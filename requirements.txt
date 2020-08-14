@@ -1,0 +1,10 @@
+pyqt5
+pyqt5-tools
+pandas
+opencv-python
+numpy
+imutils
+pillow
+matplotlib
+slackclient==2.0.1
+pyserial
