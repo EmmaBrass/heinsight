@@ -670,11 +670,11 @@ class LiquidLevel:
                                 # image is greater than zero aka a white pixel
                                 number_of_white_pixels_in_this_row = number_of_white_pixels_in_this_row + 1
                 total_number_of_pixels_in_section = total_number_of_pixels_in_section + number_of_pixels_in_this_row
-                if number_of_pixels_in_this_row is 0:  # sometimes division by zero error can occur
+                if number_of_pixels_in_this_row == 0:  # sometimes division by zero error can occur
                     number_of_pixels_in_this_row = 1
                 fraction_of_white_pixels_in_this_row = number_of_white_pixels_in_this_row / number_of_pixels_in_this_row
                 list_of_fractions_of_white_pixels_in_a_section.append(fraction_of_white_pixels_in_this_row)
-            if len(list_of_fractions_of_white_pixels_in_a_section) is 0:
+            if len(list_of_fractions_of_white_pixels_in_a_section) == 0:
                 average_fraction_of_white_pixels_in_a_section = 0
             else:
                 average_fraction_of_white_pixels_in_a_section = \
@@ -719,7 +719,7 @@ class LiquidLevel:
                 liquid_level_location = row_array[0]
                 self.row = liquid_level_location
 
-        if self.number_of_liquid_levels_to_find is 0:
+        if self.number_of_liquid_levels_to_find == 0:
             number_of_number_of_liquid_levels_to_find = 999
         else:
             number_of_number_of_liquid_levels_to_find = self.number_of_liquid_levels_to_find
@@ -754,7 +754,7 @@ class LiquidLevel:
             return None
 
         list_of_tolerance_levels = self.track_liquid_tolerance_levels.get_absolute_tolerance_height()
-        if len(list_of_tolerance_levels) is 0:
+        if len(list_of_tolerance_levels) == 0:
             raise AttributeError('No tolerance levels have been set yet')
 
         if row is None:
@@ -846,9 +846,9 @@ class LiquidLevel:
         :param image: an image, as a numpy array
         :return:
         """
-        if len(image.shape) is 3:
+        if len(image.shape) == 3:
             image_height, image_width, _ = image.shape
-        elif len(image.shape) is 2:
+        elif len(image.shape) == 2:
             image_height, image_width = image.shape
         else:
             raise ValueError('Image must be passed as a numpy array and have either 3 or 2 channels')

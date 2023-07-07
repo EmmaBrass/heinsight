@@ -10,7 +10,7 @@ CLASSIFIERS = [
     'Operating System :: Windows',
 ]
 INSTALL_REQUIRES = [
-    'opencv',
+    'opencv-python',
     'imutils',
     'numpy',
     'pandas',

@@ -81,9 +81,9 @@ class ImageAnalysis:
         :param image: an image, as a numpy array
         :return: int, int: the height and width of an image
         """
-        if len(image.shape) is 3:
+        if len(image.shape) == 3:
             image_height, image_width, _ = image.shape
-        elif len(image.shape) is 2:
+        elif len(image.shape) == 2:
             image_height, image_width = image.shape
         else:
             raise ValueError('Image must be passed as a numpy array and have either 3 or 2 channels')
@@ -213,7 +213,7 @@ class ImageAnalysis:
         if crop_bottom is None:
             crop_bottom = self.crop_bottom
 
-        if len(image.shape) is 3:
+        if len(image.shape) == 3:
             image_height, image_width, channels = image.shape
         else:
             image_height, image_width = image.shape
@@ -373,7 +373,7 @@ class ImageAnalysis:
         :return:
         """
         # draw mask outline on the  image, then return the image
-        if image.shape is 2:  # if image is black and white, not rgb
+        if image.shape == 2:  # if image is black and white, not rgb
             line_colour = (255, 255, 255)  # make line colour white
         else:
             # cv image is rgb
@@ -475,7 +475,7 @@ class ImageAnalysis:
         :param float, crop_right: value between 0 and 1, is the fraction to crop out from the right part of the image
         :return: numpy.ndarray, cropped, the image but with a fraction of the left and right parts of the image removed
         """
-        if len(image.shape) is 3:
+        if len(image.shape) == 3:
             height, width, channels = image.shape
         else:
             height, width = image.shape
@@ -498,7 +498,7 @@ class ImageAnalysis:
         :param float, crop_bottom: value between 0 and 1, is the fraction to crop out from the bottom part of the image
         :return: numpy.ndarray, cropped, the image but with a fraction of the top and bottom parts of the image removed
         """
-        if len(image.shape) is 3:
+        if len(image.shape) == 3:
             height, width, channels = image.shape
         else:
             height, width = image.shape

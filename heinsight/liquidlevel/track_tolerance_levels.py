@@ -110,9 +110,9 @@ class TrackLiquidToleranceLevels:
         :param image: an image, as a numpy array
         :return: int, int: the height and width of an image
         """
-        if len(image.shape) is 3:
+        if len(image.shape) == 3:
             image_height, image_width, _ = image.shape
-        elif len(image.shape) is 2:
+        elif len(image.shape) == 2:
             image_height, image_width = image.shape
         else:
             raise ValueError('Image must be passed as a numpy array and have either 3 or 2 channels')
@@ -314,7 +314,7 @@ class TrackLiquidToleranceLevels:
 
         list_of_absolute_tolerance_levels = self.get_absolute_tolerance_height()
 
-        if len(list_of_absolute_tolerance_levels) is 0:
+        if len(list_of_absolute_tolerance_levels) == 0:
             return image
 
         for absolute_tolerance_level in list_of_absolute_tolerance_levels:
