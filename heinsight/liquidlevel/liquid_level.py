@@ -390,7 +390,7 @@ class LiquidLevel:
         if self.track_liquid_tolerance_levels is None:
             raise AttributeError('No tracker - cannot set reference lines')
         for vol in range(volumes_list):
-            self.track_liquid_tolerance_levels.select_reference_row(image=image, vol)
+            self.track_liquid_tolerance_levels.select_reference_row(image=image, vol=vol)
 
         # add the reference level to the json file
         if self.liquid_level_data_save_folder is not None:
@@ -1065,6 +1065,9 @@ class LiquidLevel:
         self.logger.debug('run function called')
         if image is None:
             image = self.camera.take_picture()
+        else:
+            # clone the image so no issues with it being edited and then re-used, causing errors
+            image = image.copy()
         # next line can throw NoMeniscusFound exception
         edge, _ = self.load_and_find_level(image)
         if self.use_tolerance == True:
