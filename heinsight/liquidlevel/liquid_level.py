@@ -974,7 +974,7 @@ class LiquidLevel:
         edge_image = self.load_image_and_select_and_set_parameters(img=image,
                                                                    select_region_of_interest=select_region_of_interest,
                                                                    set_reference=set_reference,
-                                                                   volumes_list=volumes_list
+                                                                   volumes_list=volumes_list,
                                                                    select_tolerance=select_tolerance
                                                                    )
         self.volumes_list=[volumes_list]    
