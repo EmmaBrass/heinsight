@@ -32,6 +32,7 @@ Select the number of liquid levels to look for
 """
 
 import os
+import sys
 import logging
 import json
 import cv2
@@ -84,6 +85,8 @@ class LiquidLevel:
     def __init__(self,
                  camera=None,
                  track_liquid_tolerance_levels: TrackLiquidToleranceLevels=None,
+                 use_tolerance = False,
+                 use_reference = False,
                  number_of_liquid_levels_to_find: int = 1,
                  rows_to_count: int = 2,
                  width: int = None,
@@ -115,12 +118,29 @@ class LiquidLevel:
             location found ein this JSON
             If the value is None, then don't create this file
         """
+        # logging set up
         self.logger = logging.getLogger('liquid_level.LiquidLevel')
+        # set log level
+        self.logger.setLevel(logging.DEBUG)
+        # define file handler and set formatter
+        file_handler = logging.FileHandler('logfile.log')
+        stream_handler = logging.StreamHandler(sys.stdout)
+        formatter    = logging.Formatter('%(asctime)s : %(levelname)s : %(name)s : %(message)s')
+        file_handler.setFormatter(formatter)
+        stream_handler.setFormatter
+
+        # add file handler to logger
+        self.logger.addHandler(file_handler)
+        self.logger.addHandler(stream_handler)
 
         # how to format datetime objects into strings
         self.datetime_format = '%Y_%m_%d_%H_%M_%S'
 
         self.camera = camera
+
+        # do we want to use tolerance and/or reference?
+        self.use_tolerance = use_tolerance
+        self.use_reference = use_reference
 
         # attributes for drawing the current liquid level on an image
         bgr_green = (0, 255, 0)
@@ -136,8 +156,7 @@ class LiquidLevel:
         self.row = 0  # keeping track of current (not ref) meniscus level/height. float; this height value is
         # relative to the height of the image
 
-        self.list_of_frame_points_frame_points_list = []  # just for use in select frame frame points instead of lists
-        self.list_of_frame_points_frame_points_tuple = []  # same as frame points except input inside are tuples for
+        self.list_of_frame_points = []  # just for use in select frame frame points instead of lists
         self.mask_to_search_inside = None  # mask, inside of which to look for the liquid level - the region of
         # interest to search inside for the liquid level
         # self.current_frame_point = None
@@ -299,8 +318,7 @@ class LiquidLevel:
         :return:
         """
         self.logger.info('reset_region_of_interest function called')
-        self.list_of_frame_points_frame_points_list = []
-        self.list_of_frame_points_frame_points_tuple = []
+        self.list_of_frame_points = []
         self.mask_to_search_inside = None
 
         # when resetting the region of interest, then should also reset the tracker
@@ -329,6 +347,7 @@ class LiquidLevel:
                                                  img,
                                                  select_region_of_interest=True,
                                                  set_reference=True,
+                                                 no_reference_lines=None,
                                                  select_tolerance=True,
                                                  ):
         """
@@ -353,25 +372,22 @@ class LiquidLevel:
         if select_region_of_interest:
             self.select_region_of_interest()
             # draw the region of interest box on the image to get passed onto everything else
-            cv2.drawContours(image,
-                             [self.list_of_frame_points_frame_points_list],
-                             -1,
-                             self.current_level_colour,
-                             1,
-                             cv2.LINE_AA)
+            cv2.rectangle(image, self.list_of_frame_points[-2], 
+                    self.list_of_frame_points[-1], (0, 255, 0), 2)
 
         # next line can throw NoMeniscusFound exception
         if set_reference:
-            self.set_reference(image=image)
+            self.set_reference(image=image, no_reference_lines=no_reference_lines)
         if select_tolerance:
             self.set_tolerance(image=image)
         self.logger.info('load_image_and_select_and_set_parameters function done')
         return edge
 
-    def set_reference(self, image):
+    def set_reference(self, image, no_reference_lines):
         if self.track_liquid_tolerance_levels is None:
-            raise AttributeError('No tracker - cannot set reference')
-        self.track_liquid_tolerance_levels.select_reference_row(image=image)
+            raise AttributeError('No tracker - cannot set reference lines')
+        for row in range(no_reference_lines):
+            self.track_liquid_tolerance_levels.select_reference_row(image=image)
 
         # add the reference level to the json file
         if self.liquid_level_data_save_folder is not None:
@@ -514,8 +530,8 @@ class LiquidLevel:
         you can press 'r' to clear it to reselect a different box or press 'c' to choose the box that will be
         the frame.
 
-        This sets self.mask_to_search_inside, list_of_frame_points_frame_points_tuple,
-        and list_of_frame_points_frame_points_list in order to create the mask for the region of interest
+        This sets self.mask_to_search_inside and list_of_frame_points
+        in order to create the mask for the region of interest
         """
         self.logger.info('select_region_of_interest function called')
         # resource:  https://www.pyimagesearch.com/2015/03/09/capturing-mouse-click-events-with-python-and-opencv/
@@ -524,36 +540,18 @@ class LiquidLevel:
 
         # reset any selections made before
         self.mask_to_search_inside = None
-        self.list_of_frame_points_frame_points_tuple = []
-        self.list_of_frame_points_frame_points_list = []
+        self.list_of_frame_points = [] # a tuple of the frame points
         # also need to add stuff to make a mask
 
         def make_selection(event, x, y, flags, param):
+            print("in make_selection")
+
             # if left mouse button clicked, record the starting(x, y) coordinates
+            # press the mouse button down at the top left and bottom right corners of your desired ROI
             if event is cv2.EVENT_LBUTTONDOWN:
-                self.list_of_frame_points_frame_points_tuple.append((x, y))
-                self.list_of_frame_points_frame_points_list.append([x, y])
-
-            if event is cv2.EVENT_LBUTTONUP:
-                if len(self.list_of_frame_points_frame_points_tuple) >= 2:
-                    # if there are a total of two or more clicks made on the image, draw a line to connect the dots
-                    # to easily visualize the region of interest that has been created so far
-                    cv2.line(image, self.list_of_frame_points_frame_points_tuple[-2],
-                             self.list_of_frame_points_frame_points_tuple[-1], (0, 255, 0), 2)
-                    cv2.line(closed_image, self.list_of_frame_points_frame_points_tuple[-2],
-                             self.list_of_frame_points_frame_points_tuple[-1], (255, 0, 0), 2)
-
-            if len(self.list_of_frame_points_frame_points_tuple) > 0:
-                # I think this means that even if only a single click has occurred so far, to still draw a single line
-                #  that starts and ends at the position (aka a dot) to allow visualization of where the user just
-                # clicked
-                cv2.line(image, self.list_of_frame_points_frame_points_tuple[-1],
-                         self.list_of_frame_points_frame_points_tuple[-1],
-                         (0, 255, 0), 2)
-                cv2.line(closed_image, self.list_of_frame_points_frame_points_tuple[-1],
-                         self.list_of_frame_points_frame_points_tuple[-1], (255, 0, 0), 2)
-                cv2.imshow('Select frame', image)
-                cv2.imshow('Select frame - closed', closed_image)
+                print("in event l button down")
+                self.list_of_frame_points.append((x, y))
+                print("list of points:", self.list_of_frame_points)
 
         # clone image and set up cv2 window. the cloned images will be used if the user wants to reset the points
         # that have been selected on the image - use the most recently loaded image for this method
@@ -569,24 +567,34 @@ class LiquidLevel:
 
         # keep looping until 'q' is pressed - q to quit
         while True:
+            print("in while true loop")
             # during this time the user can left click on the image to select the region of interest
 
             # display image, wait for a keypress
             cv2.imshow('Select frame', image)
-            cv2.imshow('Select frame - closed', closed_image)
+            print("just shown image")
+            #cv2.imshow('Select frame - closed', closed_image) # TODO why do we need to see the closed image too?
             key = cv2.waitKey(1) & 0xFF
+
+            if len(self.list_of_frame_points) >= 2:
+                print("in if statement for len tuple >= 2")
+                image = self.loaded_image.copy()
+                # if there are a total of two or more points saved, draw a rectangle
+                # to visualise the region that has been selected
+                cv2.rectangle(image, self.list_of_frame_points[-2], 
+                    self.list_of_frame_points[-1], (0, 255, 0), 2)
 
             # if 'r' key is pressed, reset the cropping region
             if key == ord('r'):
+                print("in key r pressed")
                 image = clone.copy()
                 closed_image = closed_clone.copy()
-                self.list_of_frame_points_frame_points_tuple = []
-                self.list_of_frame_points_frame_points_list = []
+                self.list_of_frame_points = []
 
             # if 'c' key pressed break from while True loop
             elif key == ord('c'):
-                # make into np array because this is the format it is needed to make a mask
-                self.list_of_frame_points_frame_points_list = np.array(self.list_of_frame_points_frame_points_list)
+                # make list into np array because this is the format it is needed to make a mask
+                self.list_of_frame_points = np.array(self.list_of_frame_points)
                 break
 
         # create mask inside of which the liquid level will be searched for
@@ -597,11 +605,9 @@ class LiquidLevel:
         #         # with black pixels on the mask will not be shown
         self.mask_to_search_inside = np.zeros(shape=clone.shape[0:2], dtype=np.uint8)
         cv2.imshow("mask_to_search_inside_initial", self.mask_to_search_inside)
-        # make the mask; connect the points that the user selected to create the mask area, and make that area white
-        # pixels. the mask automatically connects the first and last points that were made, to create an enclosed
-        # area for the mask
-        cv2.drawContours(self.mask_to_search_inside, [self.list_of_frame_points_frame_points_list], -1,
-                         (255, 255, 255), -1, cv2.LINE_AA)
+        # make the mask; draw white rectangle for the region that the user has selected
+        cv2.rectangle(self.mask_to_search_inside, self.list_of_frame_points[-2], 
+                        self.list_of_frame_points[-1], 255, -1)
 
         # do bit wise operation, this gives the original image back but with only selected region showing,
         # and everything else is black (aka apply a mask, where only the things inside the mask,
@@ -620,10 +626,10 @@ class LiquidLevel:
         # rectangle surrounding the area that encompasses all non zero values of the mask. top, would be the top row,
         # right would be the right column, and so on
         left = 1000*1000
-        right = 0
+        right = -1
         top = 1000*1000
-        bottom = 0
-        for idx, pixel_point_value in enumerate(self.list_of_frame_points_frame_points_list):
+        bottom = -1
+        for idx, pixel_point_value in enumerate(self.list_of_frame_points):
             # loop through all the points that the user selected to create the outline of the mask inner list is
             # a list of the x and y coordinates of that point
             if pixel_point_value[0] < left:
@@ -645,6 +651,7 @@ class LiquidLevel:
         :param edge: contour image
         :return:
         """
+        # TODO work on this to improve liquid level detection... add ability to identify color change
         self.logger.debug('find_liquid_level function called')
         liquid_level_data_frame = pd.DataFrame(columns=('row', 'fraction_of_pixels'))  # create a pandas dataframe,
         # with 2 rows
@@ -679,6 +686,7 @@ class LiquidLevel:
             else:
                 average_fraction_of_white_pixels_in_a_section = \
                     sum(list_of_fractions_of_white_pixels_in_a_section)/len(list_of_fractions_of_white_pixels_in_a_section)
+            print("average_fraction_of_white_pixels_in_a_section", average_fraction_of_white_pixels_in_a_section)
             if average_fraction_of_white_pixels_in_a_section >= self.find_meniscus_minimum:
                 # if there is more than the minimum white pixel count required in a section identify the section as
                 # having a liquid level
@@ -692,6 +700,7 @@ class LiquidLevel:
         liquid_level_data_frame_sorted = liquid_level_data_frame.sort_values(by=['fraction_of_pixels'],
                                                                              ascending=False,
                                                                              kind='mergesort')
+        print("liquid_level_data_frame_sorted: ", liquid_level_data_frame_sorted)
         # after finding all the rows with white pixels in them, then sort the dataframe by pixel count, so that the
         # row with the most white pixels is sorted at the top (or first) of the dataframe
         liquid_level_array = liquid_level_data_frame_sorted.values  # make an array out of the sorted values
@@ -713,7 +722,7 @@ class LiquidLevel:
             if self.no_error is False:
                 raise NoMeniscusFound(self.loaded_image, edge)  # raise the NoMeniscusFound error
             else:
-                # print('meniscus was not - found setting meniscus to be the top of the image')
+                print('meniscus was not - found setting meniscus to be the top of the image')
                 # so because you dont want this to error out, then set the meniscus to be the top of the image at row 0
                 row_array.append(0)
                 liquid_level_location = row_array[0]
@@ -908,7 +917,8 @@ class LiquidLevel:
         image = cv2.line(image,
                          left_point,
                          right_point,
-                         colour)
+                         colour,
+                         thickness = 2)
         cv2.putText(image, text, text_position, font, font_scale, colour)
 
         return image
@@ -937,6 +947,7 @@ class LiquidLevel:
               image=None,
               select_region_of_interest=True,
               set_reference=False,
+              no_reference_lines=None,
               select_tolerance=False):
         """
         First thing that should be run after making the liquid level instance. This will cause the camera to take a
@@ -960,6 +971,7 @@ class LiquidLevel:
         edge_image = self.load_image_and_select_and_set_parameters(img=image,
                                                                    select_region_of_interest=select_region_of_interest,
                                                                    set_reference=set_reference,
+                                                                   no_reference_lines=no_reference_lines,
                                                                    select_tolerance=select_tolerance,
                                                                    )
         time = datetime.now()
@@ -1004,17 +1016,17 @@ class LiquidLevel:
         img, time = self.take_photo()
         edge, _ = self.load_and_find_level(img=img)
         self.add_image_to_memory(img=self.loaded_image,
-                                 img_name=time.strftime(self.datetime_format),
-                                 array_to_save_to=self.all_images_no_lines,
-                                 )
+            img_name=time.strftime(self.datetime_format),
+            array_to_save_to=self.all_images_no_lines,
+            )
         self.add_image_to_memory(img=edge,
-                                 img_name=time.strftime(self.datetime_format),
-                                 array_to_save_to=self.all_images_edge,
-                                 )
+            img_name=time.strftime(self.datetime_format),
+            array_to_save_to=self.all_images_edge,
+            )
         self.add_image_to_memory(img=self.draw_lines(),
-                                 img_name=time.strftime(self.datetime_format),
-                                 array_to_save_to=self.all_images_with_lines,
-                                 )
+            img_name=time.strftime(self.datetime_format),
+            array_to_save_to=self.all_images_with_lines,
+            )
         return img, edge, time
 
     def save_drawn_image(self):
@@ -1027,9 +1039,9 @@ class LiquidLevel:
         date_time_with_line, line_img = self.all_images_with_lines[-1]
         save_image_name = f'drawn_{date_time_with_line}'
         self.camera.save_folder.save_image_to_folder(image_name=save_image_name,
-                                                     image=line_img,
-                                                     file_format='jpg',
-                                                     )
+            image=line_img,
+            file_format='jpg',
+            )
 
     def run(self,
             image=None,
@@ -1048,11 +1060,20 @@ class LiquidLevel:
             image = self.camera.take_picture()
         # next line can throw NoMeniscusFound exception
         edge, _ = self.load_and_find_level(image)
-        tolerance_bool = self.in_tolerance()
-        percent_diff = self.distance_from_reference()
+        if self.use_tolerance == True:
+            tolerance_bool = self.in_tolerance()
+        else:
+            tolerance_bool = None
+        if self.use_reference == True:
+            percent_diff = self.distance_from_reference()
+        else:
+            percent_diff = None
         time = datetime.now()
         time_formatted = time.strftime(self.datetime_format)
         image_with_lines = self.draw_lines(img=image)
+        cv2.imshow("image with lines", image_with_lines)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
         self.all_images_with_lines.append([time_formatted, image_with_lines])
         self.all_images_no_lines.append([time_formatted, image])
         self.all_images_edge.append([time_formatted, edge])
