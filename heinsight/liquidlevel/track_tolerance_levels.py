@@ -121,7 +121,7 @@ class TrackLiquidToleranceLevels:
 
         return image_height, image_width
 
-    def select_reference_row(self, image):
+    def select_reference_row(self, image, vol):
         """
         Allows user to select a horizontal reference line in the image that will be tracked as self.reference_row.
         The set reference row will be relative to the height of the image
@@ -129,7 +129,7 @@ class TrackLiquidToleranceLevels:
         :param image: numpy array - an image
         :return:
         """
-        print(f'Select one reference line')
+        print(f'Select a reference line for {vol} volumes.')
 
         self.reference_image = image
 

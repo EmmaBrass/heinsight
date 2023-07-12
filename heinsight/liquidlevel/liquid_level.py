@@ -88,6 +88,7 @@ class LiquidLevel:
                  use_tolerance = False,
                  use_reference = False,
                  number_of_liquid_levels_to_find: int = 1,
+                 volumes_list = [],
                  rows_to_count: int = 2,
                  width: int = None,
                  find_meniscus_minimum: float = 0,
@@ -141,6 +142,8 @@ class LiquidLevel:
         # do we want to use tolerance and/or reference?
         self.use_tolerance = use_tolerance
         self.use_reference = use_reference
+
+        self.volumes_list = volumes_list # list of volumes to track using the reference levels.
 
         # attributes for drawing the current liquid level on an image
         bgr_green = (0, 255, 0)
@@ -347,7 +350,7 @@ class LiquidLevel:
                                                  img,
                                                  select_region_of_interest=True,
                                                  set_reference=True,
-                                                 no_reference_lines=None,
+                                                 volumes_list=[],
                                                  select_tolerance=True,
                                                  ):
         """
@@ -377,17 +380,17 @@ class LiquidLevel:
 
         # next line can throw NoMeniscusFound exception
         if set_reference:
-            self.set_reference(image=image, no_reference_lines=no_reference_lines)
+            self.set_reference(image=image, volumes_list=volumes_list)
         if select_tolerance:
             self.set_tolerance(image=image)
         self.logger.info('load_image_and_select_and_set_parameters function done')
         return edge
 
-    def set_reference(self, image, no_reference_lines):
+    def set_reference(self, image, volumes_list):
         if self.track_liquid_tolerance_levels is None:
             raise AttributeError('No tracker - cannot set reference lines')
-        for row in range(no_reference_lines):
-            self.track_liquid_tolerance_levels.select_reference_row(image=image)
+        for vol in range(volumes_list):
+            self.track_liquid_tolerance_levels.select_reference_row(image=image, vol)
 
         # add the reference level to the json file
         if self.liquid_level_data_save_folder is not None:
@@ -947,7 +950,7 @@ class LiquidLevel:
               image=None,
               select_region_of_interest=True,
               set_reference=False,
-              no_reference_lines=None,
+              volumes_list=[],
               select_tolerance=False):
         """
         First thing that should be run after making the liquid level instance. This will cause the camera to take a
@@ -971,9 +974,11 @@ class LiquidLevel:
         edge_image = self.load_image_and_select_and_set_parameters(img=image,
                                                                    select_region_of_interest=select_region_of_interest,
                                                                    set_reference=set_reference,
-                                                                   no_reference_lines=no_reference_lines,
-                                                                   select_tolerance=select_tolerance,
+                                                                   volumes_list=volumes_list
+                                                                   select_tolerance=select_tolerance
                                                                    )
+        self.volumes_list=[volumes_list]    
+
         time = datetime.now()
         if self.track_liquid_tolerance_levels is not None:
             if self.track_liquid_tolerance_levels.reference_row is not None:
@@ -1045,13 +1050,15 @@ class LiquidLevel:
 
     def run(self,
             image=None,
+            volume=0
             ):
         """
         Given an image (or take a photo), load the image and find the current liquid level or the set number to look
         for, and set self.row and self.liquid_level_array. Check whether the liquid level is within any tolerance
         levels, if they were set, and the relative distance from the reference line, if it was set.
 
-        :param image: An image, or if none, then the camera will take a photo to be used as the image
+        :param image: An image, or if none, then the camera will take a photo to be used as the image.
+        :param volume: The volumes to return the percent diff for.  This volume must have been specified in volumes_list in start method.
         :return: bool, tolerance_bool, whether the liquid level was within tolerance or not. float, percent_diff,
             the relative distance of the current liquid level from a set reference level
         """
@@ -1065,7 +1072,10 @@ class LiquidLevel:
         else:
             tolerance_bool = None
         if self.use_reference == True:
-            percent_diff = self.distance_from_reference()
+            percent_diff_list = self.distance_from_reference()
+            # find the array value that matches the index for the vol in self.volumes_list
+            idx = self.volumes_list.index(volume)
+            percent_diff = percent_diff_list[idx]
         else:
             percent_diff = None
         time = datetime.now()
