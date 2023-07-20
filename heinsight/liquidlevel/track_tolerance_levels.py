@@ -137,7 +137,7 @@ class TrackLiquidToleranceLevels:
         self.reference_image_height = image_height
         self.reference_image_width = image_width
 
-        line_height = self.select_one_line(image=image)
+        line_height = self.select_one_line(image=image, description=vol)
         relative_line_height = line_height / image_height
 
         self.set_reference_level(height=relative_line_height)
@@ -206,7 +206,7 @@ class TrackLiquidToleranceLevels:
         """
         raise NotImplementedError
 
-    def select_one_line(self, image):
+    def select_one_line(self, image, description):
         """
         Display an image, and allow the user to click anywhere on the image to create a horizontal line. The height
         of this horizontal line, not normalized by the height of the image, is returned. This only lets the user
@@ -233,18 +233,18 @@ class TrackLiquidToleranceLevels:
                 line_left = (0, y)
                 line_right = (image_width, y)
                 cv2.line(image, line_left, line_right, (0, 255, 0), 2)
-                cv2.imshow('Select line', image)
+                cv2.imshow(f'Select line for {description}', image)
 
         # clone image and set up cv2 window
         clone = image.copy()
 
-        cv2.namedWindow('Select line')
-        cv2.setMouseCallback('Select line', make_selection)
+        cv2.namedWindow(f'Select line for {description}')
+        cv2.setMouseCallback(f'Select line for {description}', make_selection)
 
         # keep looping until 'q' is pressed
         while True:
             # display image, wait for a keypress
-            cv2.imshow('Select line', image)
+            cv2.imshow(f'Select line for {description}', image)
             key = cv2.waitKey(1) & 0xFF
 
             # if 'r' key is pressed, reset the cropping region
@@ -364,7 +364,7 @@ class TrackLiquidToleranceLevels:
                          left_point,
                          right_point,
                          colour,
-                         thickness=2)
+                         thickness=1)
         cv2.putText(image, text, text_position, font, font_scale, colour)
 
         return image
@@ -382,10 +382,10 @@ class TrackOneLiquidToleranceLevel(TrackLiquidToleranceLevels):
             means it is within bounds
         """
         super().__init__()
-        if above_or_below is "above":
+        if above_or_below == "above":
             self.above_in_tolerance = True  # true if a liquid level above the tolerance line is considered within
             # bounds
-        elif above_or_below is "below":
+        elif above_or_below == "below":
             self.above_in_tolerance = False
         else:
             raise AttributeError('above_or_below value must be either "above" or "below"')

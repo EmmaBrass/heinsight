@@ -389,7 +389,7 @@ class LiquidLevel:
     def set_reference(self, image, volumes_list):
         if self.track_liquid_tolerance_levels is None:
             raise AttributeError('No tracker - cannot set reference lines')
-        for vol in range(volumes_list):
+        for vol in volumes_list:
             self.track_liquid_tolerance_levels.select_reference_row(image=image, vol=vol)
 
         # add the reference level to the json file
@@ -547,14 +547,12 @@ class LiquidLevel:
         # also need to add stuff to make a mask
 
         def make_selection(event, x, y, flags, param):
-            print("in make_selection")
 
             # if left mouse button clicked, record the starting(x, y) coordinates
             # press the mouse button down at the top left and bottom right corners of your desired ROI
             if event is cv2.EVENT_LBUTTONDOWN:
-                print("in event l button down")
                 self.list_of_frame_points.append((x, y))
-                print("list of points:", self.list_of_frame_points)
+                self.logger.info("list of points:", self.list_of_frame_points)
 
         # clone image and set up cv2 window. the cloned images will be used if the user wants to reset the points
         # that have been selected on the image - use the most recently loaded image for this method
@@ -570,17 +568,14 @@ class LiquidLevel:
 
         # keep looping until 'q' is pressed - q to quit
         while True:
-            print("in while true loop")
             # during this time the user can left click on the image to select the region of interest
 
             # display image, wait for a keypress
             cv2.imshow('Select frame', image)
-            print("just shown image")
             #cv2.imshow('Select frame - closed', closed_image) # TODO why do we need to see the closed image too?
             key = cv2.waitKey(1) & 0xFF
 
             if len(self.list_of_frame_points) >= 2:
-                print("in if statement for len tuple >= 2")
                 image = self.loaded_image.copy()
                 # if there are a total of two or more points saved, draw a rectangle
                 # to visualise the region that has been selected
@@ -693,11 +688,13 @@ class LiquidLevel:
             if average_fraction_of_white_pixels_in_a_section >= self.find_meniscus_minimum:
                 # if there is more than the minimum white pixel count required in a section identify the section as
                 # having a liquid level
-                liquid_level_data_frame = liquid_level_data_frame.append(
-                    {'row': int(row + (self.rows_to_count // 2)), 'fraction_of_pixels':
-                        average_fraction_of_white_pixels_in_a_section},
-                    ignore_index=True
-                )  # append a row to the panda dataframe, where the value for row is the middle  row in the rows
+                # liquid_level_data_frame = liquid_level_data_frame.append(
+                #     {'row': int(row + (self.rows_to_count // 2)), 'fraction_of_pixels':
+                #         average_fraction_of_white_pixels_in_a_section},
+                #     ignore_index=True
+                # )  # append a row to the panda dataframe, where the value for row is the middle  row in the rows
+                liquid_level_data_frame = pd.concat([liquid_level_data_frame, pd.DataFrame({'row': [int(row + (self.rows_to_count // 2))], 'fraction_of_pixels':
+                    [average_fraction_of_white_pixels_in_a_section]})], ignore_index=True)
                 #  that were used to find the meniscus, and the pixel count is number of white pixels  counted
 
         liquid_level_data_frame_sorted = liquid_level_data_frame.sort_values(by=['fraction_of_pixels'],
@@ -921,7 +918,7 @@ class LiquidLevel:
                          left_point,
                          right_point,
                          colour,
-                         thickness = 2)
+                         thickness = 1)
         cv2.putText(image, text, text_position, font, font_scale, colour)
 
         return image
@@ -977,7 +974,8 @@ class LiquidLevel:
                                                                    volumes_list=volumes_list,
                                                                    select_tolerance=select_tolerance
                                                                    )
-        self.volumes_list=[volumes_list]    
+        self.volumes_list=volumes_list
+        print(self.volumes_list)    
 
         time = datetime.now()
         if self.track_liquid_tolerance_levels is not None:
@@ -1050,7 +1048,7 @@ class LiquidLevel:
 
     def run(self,
             image=None,
-            volume=0
+            volume='0'
             ):
         """
         Given an image (or take a photo), load the image and find the current liquid level or the set number to look
@@ -1077,6 +1075,7 @@ class LiquidLevel:
         if self.use_reference == True:
             percent_diff_list = self.distance_from_reference()
             # find the array value that matches the index for the vol in self.volumes_list
+            print(self.volumes_list)
             idx = self.volumes_list.index(volume)
             percent_diff = percent_diff_list[idx]
         else:
