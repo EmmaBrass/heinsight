@@ -1084,7 +1084,7 @@ class LiquidLevel:
         time_formatted = time.strftime(self.datetime_format)
         image_with_lines = self.draw_lines(img=image)
         cv2.imshow("image with lines", image_with_lines)
-        cv2.waitKey(0)
+        cv2.waitKey(2000)
         cv2.destroyAllWindows()
         self.all_images_with_lines.append([time_formatted, image_with_lines])
         self.all_images_no_lines.append([time_formatted, image])
