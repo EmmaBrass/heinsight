@@ -481,7 +481,8 @@ class LiquidLevel:
         :return: closed: black and white image, where detected contours are in white
         """
         self.logger.debug('find_contour function called')
-        # get these values from the object's attributes
+        # get these values from the object's attributes0
+
         morph_dilate_kernel_size = (7, 7)
         morph_rect_kernel_size = (6, 1)
 
@@ -489,11 +490,11 @@ class LiquidLevel:
 
         return_image = cv2.cvtColor(return_image, cv2.COLOR_BGR2GRAY)
         # apply histogram equalization
-        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8)) # contrast limited adaptive histogram equalisation (improves contrast)
         return_image = clahe.apply(return_image)
-        canny_threshold_1, canny_threshold_2 = self.find_parameters_for_canny_edge(return_image)
-        return_image = cv2.Canny(return_image, canny_threshold_1, canny_threshold_2)
-        return_image = cv2.morphologyEx(return_image, cv2.MORPH_DILATE, morph_dilate_kernel_size)
+        canny_threshold_1, canny_threshold_2 = self.find_parameters_for_canny_edge(return_image) # find parameters for edge detection
+        return_image = cv2.Canny(return_image, canny_threshold_1, canny_threshold_2) # apply edge detection algorithm
+        return_image = cv2.morphologyEx(return_image, cv2.MORPH_DILATE, morph_dilate_kernel_size) # erosion then dilation to remove noise
 
         # create a horizontal structural element;
         horizontal_structure = cv2.getStructuringElement(cv2.MORPH_RECT, morph_rect_kernel_size)
@@ -552,7 +553,7 @@ class LiquidLevel:
             # press the mouse button down at the top left and bottom right corners of your desired ROI
             if event is cv2.EVENT_LBUTTONDOWN:
                 self.list_of_frame_points.append((x, y))
-                self.logger.info("list of points:", self.list_of_frame_points)
+                self.logger.info("list of points: %s", self.list_of_frame_points)
 
         # clone image and set up cv2 window. the cloned images will be used if the user wants to reset the points
         # that have been selected on the image - use the most recently loaded image for this method
@@ -1047,7 +1048,7 @@ class LiquidLevel:
             )
 
     def run(self,
-            image=None,
+            input_image=None,
             volume='0'
             ):
         """
@@ -1061,11 +1062,11 @@ class LiquidLevel:
             the relative distance of the current liquid level from a set reference level
         """
         self.logger.debug('run function called')
-        if image is None:
+        if input_image is None:
             image = self.camera.take_picture()
         else:
             # clone the image so no issues with it being edited and then re-used, causing errors
-            image = image.copy()
+            image = input_image.copy()
         # next line can throw NoMeniscusFound exception
         edge, _ = self.load_and_find_level(image)
         if self.use_tolerance == True:
@@ -1075,16 +1076,18 @@ class LiquidLevel:
         if self.use_reference == True:
             percent_diff_list = self.distance_from_reference()
             # find the array value that matches the index for the vol in self.volumes_list
-            print(self.volumes_list)
+            self.logger.info("volumes list is: %s", self.volumes_list)
             idx = self.volumes_list.index(volume)
             percent_diff = percent_diff_list[idx]
+            self.logger.info("percent diff distance from volume %s is %s", volume, percent_diff)
         else:
             percent_diff = None
         time = datetime.now()
         time_formatted = time.strftime(self.datetime_format)
         image_with_lines = self.draw_lines(img=image)
         cv2.imshow("image with lines", image_with_lines)
-        cv2.waitKey(2000)
+        cv2.setWindowProperty("image with lines", cv2.WND_PROP_TOPMOST, 1)
+        cv2.waitKey(5000)
         cv2.destroyAllWindows()
         self.all_images_with_lines.append([time_formatted, image_with_lines])
         self.all_images_no_lines.append([time_formatted, image])
