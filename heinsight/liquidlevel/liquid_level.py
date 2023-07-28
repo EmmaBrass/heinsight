@@ -40,6 +40,7 @@ import imutils
 import numpy as np
 import pandas as pd
 from datetime import datetime
+from skimage.color import rgb2lab, lab2rgb
 from heinsight.vision.camera import Camera
 from heinsight.liquidlevel.track_tolerance_levels import TrackLiquidToleranceLevels, TrackTwoLiquidToleranceLevels
 
@@ -192,6 +193,11 @@ class LiquidLevel:
         # entire region of interest; what is displayed on the image instead is a line at the top of the image in the
         # colour of what the current liquid level line should be
 
+        # variable for finding the liquid level based on color split
+        self.color_split_level = None
+        bgr_pink = (150, 0, 255)
+        self.color_split_colour = bgr_pink
+        self.color_split_text_position = (0, 60)
 
         # initial parameters to be used by reset()
         self.initial_arguments = {
@@ -446,7 +452,13 @@ class LiquidLevel:
         """
         self.logger.debug('load_and_find_level function called')
         fill = self.load_img(img)
+        cv2.imshow("fill", fill)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
         contour_image = self.find_contour(fill)
+        cv2.imshow("contour_image", contour_image)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
         self.loaded_edge_image = contour_image
         row = self.find_liquid_level(contour_image)
         self.logger.debug('load_and_find_level function done')
@@ -471,6 +483,111 @@ class LiquidLevel:
         self.logger.debug('load_img function done')
         return img
 
+    def find_color_split(self,
+                        fill
+                        ):
+        """
+        Given an image, find the line that divides it into sections that have the greatest
+        possible difference in average color.
+        Will divide it into n sections, where n = number_of_liquid_levels_to_find+1. 
+
+        :param fill: numpy.ndarray: image to divide into color sections
+        :return: closed: line where the sections divide
+        """
+
+        if self.number_of_liquid_levels_to_find == 0:
+            pass
+        # TODO how to do this if > 2 liquid level to find...?
+        # if more than 2 areas to find - do it for 2 area, should find one of the levels
+        # then do it AGAIN in each of the two areas.
+        # should find another split, choose the biggest split in each area.
+
+        self.logger.debug('find_color_split function called')
+
+        #image = cv2.cvtColor(fill, cv2.COLOR_BGR2HSV)
+        image = fill
+        image = rgb2lab(image)
+
+        img_height, img_width, _ = image.shape  # size of the image
+        left_x, right_x, top_y, bottom_y = self.find_maximum_edges_of_mask()
+        rows = range(top_y, bottom_y, self.rows_to_count)  # the rows to consider for iteration; but for this
+        # list only iterate over rows, separated self.rows_to_count
+        cols = range(left_x, right_x)  # columns to consider
+
+        color_dist_array = [] # an array of the dist between above and below line, all the way down the image
+
+        for row in rows:  # iterate through every section, by iterating through rows separated by self.rows_to_count
+            color_top_section = None
+            color_bottom_section = None
+            color_distance = None
+            if row+self.rows_to_count < img_height and row > top_y:  # if for the original row plus the 'offset' to consider the next few
+                # rows for finding the meniscus doesn't go out of bounds of the image height
+                print("row:", row)
+                # get average color of above section
+                color_top_section = np.mean(image[top_y:row, left_x:right_x], axis=(0,1))
+                print("color top section:", color_top_section)
+                # get average color of below section
+                color_bottom_section = np.mean(image[row:bottom_y, left_x:right_x], axis=(0,1))
+                print("color bottom section:", color_bottom_section)
+                # find euclidean distance between the colors
+                color_distance = np.linalg.norm(color_top_section-color_bottom_section) # TODO in HSV space?
+                print("color distance:", color_distance)
+                # append to color_distance array
+                color_dist_array.append(color_distance) 
+        
+        print("color_dist_array:", color_dist_array)
+
+        # return the max distance value in color_distance_array 
+        max_distance = max(color_dist_array)
+        print("max_distance:", max_distance)
+        # get index of greatest distance in color_distance_array
+        index_max = np.argmax(color_dist_array) 
+        print("max_distance index:", index_max)
+        # figure out which row that corresponds to (index * self.rows_to_count)
+        max_dist_row = (index_max*self.rows_to_count) + (self.rows_to_count/2)
+        print("max_dist_row:", max_dist_row)
+
+        threshold = 20
+
+        # next block basically to extract the order of rows with the highest pixel count into its own array called
+        # gives the row location as a fraction of image height
+        color_split_level = max_dist_row/img_height
+
+        # return the liquid level as being at this position IF above a theshold, otherwise return None
+        if max_distance > threshold:
+            self.logger.debug(f'color split level found at {color_split_level}')
+            self.logger.debug('find_color_split function done')
+            self.color_split_level = color_split_level
+            # show image with line at the color split location
+            end_image = self.draw_color_split_level(img=image)
+            cv2.imwrite('LAB_image_color_split_by_av_in_regions.jpg', end_image)
+            cv2.imshow('color split level', end_image)
+            cv2.waitKey(0)
+            cv2.destroyAllWindows()
+            return color_split_level
+        else:
+            self.logger.debug('color split level not found - no distance aboce threshold')
+            self.logger.debug('find_color_split function done')
+            return None
+
+
+
+            ref_top_left = (0, height)
+            ref_lower_right = (img_width, height)
+
+            colour = self.reference_level_colour
+            text_position = self.reference_level_text_position
+            image = self.draw_line_on_image(image=image,
+                                            left_point=ref_top_left,
+                                            right_point=ref_lower_right,
+                                            colour=colour,
+                                            text='color split',
+                                            text_position=text_position
+                                            )
+
+
+
+
     def find_contour(self,
                      fill,
                      ):
@@ -481,7 +598,7 @@ class LiquidLevel:
         :return: closed: black and white image, where detected contours are in white
         """
         self.logger.debug('find_contour function called')
-        # get these values from the object's attributes0
+        # get these values from the object's attributes
 
         morph_dilate_kernel_size = (7, 7)
         morph_rect_kernel_size = (6, 1)
@@ -489,17 +606,36 @@ class LiquidLevel:
         return_image = fill
 
         return_image = cv2.cvtColor(return_image, cv2.COLOR_BGR2GRAY)
-        # apply histogram equalization
+        #cv2.imwrite("b&w_image.jpg", return_image)
+        cv2.imshow("b&w image", return_image)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
         clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8)) # contrast limited adaptive histogram equalisation (improves contrast)
         return_image = clahe.apply(return_image)
+        #cv2.imwrite("image_after_clahe.jpg", return_image)
+        cv2.imshow("image after clahe", return_image)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
         canny_threshold_1, canny_threshold_2 = self.find_parameters_for_canny_edge(return_image) # find parameters for edge detection
         return_image = cv2.Canny(return_image, canny_threshold_1, canny_threshold_2) # apply edge detection algorithm
+        #cv2.imwrite("image_after_canny_edge_detection.jpg", return_image)
+        cv2.imshow("image after canny edge detection", return_image)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
         return_image = cv2.morphologyEx(return_image, cv2.MORPH_DILATE, morph_dilate_kernel_size) # erosion then dilation to remove noise
+        #cv2.imwrite("image_after_erosion_then_dilation_to_reduce_noise.jpg", return_image)
+        cv2.imshow("image after erosion then dilation to reduce noise", return_image)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
         # create a horizontal structural element;
         horizontal_structure = cv2.getStructuringElement(cv2.MORPH_RECT, morph_rect_kernel_size)
         # to the edges, apply morphological opening operation to remove vertical lines from the contour image
         return_image = cv2.morphologyEx(return_image, cv2.MORPH_OPEN, horizontal_structure)
+        #cv2.imwrite("image_after_morphological_opening_operation_to_remove_vertical_lines_from_the_contour_image.jpg", return_image)
+        cv2.imshow("image after morphological opening operation to remove vertical lines from the contour image", return_image)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
         self.logger.debug('find_contour function done')
         return return_image
@@ -689,15 +825,11 @@ class LiquidLevel:
             if average_fraction_of_white_pixels_in_a_section >= self.find_meniscus_minimum:
                 # if there is more than the minimum white pixel count required in a section identify the section as
                 # having a liquid level
-                # liquid_level_data_frame = liquid_level_data_frame.append(
-                #     {'row': int(row + (self.rows_to_count // 2)), 'fraction_of_pixels':
-                #         average_fraction_of_white_pixels_in_a_section},
-                #     ignore_index=True
-                # )  # append a row to the panda dataframe, where the value for row is the middle  row in the rows
+                # append a row to the panda dataframe, where the value for row is the middle row in the rows
+                # that were used to find the meniscus, and the pixel count is number of white pixels  counted
                 liquid_level_data_frame = pd.concat([liquid_level_data_frame, pd.DataFrame({'row': [int(row + (self.rows_to_count // 2))], 'fraction_of_pixels':
                     [average_fraction_of_white_pixels_in_a_section]})], ignore_index=True)
-                #  that were used to find the meniscus, and the pixel count is number of white pixels  counted
-
+                
         liquid_level_data_frame_sorted = liquid_level_data_frame.sort_values(by=['fraction_of_pixels'],
                                                                              ascending=False,
                                                                              kind='mergesort')
@@ -715,6 +847,7 @@ class LiquidLevel:
             row_array.append(row_relative_height)
 
         try:
+            print("row array:", row_array)
             liquid_level_location = row_array[0]  # location of most prominent line/where liquid level is most likely
             #  to be
             self.row = liquid_level_location  # try to find the row with the most white pixels in it
@@ -800,6 +933,32 @@ class LiquidLevel:
         self.logger.debug(f'liquid level row percent diff from reference level: {percent_diff}')
         self.logger.debug('distance_from_reference function done')
         return percent_diff
+
+    def draw_color_split_level(self, img):
+        """
+        Draw the color split lines on the image
+        :param img: image to draw line on
+        :return:
+        """
+
+        img_height, img_width = self.find_image_height_width(image=img)
+
+        absolute_color_split_level = int(img_height * self.color_split_level)
+        color_split_level_left_point = (0, absolute_color_split_level)
+        color_split_level_right_point = (img_width, absolute_color_split_level)
+
+        # draw green line for the current level
+        colour = self.color_split_colour
+        text_position = self.color_split_text_position
+        image = self.draw_line_on_image(image=img,
+                                        left_point=color_split_level_left_point,
+                                        right_point=color_split_level_right_point,
+                                        colour=colour,
+                                        text='liquid level',
+                                        text_position=text_position
+                                        )
+
+        return image
 
     def draw_menisci(self, img):
         """

@@ -47,6 +47,7 @@ class TrackLiquidToleranceLevels:
         # setting text positions for the different texts to appear on images when drawing levels on the images
         self.reference_level_text_position = (0, 15)
         self.tolerance_level_text_position = (0, 45)
+        
 
     def reset(self):
         # reset all the initial attributes
@@ -280,7 +281,7 @@ class TrackLiquidToleranceLevels:
         """
         Draw all the reference lines on the image
         :param image: image to draw line on
-        :return:
+        :return: image with lines
         """
 
         _, img_width = self.find_image_height_width(image=image)

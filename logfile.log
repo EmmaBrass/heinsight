@@ -1,0 +1,389 @@
+2023-07-28 10:42:19,346 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 10:42:19,347 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 10:42:19,349 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 10:42:19,349 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 10:42:19,350 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 10:42:19,371 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 10:42:19,376 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 10:42:19,393 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 10:42:19,394 : INFO : liquid_level.LiquidLevel : select_region_of_interest function called
+2023-07-28 10:42:32,397 : INFO : liquid_level.LiquidLevel : list of points: [(260, 108)]
+2023-07-28 10:42:35,500 : INFO : liquid_level.LiquidLevel : list of points: [(260, 108), (438, 488)]
+2023-07-28 10:42:39,853 : INFO : liquid_level.LiquidLevel : select_region_of_interest function done
+2023-07-28 10:42:46,108 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-07-28 10:42:46,112 : INFO : liquid_level.LiquidLevel : start function done
+2023-07-28 10:42:46,122 : DEBUG : liquid_level.LiquidLevel : run function called
+2023-07-28 10:42:46,125 : DEBUG : liquid_level.LiquidLevel : load_and_find_level function called
+2023-07-28 10:42:46,125 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 10:42:46,126 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 10:42:46,126 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 10:42:46,128 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 10:42:46,132 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 10:42:46,139 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 10:42:46,139 : DEBUG : liquid_level.LiquidLevel : find_liquid_level function called
+2023-07-28 10:42:46,421 : DEBUG : liquid_level.LiquidLevel : liquid level found at 0.4211309523809524
+2023-07-28 10:42:46,421 : DEBUG : liquid_level.LiquidLevel : find_liquid_level function done
+2023-07-28 10:42:46,421 : DEBUG : liquid_level.LiquidLevel : load_and_find_level function done
+2023-07-28 10:42:46,422 : DEBUG : liquid_level.LiquidLevel : distance_from_reference function called
+2023-07-28 10:42:46,422 : DEBUG : liquid_level.LiquidLevel : liquid level row percent diff from reference level: [0.20535714285714285, 0.18749999999999994, 0.07291666666666669]
+2023-07-28 10:42:46,423 : DEBUG : liquid_level.LiquidLevel : distance_from_reference function done
+2023-07-28 10:42:46,423 : INFO : liquid_level.LiquidLevel : volumes list is: ['3.5', '4', '6']
+2023-07-28 10:42:46,423 : INFO : liquid_level.LiquidLevel : percent diff distance from volume 4 is 0.18749999999999994
+2023-07-28 10:42:51,473 : DEBUG : liquid_level.LiquidLevel : run function done
+2023-07-28 10:55:22,431 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 10:55:22,432 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 10:55:22,433 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 10:55:22,434 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 10:55:22,434 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 10:55:54,993 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 10:55:55,000 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 10:56:53,695 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 10:56:53,695 : INFO : liquid_level.LiquidLevel : select_region_of_interest function called
+2023-07-28 10:57:28,856 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 10:57:28,856 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 10:57:28,858 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 10:57:28,858 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 10:57:28,858 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 10:57:32,086 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 10:57:32,090 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 10:58:47,402 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 10:58:47,402 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 10:58:47,403 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 10:58:47,404 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 10:58:47,404 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 10:59:13,693 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 10:59:13,693 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 10:59:13,695 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 10:59:13,695 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 10:59:13,695 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 11:01:03,009 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 11:01:03,009 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 11:01:03,010 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 11:01:03,011 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 11:01:03,011 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 11:01:19,003 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 11:01:19,008 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 11:01:24,987 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 11:01:24,987 : INFO : liquid_level.LiquidLevel : select_region_of_interest function called
+2023-07-28 11:02:18,617 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 11:02:18,618 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 11:02:18,620 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 11:02:18,620 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 11:02:18,620 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 11:02:20,077 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 11:02:20,080 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 11:02:29,691 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 11:02:29,691 : INFO : liquid_level.LiquidLevel : select_region_of_interest function called
+2023-07-28 11:02:31,870 : INFO : liquid_level.LiquidLevel : list of points: [(262, 110)]
+2023-07-28 11:02:32,862 : INFO : liquid_level.LiquidLevel : list of points: [(262, 110), (436, 488)]
+2023-07-28 11:02:34,565 : INFO : liquid_level.LiquidLevel : select_region_of_interest function done
+2023-07-28 11:02:38,517 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-07-28 11:02:38,523 : INFO : liquid_level.LiquidLevel : start function done
+2023-07-28 11:02:38,531 : DEBUG : liquid_level.LiquidLevel : run function called
+2023-07-28 11:02:38,532 : DEBUG : liquid_level.LiquidLevel : load_and_find_level function called
+2023-07-28 11:02:38,533 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 11:02:38,533 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 11:02:40,063 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 11:02:40,841 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 11:02:40,844 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 11:02:43,149 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 11:02:44,128 : DEBUG : liquid_level.LiquidLevel : find_liquid_level function called
+2023-07-28 11:02:44,399 : DEBUG : liquid_level.LiquidLevel : liquid level found at 0.4538690476190476
+2023-07-28 11:02:44,399 : DEBUG : liquid_level.LiquidLevel : find_liquid_level function done
+2023-07-28 11:02:44,400 : DEBUG : liquid_level.LiquidLevel : load_and_find_level function done
+2023-07-28 11:02:44,400 : DEBUG : liquid_level.LiquidLevel : distance_from_reference function called
+2023-07-28 11:02:44,400 : DEBUG : liquid_level.LiquidLevel : liquid level row percent diff from reference level: [0.17410714285714285, 0.1547619047619047, 0.03869047619047622]
+2023-07-28 11:02:44,400 : DEBUG : liquid_level.LiquidLevel : distance_from_reference function done
+2023-07-28 11:02:44,401 : INFO : liquid_level.LiquidLevel : volumes list is: ['3.5', '4', '6']
+2023-07-28 11:02:44,401 : INFO : liquid_level.LiquidLevel : percent diff distance from volume 4 is 0.1547619047619047
+2023-07-28 11:02:49,463 : DEBUG : liquid_level.LiquidLevel : run function done
+2023-07-28 11:03:51,181 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 11:03:51,182 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 11:03:51,183 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 11:03:51,183 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 11:03:51,183 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 11:03:57,950 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 11:03:57,955 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 11:04:16,866 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 11:04:16,867 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 11:04:16,868 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 11:04:16,868 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 11:04:16,869 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 11:04:19,950 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 11:04:19,954 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 11:04:39,354 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 11:04:39,354 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 11:04:39,356 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 11:04:39,356 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 11:04:39,356 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 11:04:41,562 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 11:04:41,567 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 11:16:51,109 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 11:16:51,110 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 11:16:51,112 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 11:16:51,112 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 11:16:51,112 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 11:16:57,229 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 11:16:57,234 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 11:17:30,510 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 11:17:30,512 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 11:17:30,514 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 11:17:30,514 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 11:17:30,514 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 11:17:35,762 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 11:17:35,766 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 11:17:39,911 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 11:17:39,911 : INFO : liquid_level.LiquidLevel : select_region_of_interest function called
+2023-07-28 11:17:41,133 : INFO : liquid_level.LiquidLevel : list of points: [(267, 132)]
+2023-07-28 11:17:41,890 : INFO : liquid_level.LiquidLevel : list of points: [(267, 132), (438, 484)]
+2023-07-28 11:17:43,852 : INFO : liquid_level.LiquidLevel : select_region_of_interest function done
+2023-07-28 11:17:45,943 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-07-28 11:17:45,949 : INFO : liquid_level.LiquidLevel : start function done
+2023-07-28 11:17:45,958 : DEBUG : liquid_level.LiquidLevel : run function called
+2023-07-28 11:17:45,959 : DEBUG : liquid_level.LiquidLevel : load_and_find_level function called
+2023-07-28 11:17:45,959 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 11:17:45,959 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 11:17:46,647 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 11:17:52,478 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 11:17:52,485 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 11:17:55,564 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 11:17:56,545 : DEBUG : liquid_level.LiquidLevel : find_liquid_level function called
+2023-07-28 11:17:56,776 : DEBUG : liquid_level.LiquidLevel : liquid level found at 0.4419642857142857
+2023-07-28 11:17:56,776 : DEBUG : liquid_level.LiquidLevel : find_liquid_level function done
+2023-07-28 11:17:56,776 : DEBUG : liquid_level.LiquidLevel : load_and_find_level function done
+2023-07-28 11:17:56,777 : DEBUG : liquid_level.LiquidLevel : distance_from_reference function called
+2023-07-28 11:17:56,777 : DEBUG : liquid_level.LiquidLevel : liquid level row percent diff from reference level: [0.2098214285714286, 0.1339285714285714, 0.0714285714285714]
+2023-07-28 11:17:56,779 : DEBUG : liquid_level.LiquidLevel : distance_from_reference function done
+2023-07-28 11:17:56,783 : INFO : liquid_level.LiquidLevel : volumes list is: ['3.5', '4', '6']
+2023-07-28 11:17:56,783 : INFO : liquid_level.LiquidLevel : percent diff distance from volume 4 is 0.1339285714285714
+2023-07-28 11:17:58,437 : DEBUG : liquid_level.LiquidLevel : run function done
+2023-07-28 11:18:14,256 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 11:18:14,256 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 11:18:14,257 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 11:18:14,258 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 11:18:14,258 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 11:18:22,680 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 11:18:22,684 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 12:43:59,524 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 12:43:59,525 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 12:43:59,527 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 12:43:59,528 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 12:43:59,528 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 12:44:32,014 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 12:44:32,014 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 12:44:32,016 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 12:44:32,016 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 12:44:32,016 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 12:44:34,426 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 12:44:34,433 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 12:44:36,301 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 12:44:36,304 : INFO : liquid_level.LiquidLevel : select_region_of_interest function called
+2023-07-28 12:44:38,472 : INFO : liquid_level.LiquidLevel : list of points: [(267, 122)]
+2023-07-28 12:44:39,843 : INFO : liquid_level.LiquidLevel : list of points: [(267, 122), (436, 484)]
+2023-07-28 12:44:41,530 : INFO : liquid_level.LiquidLevel : select_region_of_interest function done
+2023-07-28 12:44:45,721 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-07-28 12:44:45,724 : INFO : liquid_level.LiquidLevel : start function done
+2023-07-28 12:44:45,733 : DEBUG : liquid_level.LiquidLevel : run function called
+2023-07-28 12:44:45,742 : DEBUG : liquid_level.LiquidLevel : load_and_find_level function called
+2023-07-28 12:44:45,742 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 12:44:45,744 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 12:44:48,986 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 12:44:51,012 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 12:44:51,016 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 12:44:53,528 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 12:44:54,834 : DEBUG : liquid_level.LiquidLevel : find_liquid_level function called
+2023-07-28 12:44:55,062 : DEBUG : liquid_level.LiquidLevel : liquid level found at 0.47172619047619047
+2023-07-28 12:44:55,063 : DEBUG : liquid_level.LiquidLevel : find_liquid_level function done
+2023-07-28 12:44:55,063 : DEBUG : liquid_level.LiquidLevel : load_and_find_level function done
+2023-07-28 12:44:55,063 : DEBUG : liquid_level.LiquidLevel : distance_from_reference function called
+2023-07-28 12:44:55,063 : DEBUG : liquid_level.LiquidLevel : liquid level row percent diff from reference level: [0.1607142857142857, 0.1339285714285714, 0.022321428571428603]
+2023-07-28 12:44:55,064 : DEBUG : liquid_level.LiquidLevel : distance_from_reference function done
+2023-07-28 12:44:55,067 : INFO : liquid_level.LiquidLevel : volumes list is: ['3.5', '4', '6']
+2023-07-28 12:44:55,067 : INFO : liquid_level.LiquidLevel : percent diff distance from volume 4 is 0.1339285714285714
+2023-07-28 12:44:56,792 : DEBUG : liquid_level.LiquidLevel : run function done
+2023-07-28 12:44:56,797 : DEBUG : liquid_level.LiquidLevel : find_color_split function called
+2023-07-28 12:47:11,615 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 12:47:11,616 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 12:47:11,617 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 12:47:11,617 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 12:47:11,617 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 12:47:14,405 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 12:47:14,410 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 12:47:16,227 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 12:47:16,227 : INFO : liquid_level.LiquidLevel : select_region_of_interest function called
+2023-07-28 12:47:18,454 : INFO : liquid_level.LiquidLevel : list of points: [(263, 128)]
+2023-07-28 12:47:19,740 : INFO : liquid_level.LiquidLevel : list of points: [(263, 128), (435, 478)]
+2023-07-28 12:47:21,103 : INFO : liquid_level.LiquidLevel : select_region_of_interest function done
+2023-07-28 12:47:24,759 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-07-28 12:47:24,762 : INFO : liquid_level.LiquidLevel : start function done
+2023-07-28 12:47:24,770 : DEBUG : liquid_level.LiquidLevel : find_color_split function called
+2023-07-28 12:56:40,018 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 12:56:40,018 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 12:56:40,020 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 12:56:40,020 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 12:56:40,021 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 12:56:42,094 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 12:56:42,098 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 12:56:43,833 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 12:56:43,833 : INFO : liquid_level.LiquidLevel : select_region_of_interest function called
+2023-07-28 12:56:46,272 : INFO : liquid_level.LiquidLevel : list of points: [(261, 119)]
+2023-07-28 12:56:47,283 : INFO : liquid_level.LiquidLevel : list of points: [(261, 119), (435, 495)]
+2023-07-28 12:56:49,828 : INFO : liquid_level.LiquidLevel : select_region_of_interest function done
+2023-07-28 12:56:55,080 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-07-28 12:56:55,084 : INFO : liquid_level.LiquidLevel : start function done
+2023-07-28 12:56:55,092 : DEBUG : liquid_level.LiquidLevel : find_color_split function called
+2023-07-28 12:56:55,200 : DEBUG : liquid_level.LiquidLevel : color split level not found - no distance aboce threshold
+2023-07-28 12:56:55,202 : DEBUG : liquid_level.LiquidLevel : find_color_split function done
+2023-07-28 12:59:13,791 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 12:59:13,792 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 12:59:13,793 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 12:59:13,794 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 12:59:13,794 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 12:59:16,024 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 12:59:16,028 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 12:59:17,826 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 12:59:17,826 : INFO : liquid_level.LiquidLevel : select_region_of_interest function called
+2023-07-28 12:59:19,301 : INFO : liquid_level.LiquidLevel : list of points: [(265, 137)]
+2023-07-28 12:59:20,154 : INFO : liquid_level.LiquidLevel : list of points: [(265, 137), (431, 488)]
+2023-07-28 12:59:21,464 : INFO : liquid_level.LiquidLevel : select_region_of_interest function done
+2023-07-28 12:59:25,495 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-07-28 12:59:25,497 : INFO : liquid_level.LiquidLevel : start function done
+2023-07-28 12:59:25,504 : DEBUG : liquid_level.LiquidLevel : find_color_split function called
+2023-07-28 12:59:25,612 : DEBUG : liquid_level.LiquidLevel : color split level not found - no distance aboce threshold
+2023-07-28 12:59:25,612 : DEBUG : liquid_level.LiquidLevel : find_color_split function done
+2023-07-28 13:00:28,483 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 13:00:28,484 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 13:00:28,484 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 13:00:28,484 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 13:00:28,484 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 13:00:31,674 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 13:00:31,679 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 13:00:33,085 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 13:00:33,086 : INFO : liquid_level.LiquidLevel : select_region_of_interest function called
+2023-07-28 13:00:34,391 : INFO : liquid_level.LiquidLevel : list of points: [(266, 126)]
+2023-07-28 13:00:35,123 : INFO : liquid_level.LiquidLevel : list of points: [(266, 126), (434, 489)]
+2023-07-28 13:00:36,692 : INFO : liquid_level.LiquidLevel : select_region_of_interest function done
+2023-07-28 13:00:40,860 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-07-28 13:00:40,862 : INFO : liquid_level.LiquidLevel : start function done
+2023-07-28 13:00:40,874 : DEBUG : liquid_level.LiquidLevel : find_color_split function called
+2023-07-28 13:00:40,977 : DEBUG : liquid_level.LiquidLevel : color split level found at 0.31994047619047616
+2023-07-28 13:00:40,978 : DEBUG : liquid_level.LiquidLevel : find_color_split function done
+2023-07-28 13:01:22,136 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 13:01:22,137 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 13:01:22,139 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 13:01:22,139 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 13:01:22,139 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 13:01:23,716 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 13:01:23,721 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 13:01:24,865 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 13:01:24,865 : INFO : liquid_level.LiquidLevel : select_region_of_interest function called
+2023-07-28 13:01:26,431 : INFO : liquid_level.LiquidLevel : list of points: [(260, 107)]
+2023-07-28 13:01:27,123 : INFO : liquid_level.LiquidLevel : list of points: [(260, 107), (437, 493)]
+2023-07-28 13:01:28,758 : INFO : liquid_level.LiquidLevel : select_region_of_interest function done
+2023-07-28 13:01:32,410 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-07-28 13:01:32,413 : INFO : liquid_level.LiquidLevel : start function done
+2023-07-28 13:01:32,420 : DEBUG : liquid_level.LiquidLevel : find_color_split function called
+2023-07-28 13:01:32,535 : DEBUG : liquid_level.LiquidLevel : color split level found at 0.34970238095238093
+2023-07-28 13:01:32,535 : DEBUG : liquid_level.LiquidLevel : find_color_split function done
+2023-07-28 13:05:01,266 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 13:05:01,266 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 13:05:01,268 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 13:05:01,268 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 13:05:01,268 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 13:05:03,241 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 13:05:03,244 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 13:05:04,789 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 13:05:04,790 : INFO : liquid_level.LiquidLevel : select_region_of_interest function called
+2023-07-28 13:05:06,143 : INFO : liquid_level.LiquidLevel : list of points: [(254, 119)]
+2023-07-28 13:05:07,178 : INFO : liquid_level.LiquidLevel : list of points: [(254, 119), (434, 484)]
+2023-07-28 13:05:09,312 : INFO : liquid_level.LiquidLevel : select_region_of_interest function done
+2023-07-28 13:05:12,141 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-07-28 13:05:12,143 : INFO : liquid_level.LiquidLevel : start function done
+2023-07-28 13:05:12,152 : DEBUG : liquid_level.LiquidLevel : find_color_split function called
+2023-07-28 13:05:12,259 : DEBUG : liquid_level.LiquidLevel : color split level found at 0.33482142857142855
+2023-07-28 13:05:12,259 : DEBUG : liquid_level.LiquidLevel : find_color_split function done
+2023-07-28 13:07:48,583 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 13:07:48,584 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 13:07:48,585 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 13:07:48,585 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 13:07:48,585 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 13:07:51,020 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 13:07:51,025 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 13:07:52,748 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 13:07:52,748 : INFO : liquid_level.LiquidLevel : select_region_of_interest function called
+2023-07-28 13:07:55,928 : INFO : liquid_level.LiquidLevel : list of points: [(248, 106)]
+2023-07-28 13:07:56,795 : INFO : liquid_level.LiquidLevel : list of points: [(248, 106), (445, 485)]
+2023-07-28 13:08:02,182 : INFO : liquid_level.LiquidLevel : select_region_of_interest function done
+2023-07-28 13:08:12,402 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-07-28 13:08:12,405 : INFO : liquid_level.LiquidLevel : start function done
+2023-07-28 13:08:12,413 : DEBUG : liquid_level.LiquidLevel : find_color_split function called
+2023-07-28 13:08:12,517 : DEBUG : liquid_level.LiquidLevel : color split level found at 0.34970238095238093
+2023-07-28 13:08:12,518 : DEBUG : liquid_level.LiquidLevel : find_color_split function done
+2023-07-28 13:09:46,705 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 13:09:46,705 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 13:09:46,707 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 13:09:46,707 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 13:09:46,707 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 13:09:48,178 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 13:09:48,182 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 13:09:49,785 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 13:09:49,785 : INFO : liquid_level.LiquidLevel : select_region_of_interest function called
+2023-07-28 13:09:51,087 : INFO : liquid_level.LiquidLevel : list of points: [(276, 127)]
+2023-07-28 13:09:51,818 : INFO : liquid_level.LiquidLevel : list of points: [(276, 127), (415, 462)]
+2023-07-28 13:09:53,556 : INFO : liquid_level.LiquidLevel : select_region_of_interest function done
+2023-07-28 13:09:56,713 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-07-28 13:09:56,716 : INFO : liquid_level.LiquidLevel : start function done
+2023-07-28 13:09:56,724 : DEBUG : liquid_level.LiquidLevel : find_color_split function called
+2023-07-28 13:09:56,807 : DEBUG : liquid_level.LiquidLevel : color split level found at 0.31994047619047616
+2023-07-28 13:09:56,808 : DEBUG : liquid_level.LiquidLevel : find_color_split function done
+2023-07-28 13:13:11,481 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 13:13:11,482 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 13:13:11,484 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 13:13:11,484 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 13:13:11,484 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 13:13:15,261 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 13:13:15,266 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 13:13:17,096 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 13:13:17,099 : INFO : liquid_level.LiquidLevel : select_region_of_interest function called
+2023-07-28 13:13:18,813 : INFO : liquid_level.LiquidLevel : list of points: [(260, 114)]
+2023-07-28 13:13:19,733 : INFO : liquid_level.LiquidLevel : list of points: [(260, 114), (435, 485)]
+2023-07-28 13:13:21,882 : INFO : liquid_level.LiquidLevel : select_region_of_interest function done
+2023-07-28 13:13:25,671 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-07-28 13:13:25,675 : INFO : liquid_level.LiquidLevel : start function done
+2023-07-28 13:13:25,688 : DEBUG : liquid_level.LiquidLevel : find_color_split function called
+2023-07-28 13:13:26,044 : DEBUG : liquid_level.LiquidLevel : color split level found at 0.33482142857142855
+2023-07-28 13:13:26,045 : DEBUG : liquid_level.LiquidLevel : find_color_split function done
+2023-07-28 13:17:42,197 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 13:17:42,198 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 13:17:42,199 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 13:17:42,200 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 13:17:42,200 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 13:17:43,936 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 13:17:43,942 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 13:17:45,678 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 13:17:45,678 : INFO : liquid_level.LiquidLevel : select_region_of_interest function called
+2023-07-28 13:17:47,133 : INFO : liquid_level.LiquidLevel : list of points: [(269, 129)]
+2023-07-28 13:17:47,994 : INFO : liquid_level.LiquidLevel : list of points: [(269, 129), (442, 481)]
+2023-07-28 13:17:49,511 : INFO : liquid_level.LiquidLevel : select_region_of_interest function done
+2023-07-28 13:17:53,210 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-07-28 13:17:53,220 : INFO : liquid_level.LiquidLevel : start function done
+2023-07-28 13:17:53,236 : DEBUG : liquid_level.LiquidLevel : find_color_split function called
+2023-07-28 13:17:53,725 : DEBUG : liquid_level.LiquidLevel : color split level found at 0.31994047619047616
+2023-07-28 13:17:53,726 : DEBUG : liquid_level.LiquidLevel : find_color_split function done
+2023-07-28 13:18:17,508 : INFO : liquid_level.LiquidLevel : start function called
+2023-07-28 13:18:17,508 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-07-28 13:18:17,510 : DEBUG : liquid_level.LiquidLevel : load_img function called
+2023-07-28 13:18:17,510 : DEBUG : liquid_level.LiquidLevel : load_img function done
+2023-07-28 13:18:17,510 : DEBUG : liquid_level.LiquidLevel : find_contour function called
+2023-07-28 13:18:19,382 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function called
+2023-07-28 13:18:19,387 : DEBUG : liquid_level.LiquidLevel : find_parameteres_for_canny_edge function done
+2023-07-28 13:18:20,977 : DEBUG : liquid_level.LiquidLevel : find_contour function done
+2023-07-28 13:18:20,977 : INFO : liquid_level.LiquidLevel : select_region_of_interest function called
+2023-07-28 13:18:22,448 : INFO : liquid_level.LiquidLevel : list of points: [(265, 110)]
+2023-07-28 13:18:23,379 : INFO : liquid_level.LiquidLevel : list of points: [(265, 110), (437, 484)]
+2023-07-28 13:18:24,957 : INFO : liquid_level.LiquidLevel : select_region_of_interest function done
+2023-07-28 13:18:28,529 : INFO : liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-07-28 13:18:28,534 : INFO : liquid_level.LiquidLevel : start function done
+2023-07-28 13:18:28,543 : DEBUG : liquid_level.LiquidLevel : find_color_split function called
+2023-07-28 13:18:28,879 : DEBUG : liquid_level.LiquidLevel : color split level found at 0.34970238095238093
+2023-07-28 13:18:28,879 : DEBUG : liquid_level.LiquidLevel : find_color_split function done
