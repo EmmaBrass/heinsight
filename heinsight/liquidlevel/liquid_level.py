@@ -455,14 +455,10 @@ class LiquidLevel:
         cv2.imshow("fill", fill)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
-        contour_image = self.find_contour(fill)
-        cv2.imshow("contour_image", contour_image)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-        self.loaded_edge_image = contour_image
-        row = self.find_liquid_level(contour_image)
+        bw_image = self.convert_bw(fill)
+        row = self.find_liquid_level(bw_image)
         self.logger.debug('load_and_find_level function done')
-        return contour_image, row
+        return bw_image, row
 
     def load_img(self, img):
         """
@@ -586,22 +582,17 @@ class LiquidLevel:
                                             )
 
 
-
-
-    def find_contour(self,
+    def convert_bw(self,
                      fill,
                      ):
         """
-        Given an image find a closed image that tries to eliminate non-horizontal lines
+        Given an image converts it to a black and white image.
 
-        :param fill: numpy.ndarray: image to find the contour of
-        :return: closed: black and white image, where detected contours are in white
+        :param fill: numpy.ndarray: image to convert
+        :return: closed: black and white image
         """
-        self.logger.debug('find_contour function called')
+        self.logger.debug('convert_bw function called')
         # get these values from the object's attributes
-
-        morph_dilate_kernel_size = (7, 7)
-        morph_rect_kernel_size = (6, 1)
 
         return_image = fill
 
@@ -610,34 +601,8 @@ class LiquidLevel:
         cv2.imshow("b&w image", return_image)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
-        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8)) # contrast limited adaptive histogram equalisation (improves contrast)
-        return_image = clahe.apply(return_image)
-        #cv2.imwrite("image_after_clahe.jpg", return_image)
-        cv2.imshow("image after clahe", return_image)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-        canny_threshold_1, canny_threshold_2 = self.find_parameters_for_canny_edge(return_image) # find parameters for edge detection
-        return_image = cv2.Canny(return_image, canny_threshold_1, canny_threshold_2) # apply edge detection algorithm
-        #cv2.imwrite("image_after_canny_edge_detection.jpg", return_image)
-        cv2.imshow("image after canny edge detection", return_image)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-        return_image = cv2.morphologyEx(return_image, cv2.MORPH_DILATE, morph_dilate_kernel_size) # erosion then dilation to remove noise
-        #cv2.imwrite("image_after_erosion_then_dilation_to_reduce_noise.jpg", return_image)
-        cv2.imshow("image after erosion then dilation to reduce noise", return_image)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
 
-        # create a horizontal structural element;
-        horizontal_structure = cv2.getStructuringElement(cv2.MORPH_RECT, morph_rect_kernel_size)
-        # to the edges, apply morphological opening operation to remove vertical lines from the contour image
-        return_image = cv2.morphologyEx(return_image, cv2.MORPH_OPEN, horizontal_structure)
-        #cv2.imwrite("image_after_morphological_opening_operation_to_remove_vertical_lines_from_the_contour_image.jpg", return_image)
-        cv2.imshow("image after morphological opening operation to remove vertical lines from the contour image", return_image)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-
-        self.logger.debug('find_contour function done')
+        self.logger.debug('convert_bw function done')
         return return_image
 
     def find_parameters_for_canny_edge(self, image, sigma=0.33):
@@ -786,7 +751,10 @@ class LiquidLevel:
         :param edge: contour image
         :return:
         """
-        # TODO work on this to improve liquid level detection... add ability to identify color change
+        # TODO change to 1D method using derivatives
+
+        # 
+        # work on this to improve liquid level detection... add ability to identify color change
         self.logger.debug('find_liquid_level function called')
         liquid_level_data_frame = pd.DataFrame(columns=('row', 'fraction_of_pixels'))  # create a pandas dataframe,
         # with 2 rows
