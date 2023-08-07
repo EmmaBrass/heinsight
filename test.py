@@ -1,10 +1,21 @@
-from pylabware import Optimax
 import os
 import cv2
 import time
 from heinsight.liquidlevel.liquid_level import LiquidLevel
 from heinsight.liquidlevel.track_tolerance_levels import \
     TrackLiquidToleranceLevels, TrackOneLiquidToleranceLevel, TrackTwoLiquidToleranceLevels
+
+
+# get image
+# select ROI as normal
+# reduce ROI to a vertical line of pixels, with the values as the average for that row in the ROI
+# make a scatter plot of I vs h
+# find second derivative at each point on the graph
+# select the two points with the greatest absolute second derivative
+# ensure that these two points are close enough together - within a threshold
+# e.g. could do select the greatest one and then select the next greatest within the threshold area
+# set liquid level line as being halfway between these two points
+
 
 def resize(input_image):
     h, w = input_image.shape[:2]
