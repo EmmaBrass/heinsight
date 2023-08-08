@@ -38,10 +38,14 @@ import json
 import cv2
 import imutils
 import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+from scipy.signal import lfilter, lfilter_zi, filtfilt, butter, find_peaks
+from numpy import diff
 import pandas as pd
+import heapq
 from datetime import datetime
 from skimage.color import rgb2lab, lab2rgb
-from heinsight.vision.camera import Camera
 from heinsight.liquidlevel.track_tolerance_levels import TrackLiquidToleranceLevels, TrackTwoLiquidToleranceLevels
 
 module_logger = logging.getLogger('liquid_level')
@@ -155,7 +159,7 @@ class LiquidLevel:
         self.track_liquid_tolerance_levels = track_liquid_tolerance_levels
 
         self.loaded_image = None  # the image that was most recently loaded
-        self.loaded_edge_image = None  # the edge image of the image that was most recently loaded
+        self.loaded_bw_image = None  # the b&w image of the image that was most recently loaded
 
         self.row = 0  # keeping track of current (not ref) meniscus level/height. float; this height value is
         # relative to the height of the image
@@ -175,8 +179,8 @@ class LiquidLevel:
                                         # image has lines
         self.all_images_no_lines = []  # list of list of timestamp, img: [[timestamp, img], [timestamp, img]...]
                                         # images dont have lines
-        self.all_images_edge = []  # # list of list of timestamp, img: [[timestamp, img], [timestamp, img]...]
-                                        # images are the edge images
+        self.all_images_bw = []  # # list of list of timestamp, img: [[timestamp, img], [timestamp, img]...]
+                                        # images are the b&w images
 
         self.pump_to_pixel_ratio = {}  # this will only be used if the liquid level object is used for a pump,
         # and you want to do some self-corrective things based on images that are taken of the liquid level. This is
@@ -292,7 +296,7 @@ class LiquidLevel:
             self.track_liquid_tolerance_levels.reset()
         self.width = self.initial_arguments['width']
         self.loaded_image = None
-        self.loaded_edge_image = None
+        self.loaded_bw_image = None
 
         self.reset_region_of_interest()
 
@@ -375,8 +379,8 @@ class LiquidLevel:
         """
         self.logger.info('load_image_and_select_and_set_parameters function called')
         image = self.load_img(img)
-        edge = self.find_contour(image)
-        self.loaded_edge_image = edge
+        bw_image = self.convert_bw(image)
+        self.loaded_bw_image = bw_image
 
         if select_region_of_interest:
             self.select_region_of_interest()
@@ -390,7 +394,7 @@ class LiquidLevel:
         if select_tolerance:
             self.set_tolerance(image=image)
         self.logger.info('load_image_and_select_and_set_parameters function done')
-        return edge
+        return bw_image
 
     def set_reference(self, image, volumes_list):
         if self.track_liquid_tolerance_levels is None:
@@ -434,13 +438,13 @@ class LiquidLevel:
             json_file.write(json.dumps(data))
             json_file.close()
 
-    def load_and_find_contour(self, img):
+    def load_and_convert_bw(self, img):
         self.logger.debug('load_and_find_contour function called')
         fill = self.load_img(img)
-        edge = self.find_contour(fill)
-        self.loaded_edge_image = edge
+        bw_image = self.convert_bw(fill)
+        self.loaded_bw_image = bw_image
         self.logger.debug('load_and_find_contour function done')
-        return edge
+        return bw_image
 
     def load_and_find_level(self, img):
         """
@@ -660,8 +664,8 @@ class LiquidLevel:
         # that have been selected on the image - use the most recently loaded image for this method
         image = self.loaded_image.copy()
         clone = self.loaded_image.copy()
-        closed_image = self.loaded_edge_image.copy()
-        closed_clone = self.loaded_edge_image.copy()
+        closed_image = self.loaded_bw_image.copy()
+        closed_clone = self.loaded_bw_image.copy()
 
         cv2.namedWindow('Select frame')
         cv2.namedWindow('Select frame - closed')
@@ -719,6 +723,8 @@ class LiquidLevel:
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
+        print("LIST OF FRAME POINTS:", self.list_of_frame_points)
+
         self.logger.info('select_region_of_interest function done')
 
     def find_maximum_edges_of_mask(self):
@@ -742,108 +748,179 @@ class LiquidLevel:
                 bottom = pixel_point_value[1]
         return left, right, top, bottom
 
-    def find_liquid_level(self, edge):
+    def find_liquid_level(self, bw_image):
         """
-        Finds a/multiple menisci within a frame of a edge image (contour image). Updates self.row and
+        Finds a/multiple menisci within a frame of a b&w image. Updates self.row and
         self.liquid_level_array. self.row is the single row where the only/strongest horizontal line/meniscus is,
         and self.liquid_level_array is an array of the rows with lines/menisci ordered by rank (higher means stronger
         horizontal line)
-        :param edge: contour image
+        :param bw_image: black and white image
         :return:
         """
         # TODO change to 1D method using derivatives
 
-        # 
-        # work on this to improve liquid level detection... add ability to identify color change
         self.logger.debug('find_liquid_level function called')
-        liquid_level_data_frame = pd.DataFrame(columns=('row', 'fraction_of_pixels'))  # create a pandas dataframe,
-        # with 2 rows
-        img_height, img_width = edge.shape  # size of the edge image
-        left_row, right_row, top_row, bottom_row = self.find_maximum_edges_of_mask()
-        rows = range(top_row, bottom_row, self.rows_to_count)  # the rows to consider for iteration; but for this
-        # list only iterate over rows, separated self.rows_to_count
+        liquid_level_data_frame = pd.DataFrame(columns=('row', 
+            'fraction_of_pixels'))  # create a pandas dataframe, with 2 rows
+        img_height, img_width = bw_image.shape  # size of the edge image
+        left_row, right_row, top_row, bottom_row = \
+            self.find_maximum_edges_of_mask()
+        rows = range(top_row, bottom_row)  # the rows to consider for iteration
         cols = range(left_row, right_row)  # columns to consider
+        num_cols = len(cols)
 
-        for row in rows:  # iterate through every section, by iterating through rows separated by self.rows_to_count
-            list_of_fractions_of_white_pixels_in_a_section = []
-            total_number_of_pixels_in_section = 0
-            for i in range(0, self.rows_to_count):  # iterate through a row in a section
-                number_of_pixels_in_this_row = 0
-                number_of_white_pixels_in_this_row = 0
-                for col in cols:  # iterate through the columns in a row
-                    if row+i <= img_height-1:  # if for the original row plus the 'offset' to consider the next few
-                        # rows for finding the meniscus doesn't go out of bounds of the image height
-                        if self.mask_to_search_inside[row + i][col] > 0:  # if in the mask the value is greater than
-                            # 0 at that pixel, which means it was part of the selection area to search in
-                            number_of_pixels_in_this_row = number_of_pixels_in_this_row + 1
-                            if edge[row+i][col] > 0:  # if the pixel at that row and column location in the edge
-                                # image is greater than zero aka a white pixel
-                                number_of_white_pixels_in_this_row = number_of_white_pixels_in_this_row + 1
-                total_number_of_pixels_in_section = total_number_of_pixels_in_section + number_of_pixels_in_this_row
-                if number_of_pixels_in_this_row == 0:  # sometimes division by zero error can occur
-                    number_of_pixels_in_this_row = 1
-                fraction_of_white_pixels_in_this_row = number_of_white_pixels_in_this_row / number_of_pixels_in_this_row
-                list_of_fractions_of_white_pixels_in_a_section.append(fraction_of_white_pixels_in_this_row)
-            if len(list_of_fractions_of_white_pixels_in_a_section) == 0:
-                average_fraction_of_white_pixels_in_a_section = 0
-            else:
-                average_fraction_of_white_pixels_in_a_section = \
-                    sum(list_of_fractions_of_white_pixels_in_a_section)/len(list_of_fractions_of_white_pixels_in_a_section)
-            print("average_fraction_of_white_pixels_in_a_section", average_fraction_of_white_pixels_in_a_section)
-            if average_fraction_of_white_pixels_in_a_section >= self.find_meniscus_minimum:
-                # if there is more than the minimum white pixel count required in a section identify the section as
-                # having a liquid level
-                # append a row to the panda dataframe, where the value for row is the middle row in the rows
-                # that were used to find the meniscus, and the pixel count is number of white pixels  counted
-                liquid_level_data_frame = pd.concat([liquid_level_data_frame, pd.DataFrame({'row': [int(row + (self.rows_to_count // 2))], 'fraction_of_pixels':
-                    [average_fraction_of_white_pixels_in_a_section]})], ignore_index=True)
-                
-        liquid_level_data_frame_sorted = liquid_level_data_frame.sort_values(by=['fraction_of_pixels'],
-                                                                             ascending=False,
-                                                                             kind='mergesort')
-        print("liquid_level_data_frame_sorted: ", liquid_level_data_frame_sorted)
-        # after finding all the rows with white pixels in them, then sort the dataframe by pixel count, so that the
-        # row with the most white pixels is sorted at the top (or first) of the dataframe
-        liquid_level_array = liquid_level_data_frame_sorted.values  # make an array out of the sorted values
+        pixels = [] # array of pixel values created from the average of the row
 
-        row_array = []  # array sorted of the rows with most pixel count
+        for row in rows:  # iterate through each row
+            pixel_total = 0
+            for col in cols: # iterate through each coloumn
+                pixel_total += bw_image[row][col]
+            pixel_value = pixel_total/num_cols
+            pixels.append(pixel_value)
 
-        # next block basically to extract the order of rows with the highest pixel count into its own array called
-        # row_array
-        for row in liquid_level_array:
-            row_relative_height = int(row[0]) / img_height
-            row_array.append(row_relative_height)
+        height = np.array(rows)
+        intensity = np.array(pixels)
 
-        try:
-            print("row array:", row_array)
-            liquid_level_location = row_array[0]  # location of most prominent line/where liquid level is most likely
+        # plt.plot(x, y)
+        # plt.show()
+
+        # implement FIR/IIR forwards and backwards filter
+        # reference: https://scipy.github.io/old-wiki/pages/Cookbook/FiltFilt.html#:~:text=filtfilt%2C%20a%20linear%20filter%20that,stable%20response%20(via%20lfilter_zi).
+
+         # Create an order 3 lowpass butterworth filter.
+        b, a = butter(9, 0.09)
+         
+        # Apply the filter to xn.  Use lfilter_zi to choose the initial 
+        # condition of the filter.
+        zi = lfilter_zi(b, a)
+        z, _ = lfilter(b, a, intensity, zi=zi*intensity[0])
+         
+        # Apply the filter again, to have a result filtered at an order
+        # the same as filtfilt.
+        z2, _ = lfilter(b, a, z, zi=zi*z[0])
+         
+        # Use filtfilt to apply the filter.
+        intensity_smoothed = filtfilt(b, a, intensity)
+
+        # n = 10  # the larger n is, the smoother curve will be
+        # b = [1.0 / n] * n
+        # a = 1
+        # yy = lfilter(b, a, y)
+        print("x values:", height)
+        print("y values:", intensity)
+        print("yy values:", intensity_smoothed)
+        plt.plot(height, intensity, c='b')
+        plt.plot(height, intensity_smoothed, c='r')  # smoothed by filter
+        
+        plt.show()
+
+        # Here we start the differentiation steps.
+
+        dh = 1
+
+        intensity_smoothed_1deriv = diff(intensity_smoothed)/dh
+        intensity_smoothed_2deriv = diff(intensity_smoothed_1deriv)/dh
+        intensity_smoothed_3deriv = diff(intensity_smoothed_2deriv)/dh
+
+        # plt.plot(height, intensity_smoothed, c='r')  # Smoothed by filter
+        plt.plot(height[1:], intensity_smoothed_1deriv, c='b') # 1st derivative
+        plt.plot(height[2:], intensity_smoothed_2deriv, c='g') # 2nd derivative
+        plt.plot(height[3:], intensity_smoothed_3deriv, c='pink') # 3rd derivative
+        plt.show()
+
+        intensity_smoothed_2deriv_abs = []
+        intensity_smoothed_3deriv_abs = []
+
+        # The liquid level will be at the position of the greatest |d3I/dh3| 
+        # values between the two greatest |d2I/dh2| values.
+
+        # Get the absolute values.
+        for i in intensity_smoothed_2deriv:
+            a_i = abs(i)
+            intensity_smoothed_2deriv_abs.append(a_i)
+
+        for i in intensity_smoothed_3deriv:
+            a_i = abs(i)
+            intensity_smoothed_3deriv_abs.append(a_i)
+
+        # Find the two highest peaks in the plot of 
+        # intensity_smoothed_2deriv_abs vs height.
+
+        # Find the peaks in absolute 2nd derivative of intensity
+        peaks = find_peaks(intensity_smoothed_2deriv_abs, height = 0)
+        i_peaks = []
+        for p in peaks[0]:
+            i_peaks.append(p)
+        
+        print("intensity peak indicies: ", i_peaks)
+
+        h_peaks = []
+        for p in i_peaks:
+            h_peaks.append(p+2)
+        print("height peak indicies: ", h_peaks)
+        
+        plt.plot(height[2:], intensity_smoothed_2deriv_abs, c='g') # 2nd derivative
+        for i, h in zip(i_peaks, h_peaks):
+            plt.plot(height[h], intensity_smoothed_2deriv_abs[i], 
+                marker="o", ls="", ms=3, color='r' )
+        plt.show()
+
+        # From these list of indices, we want to return the two indicies that 
+        # correspond to the greatest absolute 2nd derivative values.
+        peak_heights = np.array(list(peaks[1].values())).flatten()
+        print("peak heights: ", peak_heights)
+
+        # Get index of the 2 highest
+        n = 2
+        highest_2_peaks_index = [np.where(peak_heights==i) for i in \
+            sorted(peak_heights, reverse=True)][:n]
+
+        highest_2_peaks_index = [highest_2_peaks_index[0][0][0], highest_2_peaks_index[1][0][0]]    
+
+        print("highest_2_peaks_index 0", highest_2_peaks_index)
+
+        largest_2ndderiv_index = []
+        largest_2ndderiv_index.append(i_peaks[highest_2_peaks_index[0]])
+        largest_2ndderiv_index.append(i_peaks[highest_2_peaks_index[1]])
+
+        print("largest_2ndderiv_index: ", largest_2ndderiv_index)
+
+        max_i = 0
+        max_i_idx = 0
+        for idx, i in enumerate(intensity_smoothed_3deriv_abs):
+            if (idx >= largest_2ndderiv_index[0] and 
+                idx <= largest_2ndderiv_index[1]):
+                if i > max_i:
+                    max_i = i
+                    max_i_idx = idx
+
+        print("max_i_idx", max_i_idx)
+
+        # max_i_idx gives the index of the greatest value of 
+        # the abs of the 3rd derivative.
+        # The corresponding value from the height array will be the row where
+        # the liquid level is located.
+
+        liquid_level_location = height[max_i_idx+3]  # location of most prominent line/where liquid level is most likely
             #  to be
-            self.row = liquid_level_location  # try to find the row with the most white pixels in it
-        except IndexError:  # if couldn't find a meniscus in the array/couldn't find anything in the array,
-            # because there were no white pixels to have been found in the region of interest in the edge image
-            if self.no_error is False:
-                raise NoMeniscusFound(self.loaded_image, edge)  # raise the NoMeniscusFound error
-            else:
-                print('meniscus was not - found setting meniscus to be the top of the image')
-                # so because you dont want this to error out, then set the meniscus to be the top of the image at row 0
-                row_array.append(0)
-                liquid_level_location = row_array[0]
-                self.row = liquid_level_location
+
+        print("liquid level location row: ", liquid_level_location)
+        self.row = liquid_level_location  
 
         if self.number_of_liquid_levels_to_find == 0:
             number_of_number_of_liquid_levels_to_find = 999
         else:
             number_of_number_of_liquid_levels_to_find = self.number_of_liquid_levels_to_find
 
-        self.liquid_level_array = row_array[0:int(number_of_number_of_liquid_levels_to_find)]  # store the values for the
+        self.liquid_level_array = liquid_level_location  # store the values for the
         # rows for the number of menisci that the user wanted to check aka if user wanted to look for 2 menisci,
         # then save the row values for the top 2 'found menisci'. if the self.number_of_liquid_levels_to_find was set
         #  to 0 because user doesn't want to set a specific number to check, this will still work because 999 will
         # actually be passed to the row_array call to find 999 menisci; it will go to the maximum number it can go to
 
-        self.logger.debug(f'liquid level found at {liquid_level_location}')
-        self.logger.debug('find_liquid_level function done')
-        return liquid_level_location
+        # self.logger.debug(f'liquid level found at {liquid_level_location}')
+        # self.logger.debug('find_liquid_level function done')
+        # return liquid_level_location
 
     def number_of_levels_last_found(self):
         # return number of liquid levels last found when find_liquid_level was run
@@ -1096,7 +1173,7 @@ class LiquidLevel:
         if image is None:
             image = self.camera.take_picture()
         # next line can throw NoMeniscusFound exception
-        edge_image = self.load_image_and_select_and_set_parameters(img=image,
+        bw_image = self.load_image_and_select_and_set_parameters(img=image,
                                                                    select_region_of_interest=select_region_of_interest,
                                                                    set_reference=set_reference,
                                                                    volumes_list=volumes_list,
@@ -1110,7 +1187,7 @@ class LiquidLevel:
             if self.track_liquid_tolerance_levels.reference_row is not None:
                 self.all_images_with_lines.append([time.strftime(self.datetime_format), self.draw_ref_on_loaded_image()])
         self.all_images_no_lines.append([time.strftime(self.datetime_format), image])
-        self.all_images_edge.append([time.strftime(self.datetime_format), edge_image])
+        self.all_images_bw.append([time.strftime(self.datetime_format), bw_image])
 
         # while the experiment is still running
         # call self.run(cam) after every cycle of liquid transfer
@@ -1145,20 +1222,20 @@ class LiquidLevel:
 
     def take_photo_find_levels_add_to_memory(self):
         img, time = self.take_photo()
-        edge, _ = self.load_and_find_level(img=img)
+        bw_image, _ = self.load_and_find_level(img=img)
         self.add_image_to_memory(img=self.loaded_image,
             img_name=time.strftime(self.datetime_format),
             array_to_save_to=self.all_images_no_lines,
             )
-        self.add_image_to_memory(img=edge,
+        self.add_image_to_memory(img=bw_image,
             img_name=time.strftime(self.datetime_format),
-            array_to_save_to=self.all_images_edge,
+            array_to_save_to=self.all_images_bw,
             )
         self.add_image_to_memory(img=self.draw_lines(),
             img_name=time.strftime(self.datetime_format),
             array_to_save_to=self.all_images_with_lines,
             )
-        return img, edge, time
+        return img, bw_image, time
 
     def save_drawn_image(self):
         """
@@ -1173,6 +1250,23 @@ class LiquidLevel:
             image=line_img,
             file_format='jpg',
             )
+
+    def test_run(self,
+                input_image=None
+                ):
+
+        self.list_of_frame_points = [[263, 85],[434, 495]]
+
+        self.logger.debug('test run function called')
+        if input_image is None:
+            image = self.camera.take_picture()
+        else:
+            # clone the image so no issues with it being edited and then re-used, causing errors
+            image = input_image.copy()
+
+        bw_image, row = self.load_and_find_level(image)
+
+        self.logger.debug('test run function complete')
 
     def run(self,
             input_image=None,
@@ -1195,7 +1289,7 @@ class LiquidLevel:
             # clone the image so no issues with it being edited and then re-used, causing errors
             image = input_image.copy()
         # next line can throw NoMeniscusFound exception
-        edge, _ = self.load_and_find_level(image)
+        bw_image, _ = self.load_and_find_level(image)
         if self.use_tolerance == True:
             tolerance_bool = self.in_tolerance()
         else:
@@ -1218,7 +1312,7 @@ class LiquidLevel:
         cv2.destroyAllWindows()
         self.all_images_with_lines.append([time_formatted, image_with_lines])
         self.all_images_no_lines.append([time_formatted, image])
-        self.all_images_edge.append([time_formatted, edge])
+        self.all_images_bw.append([time_formatted, bw_image])
 
         # to prevent using too much memory, delete all except the latest image taken after more than n images have be
         #  taken
@@ -1227,8 +1321,8 @@ class LiquidLevel:
             self.all_images_with_lines = self.all_images_with_lines[-1:]
         if len(self.all_images_no_lines) >= n:
             self.all_images_no_lines = self.all_images_no_lines[-1:]
-        if len(self.all_images_edge) >= n:
-            self.all_images_edge = self.all_images_edge[-1:]
+        if len(self.all_images_bw) >= n:
+            self.all_images_bw = self.all_images_bw[-1:]
 
         # if user wants to create a file of all the time stamped values with the liquid level, this is the code block
         #  that will fill in the array of liquid_level_data with a dicitonary items of timestamp: liquid_level_location,
@@ -1258,8 +1352,7 @@ class LiquidLevel:
 
 # live view test of the tracking class for the liquid level class
 def video_run(cam=1):
-    camera = Camera(cam=cam,
-                    save_folder_bool=False)
+    camera = None
 
     # only hae one tracker instance at a time
     # tracker = TrackOneLiquidToleranceLevel(above_or_below='above',
