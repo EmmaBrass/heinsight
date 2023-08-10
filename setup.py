@@ -2,14 +2,20 @@ import os
 import setuptools
 from setuptools import find_packages, setup
 
-NAME = 'heinsight_liquid_level_H1'
-DESCRIPTION = """HeinSight is a computer-vision based control system for automating common laboratory tasks. The Liquid-Level Hydrogen-1 release is a prototype designed to facilitate the remote monitoring and control of liquid-air interface in a transparent vessel across a variety of pre-programmed experimental types that require continuous stirring: single and dual pump continuous preferential crystallization (CPC), continuous distillation, and filtration"""
-AUTHOR = 'Veronica Lai, Tara Zepel, Lars Yunker // Hein Group'
+NAME = 'gradient_liquid_level'
+DESCRIPTION = """This module is designed to identify the liquid level 
+    in a vessel using computer vision techniques.  The main algorithm used is 
+    inspired by the work in this paper:  [paper link]
+    The structure of the package is largely taken from the HeinSeight package
+    developed by Veronica Lai, Tara Zepel, Lars Yunker of the Hein Group:
+    [paper link]
+    """
+AUTHOR = 'Emma Brass // Cooper Group'
 CLASSIFIERS = [
     'Programming Language :: Python :: 3',
     'Operating System :: Windows',
 ]
-INSTALL_REQUIRES = [
+INSTALL_REQUIRES = [ # TODO check the requirements are right
     'opencv-python',
     'imutils',
     'numpy',
@@ -27,7 +33,8 @@ with open('LICENSE') as f:
     lic.replace('\n', ' ')
 
 # find packages and prefix them with the main package name
-# PACKAGES = [NAME] + [f'{NAME}.{package}' for package in find_packages(exclude=EXCLUDE_PACKAGES)]
+# PACKAGES = [NAME] + [f'{NAME}.{package}' 
+# for package in find_packages(exclude=EXCLUDE_PACKAGES)]
 PACKAGES = find_packages()
 
 setup(
@@ -35,7 +42,7 @@ setup(
     version='1.0',
     description=DESCRIPTION,
     author=AUTHOR,
-    url='https://gitlab.com/heingroup/heinsight_liquid_level_H1',
+    url='https://gitlab.com/heingroup/heinsight_liquid_level_H1', #TODO change
     install_requires=INSTALL_REQUIRES,
     packages=PACKAGES,
     license=lic,

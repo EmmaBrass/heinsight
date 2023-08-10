@@ -27,14 +27,16 @@ class TrackLiquidToleranceLevels:
         decisions based on a liquid level based on its proximity/distance from/between one/two tolerance level(s).
 
         """
-        self.reference_row = []  # the user can select reference rows for the image, and this value (float) is the
-        # relative height of that row in the image (relative to the image height)
+        self.reference_rows = []  # the user can select reference rows for the 
+        # image, and this value (float) is the relative height of that row in 
+        # the image (relative to the image height)
         self.reference_image = None  # copy of the reference image
         self.reference_image_height = 0
         self.reference_image_width = 0
 
-        self.tolerance_levels = []  # list of tolerance levels (height in an image) where values are between 0 and 1;
-        # tolerance levels are relative to the height of the image
+        self.tolerance_levels = []  # list of tolerance levels (height in an 
+        # image) where values are between 0 and 1; tolerance levels are relative 
+        # to the height of the image
 
         # bgr colours
         bgr_red = (0, 0, 255)
@@ -50,42 +52,50 @@ class TrackLiquidToleranceLevels:
         
 
     def reset(self):
-        # reset all the initial attributes
+        """
+        Reset all the initial attributes
+        """
         self.reset_reference()
         self.tolerance_levels = []
 
     def reset_reference(self):
-        self.reference_row = []
+        self.reference_rows = []
         self.reference_image = None
         self.reference_image_height = 0
         self.reference_image_width = 0
 
-    def get_relative_reference_height(self):
+    def get_relative_reference_heights(self):
         """
-        Return the height of the reference row relative to the height of the image
+        Return the heights of the reference rows relative to the height of the 
+        image.
+
         :return: float
         """
-        if len(self.reference_row) == 0:
+        if len(self.reference_rows) == 0:
             raise AttributeError('No reference row has been set')
         else:
-            return self.reference_row
+            return self.reference_rows
 
-    def get_absolute_reference_height(self):
+    def get_absolute_reference_heights(self):
         """
-        Return the absolute height of the reference row in the reference image
+        Return the absolute heights of the reference rows in the reference image.
+
         :return: int, absolute height of the reference row the user selected
         """
-        if len(self.reference_row) == 0:
-            return self.reference_row
+        if len(self.reference_rows) == 0:
+            return self.reference_rows
 
-        absolute_reference_height = []
-        for row in self.reference_row:
-            absolute_reference_height.append(int(self.reference_image_height * row))
-        return absolute_reference_height
+        absolute_reference_heights = []
+        for row in self.reference_rows:
+            absolute_reference_heights.append(int(self.reference_image_height 
+                * row))
+        return absolute_reference_heights
 
     def get_relative_tolerance_height(self):
         """
-        Return the height of the tolerance level(s) relative to the height of the image
+        Return the height of the tolerance level(s) relative to the height of 
+        the image.
+
         :return: float
         """
         if self.tolerance_levels is None:
@@ -95,20 +105,23 @@ class TrackLiquidToleranceLevels:
 
     def get_absolute_tolerance_height(self):
         """
-        Return a list of the tolerance level(s) the user set
-        :return: list, a list of the absolute heights (row number) in an image of the tolerance level(s) the user
-        selected
+        Return a list of the tolerance level(s) the user set.
+
+        :return: list, a list of the absolute heights (row number) in an image 
+        of the tolerance level(s) the user selected.
         """
         list_of_absolute_tolerance_heights = []
         for idx, tolerance_level in enumerate(self.tolerance_levels):
-            absolute_tolerance_height = int(self.reference_image_height * tolerance_level)
+            absolute_tolerance_height = int(self.reference_image_height * 
+                tolerance_level)
             list_of_absolute_tolerance_heights.append(absolute_tolerance_height)
 
         return list_of_absolute_tolerance_heights
 
     def find_image_height_width(self, image):
         """
-        Helper method to find the height and width of an image, whether it is a grey scale image or not
+        Helper method to find the height and width of an image, whether it is a 
+        grey scale image or not.
 
         :param image: an image, as a numpy array
         :return: int, int: the height and width of an image
@@ -118,13 +131,15 @@ class TrackLiquidToleranceLevels:
         elif len(image.shape) == 2:
             image_height, image_width = image.shape
         else:
-            raise ValueError('Image must be passed as a numpy array and have either 3 or 2 channels')
+            raise ValueError('Image must be passed as a numpy array and have \
+                either 3 or 2 channels')
 
         return image_height, image_width
 
     def select_reference_row(self, image, vol):
         """
-        Allows user to select a horizontal reference line in the image that will be tracked as self.reference_row.
+        Allows user to select a horizontal reference line in the image that will 
+        be tracked as self.reference_rows.
         The set reference row will be relative to the height of the image
 
         :param image: numpy array - an image
@@ -139,7 +154,7 @@ class TrackLiquidToleranceLevels:
         self.reference_image_width = image_width
 
         line_height = self.select_one_line(image=image, description=vol)
-        relative_line_height = line_height / image_height
+        relative_line_height = line_height/image_height
 
         self.set_reference_level(height=relative_line_height)
 
@@ -151,7 +166,7 @@ class TrackLiquidToleranceLevels:
         :param height:
         :return:
         """
-        self.reference_row.append(height)
+        self.reference_rows.append(height)
         return
 
     def distance_from_reference(self, height: float):
@@ -167,7 +182,7 @@ class TrackLiquidToleranceLevels:
         # if difference from reference is a positive number, then the height of the liquid level is above the
         # reference row
         difference_from_reference = []
-        for row in self.reference_row:
+        for row in self.reference_rows:
             difference_from_reference.append(row - height)
 
         return difference_from_reference
@@ -181,6 +196,7 @@ class TrackLiquidToleranceLevels:
         :param float, height: relative height of a horizontal row in an image
         :return: bool, whether the given height is above the single tolerance level or not
         """
+        # must be implemented in the sub classes
         raise NotImplementedError('Function only implemented in the TrackOneLiquidToleranceLevel class')
 
     def select_tolerance(self, image):
@@ -192,7 +208,6 @@ class TrackLiquidToleranceLevels:
         :param image: Image that will be displayed for user to be able to interactively set a height line for
         :return:
         """
-
         # must be implemented in the sub classes
         raise NotImplementedError
 
@@ -205,6 +220,7 @@ class TrackLiquidToleranceLevels:
         :param height_1: height relative to image height to set tolerance level to
         :return:
         """
+        # must be implemented in the sub classes
         raise NotImplementedError
 
     def select_one_line(self, image, description):
@@ -275,6 +291,7 @@ class TrackLiquidToleranceLevels:
             tolerance level(s) or not
         :return: bool, whether the current height is within the tolerance level(s) the user set
         """
+        # must be implemented in the sub classes
         raise NotImplementedError
 
     def draw_reference_level(self, image):
@@ -286,7 +303,7 @@ class TrackLiquidToleranceLevels:
 
         _, img_width = self.find_image_height_width(image=image)
 
-        absolute_reference_height = self.get_absolute_reference_height()
+        absolute_reference_height = self.get_absolute_reference_heights()
 
         if len(absolute_reference_height) == 0:
             # if user hasnt yet selected a reference level
@@ -535,7 +552,7 @@ class TrackTwoLiquidToleranceLevels(TrackLiquidToleranceLevels):
                                               height_2=relative_line_two_height
                                               )
 
-                    print(f'selected tolerance levels: {self.tolerance_levels}')
+                    print(f'Selected tolerance levels: {self.tolerance_levels}')
                     break
                 else:
                     print('You must only select two levels. Press "r" to reset line selection')

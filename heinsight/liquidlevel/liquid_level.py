@@ -1,33 +1,42 @@
 """
-The liquid level class uses computer vision to analyze an image of a container with a liquid in it, and be able to
-determine the position of the liquid levels in it; one or more, depending on the liquid. Broadly speaking,
-the determination of the liquid level is based on looking at an image and finding the strongest horizontal line in
-the image. The user can also specify the number of liquid levels to look for, or not specify, and so the number of
-liquid levels in an image can be determined dynamically. A camera/webcam is required to use the liquid level
-class. Images taken by the camera (raw) and images with liquid level lines drawn on them (drawn) can be accessed to
-be saved and stored, or accessed and sent through Slack.
+The liquid level class uses computer vision to analyze an image of a container 
+with a liquid in it, and be able to determine the position of the liquid levels 
+in it; one or more, depending on the liquid. Broadly speaking, the determination 
+of the liquid level is based on [insert algo description]
 
-This class also has complementary classes - the TrackLiquidToleranceLevels subclasses. These tracking classes can be
-used to track a user defined reference level and either one or two user defined tolerance levels, and can determine
-whether a liquid level identified in an image falls above/below a single tolerance level or within two tolerance
-levels, or not. It can also determine the distance (within the image) between the reference line and the current
-liquid level.
+The user can also specify the number of liquid levels to look for, 
+or not specify, and so the number of liquid levels in an image can be 
+determined dynamically. A camera/webcam is required to use the liquid level
+class. Images taken by the camera (raw) and images with liquid level lines drawn 
+on them (drawn) can be accessed to be saved and stored.
 
-This liquid level class can be leveraged to be used as control code for a larger system by providing visual feedback
-on the liquid level(s) in a container, especially when also using a liquid level tracking class.
+This class also has complementary classes - the TrackLiquidToleranceLevels 
+subclasses. These tracking classes can be used to track any number of user 
+defined reference levels and either one or two user defined tolerance levels, 
+and can determine whether a liquid level identified in an image falls 
+above/below a single tolerance level or within two tolerance levels, or not. 
+It can also determine the distance (within the image) between the reference line 
+and the current liquid level.
+
+This liquid level class can be leveraged to be used as control code for a larger 
+system by providing visual feedback on the liquid level(s) in a container, 
+especially when also using a liquid level tracking class.
 
 General background:
-If you call image.shape, you get back (height, width, channels), and if you want to access a pixel in the image,
-you need to search it by image[height][row][channel]. If there is only one channel in the image there will
-not be a channel specified. Height is equivalent to the row in an image, and width is equivalent to a column in an
-image. For an image the top-left corner of the image is (0,0), and the width of the image increases as you travel
-towards the top-right corner of the image (0, width), and the height of the image increases as you travel towards the
-bottom-left of the image (height, 0).
+If you call image.shape, you get back (height, width, channels), and if you want 
+to access a pixel in the image, you need to search it by 
+image[height][row][channel]. If there is only one channel in the image there 
+will not be a channel specified. Height is equivalent to the row in an image, 
+and width is equivalent to a column in an image. For an image the top-left 
+corner of the image is (0,0), and the width of the image increases as you travel
+towards the top-right corner of the image (0, width), and the height of the 
+image increases as you travel towards the bottom-left of the image (height, 0).
 
 The user can:
-Select a region of interest within to search for the liquid level
-Adjust parameters of how defined a line must be for it to be identified as a liquid level
-Select the number of liquid levels to look for
+Select a region of interest within to search for the liquid level.
+Adjust parameters of how defined a line must be for it to be identified 
+as a liquid level.
+Select the number of liquid levels to look for.
 
 """
 
@@ -46,7 +55,8 @@ import pandas as pd
 import heapq
 from datetime import datetime
 from skimage.color import rgb2lab, lab2rgb
-from heinsight.liquidlevel.track_tolerance_levels import TrackLiquidToleranceLevels, TrackTwoLiquidToleranceLevels
+from heinsight.liquidlevel.track_tolerance_levels import \
+    TrackLiquidToleranceLevels, TrackTwoLiquidToleranceLevels
 
 module_logger = logging.getLogger('liquid_level')
 
@@ -58,18 +68,21 @@ def set_up_module_logger():
     if not os.path.exists(log_folder):
         os.makedirs(log_folder)
 
-    print(f'log folder: {log_folder}')
+    (f'log folder: {log_folder}')
 
-    fh = logging.FileHandler(filename=os.path.join(log_folder, f'test_logging.txt'))
+    fh = logging.FileHandler(filename=os.path.join(log_folder, 
+        f'test_logging.txt'))
     fh.setLevel(logging.DEBUG)
 
     ch = logging.StreamHandler()
     ch.setLevel(logging.INFO)
 
     #  create formatter and add it to the handlers
-    file_formatter = logging.Formatter("%(asctime)s ; %(levelname)s ; %(module)s ; %(threadName)s ; %(message)s")
+    file_formatter = logging.Formatter("%(asctime)s ; %(levelname)s ; \
+        %(module)s ; %(threadName)s ; %(message)s")
     fh.setFormatter(file_formatter)
-    console_formatter = logging.Formatter("%(asctime)s ; %(module)s ; %(message)s")
+    console_formatter = logging.Formatter("%(asctime)s ; %(module)s ; \
+        %(message)s")
     ch.setFormatter(console_formatter)
 
     module_logger.addHandler(fh)
@@ -131,7 +144,8 @@ class LiquidLevel:
         # define file handler and set formatter
         file_handler = logging.FileHandler('logfile.log')
         stream_handler = logging.StreamHandler(sys.stdout)
-        formatter    = logging.Formatter('%(asctime)s : %(levelname)s : %(name)s : %(message)s')
+        formatter = logging.Formatter('%(asctime)s : %(levelname)s : \
+            %(name)s : %(message)s')
         file_handler.setFormatter(formatter)
         stream_handler.setFormatter
 
@@ -196,12 +210,6 @@ class LiquidLevel:
         self.no_error = no_error  # bool, if true, then no error will be thrown if a meniscus was not found in the
         # entire region of interest; what is displayed on the image instead is a line at the top of the image in the
         # colour of what the current liquid level line should be
-
-        # variable for finding the liquid level based on color split
-        self.color_split_level = None
-        bgr_pink = (150, 0, 255)
-        self.color_split_colour = bgr_pink
-        self.color_split_text_position = (0, 60)
 
         # initial parameters to be used by reset()
         self.initial_arguments = {
@@ -284,12 +292,15 @@ class LiquidLevel:
         return liquid_level_data_buffer
 
     def reset(self):
+        """
+        Function to reset everything so it is like starting with a new version 
+        of liquid level; so no reference line, tolerance goes back to the 
+        initial value, there are no images saved in memory. 
+        Also call reset() for the camera so if there were any images were saved 
+        to memory they will be deleted.
+        """
         self.logger.debug('reset function called')
-
-        # if this is called, reset all the ini-tial attributes
-        # function to reset everything so it is like starting with a new version of liquid level; so no reference
-        # line, tolerance goes back to the initial value, there are no images saved in memory or anything. also call
-        # reset() for the camera so if there were any images were saved to memory they will be deleted
+        
         if self.camera is not None:
             self.camera.reset()
         if self.track_liquid_tolerance_levels is not None:
@@ -409,7 +420,7 @@ class LiquidLevel:
             json_file.close()  # Close the JSON file
 
             # Working with buffered content
-            reference_level_relative = self.track_liquid_tolerance_levels.get_relative_reference_height()
+            reference_level_relative = self.track_liquid_tolerance_levels.get_relative_reference_heights()
             data["reference_level_relative"] = reference_level_relative
 
             # Save changes to JSON file
@@ -460,7 +471,7 @@ class LiquidLevel:
         cv2.waitKey(0)
         cv2.destroyAllWindows()
         bw_image = self.convert_bw(fill)
-        row = self.find_liquid_level(bw_image)
+        row = self.find_liquid_level(fill)
         self.logger.debug('load_and_find_level function done')
         return bw_image, row
 
@@ -482,109 +493,6 @@ class LiquidLevel:
 
         self.logger.debug('load_img function done')
         return img
-
-    def find_color_split(self,
-                        fill
-                        ):
-        """
-        Given an image, find the line that divides it into sections that have the greatest
-        possible difference in average color.
-        Will divide it into n sections, where n = number_of_liquid_levels_to_find+1. 
-
-        :param fill: numpy.ndarray: image to divide into color sections
-        :return: closed: line where the sections divide
-        """
-
-        if self.number_of_liquid_levels_to_find == 0:
-            pass
-        # TODO how to do this if > 2 liquid level to find...?
-        # if more than 2 areas to find - do it for 2 area, should find one of the levels
-        # then do it AGAIN in each of the two areas.
-        # should find another split, choose the biggest split in each area.
-
-        self.logger.debug('find_color_split function called')
-
-        #image = cv2.cvtColor(fill, cv2.COLOR_BGR2HSV)
-        image = fill
-        image = rgb2lab(image)
-
-        img_height, img_width, _ = image.shape  # size of the image
-        left_x, right_x, top_y, bottom_y = self.find_maximum_edges_of_mask()
-        rows = range(top_y, bottom_y, self.rows_to_count)  # the rows to consider for iteration; but for this
-        # list only iterate over rows, separated self.rows_to_count
-        cols = range(left_x, right_x)  # columns to consider
-
-        color_dist_array = [] # an array of the dist between above and below line, all the way down the image
-
-        for row in rows:  # iterate through every section, by iterating through rows separated by self.rows_to_count
-            color_top_section = None
-            color_bottom_section = None
-            color_distance = None
-            if row+self.rows_to_count < img_height and row > top_y:  # if for the original row plus the 'offset' to consider the next few
-                # rows for finding the meniscus doesn't go out of bounds of the image height
-                print("row:", row)
-                # get average color of above section
-                color_top_section = np.mean(image[top_y:row, left_x:right_x], axis=(0,1))
-                print("color top section:", color_top_section)
-                # get average color of below section
-                color_bottom_section = np.mean(image[row:bottom_y, left_x:right_x], axis=(0,1))
-                print("color bottom section:", color_bottom_section)
-                # find euclidean distance between the colors
-                color_distance = np.linalg.norm(color_top_section-color_bottom_section) # TODO in HSV space?
-                print("color distance:", color_distance)
-                # append to color_distance array
-                color_dist_array.append(color_distance) 
-        
-        print("color_dist_array:", color_dist_array)
-
-        # return the max distance value in color_distance_array 
-        max_distance = max(color_dist_array)
-        print("max_distance:", max_distance)
-        # get index of greatest distance in color_distance_array
-        index_max = np.argmax(color_dist_array) 
-        print("max_distance index:", index_max)
-        # figure out which row that corresponds to (index * self.rows_to_count)
-        max_dist_row = (index_max*self.rows_to_count) + (self.rows_to_count/2)
-        print("max_dist_row:", max_dist_row)
-
-        threshold = 20
-
-        # next block basically to extract the order of rows with the highest pixel count into its own array called
-        # gives the row location as a fraction of image height
-        color_split_level = max_dist_row/img_height
-
-        # return the liquid level as being at this position IF above a theshold, otherwise return None
-        if max_distance > threshold:
-            self.logger.debug(f'color split level found at {color_split_level}')
-            self.logger.debug('find_color_split function done')
-            self.color_split_level = color_split_level
-            # show image with line at the color split location
-            end_image = self.draw_color_split_level(img=image)
-            cv2.imwrite('LAB_image_color_split_by_av_in_regions.jpg', end_image)
-            cv2.imshow('color split level', end_image)
-            cv2.waitKey(0)
-            cv2.destroyAllWindows()
-            return color_split_level
-        else:
-            self.logger.debug('color split level not found - no distance aboce threshold')
-            self.logger.debug('find_color_split function done')
-            return None
-
-
-
-            ref_top_left = (0, height)
-            ref_lower_right = (img_width, height)
-
-            colour = self.reference_level_colour
-            text_position = self.reference_level_text_position
-            image = self.draw_line_on_image(image=image,
-                                            left_point=ref_top_left,
-                                            right_point=ref_lower_right,
-                                            colour=colour,
-                                            text='color split',
-                                            text_position=text_position
-                                            )
-
 
     def convert_bw(self,
                      fill,
@@ -690,7 +598,6 @@ class LiquidLevel:
 
             # if 'r' key is pressed, reset the cropping region
             if key == ord('r'):
-                print("in key r pressed")
                 image = clone.copy()
                 closed_image = closed_clone.copy()
                 self.list_of_frame_points = []
@@ -723,21 +630,21 @@ class LiquidLevel:
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
-        print("LIST OF FRAME POINTS:", self.list_of_frame_points)
-
         self.logger.info('select_region_of_interest function done')
 
     def find_maximum_edges_of_mask(self):
-        # from the mask to search for a liquid level, find the row and column values that together would make a
-        # rectangle surrounding the area that encompasses all non zero values of the mask. top, would be the top row,
-        # right would be the right column, and so on
+        # from the mask to search for a liquid level, find the row and 
+        # column values that together would make a rectangle surrounding the 
+        # area that encompasses all non zero values of the mask. 
+        # top, would be the top row, right would be the right column, and so on
         left = 1000*1000
         right = -1
         top = 1000*1000
         bottom = -1
         for idx, pixel_point_value in enumerate(self.list_of_frame_points):
-            # loop through all the points that the user selected to create the outline of the mask inner list is
-            # a list of the x and y coordinates of that point
+            # loop through all the points that the user selected to create the 
+            # outline of the mask inner list is a list of the x and y 
+            # coordinates of that point
             if pixel_point_value[0] < left:
                 left = pixel_point_value[0]
             if pixel_point_value[0] > right:
@@ -748,16 +655,152 @@ class LiquidLevel:
                 bottom = pixel_point_value[1]
         return left, right, top, bottom
 
-    def find_liquid_level(self, bw_image):
+    def find_max_change_location(self, rows, aspect, aspect_name: str):
         """
-        Finds a/multiple menisci within a frame of a b&w image. Updates self.row and
-        self.liquid_level_array. self.row is the single row where the only/strongest horizontal line/meniscus is,
-        and self.liquid_level_array is an array of the rows with lines/menisci ordered by rank (higher means stronger
+        Find the row location of the most prominent change of the aspect value.
+
+        :param rows: the array of the row values
+        :param aspect: the array of the color aspect (e.g. hue)
+        :param aspect_name: the name of the color aspect being analysed
+        """
+
+        # implement FIR/IIR forwards and backwards filter
+        # reference: https://scipy.github.io/old-wiki/pages/Cookbook/FiltFilt.html#:~:text=filtfilt%2C%20a%20linear%20filter%20that,stable%20response%20(via%20lfilter_zi).
+
+         # Create an order 3 lowpass butterworth filter.
+        b, a = butter(9, 0.09)
+         
+        # Apply the filter to xn.  Use lfilter_zi to choose the initial 
+        # condition of the filter.
+        zi = lfilter_zi(b, a)
+        z, _ = lfilter(b, a, aspect, zi=zi*aspect[0])
+         
+        # Apply the filter again, to have a result filtered at an order
+        # the same as filtfilt.
+        z2, _ = lfilter(b, a, z, zi=zi*z[0])
+         
+        # Use filtfilt to apply the filter.
+        aspect_smoothed = filtfilt(b, a, aspect)
+
+        plt.plot(rows, aspect, c='b')
+        plt.plot(rows, aspect_smoothed, c='r')  # smoothed by filter
+        plt.title(aspect_name)
+        plt.show()
+
+        # Here we start the differentiation steps.
+
+        dh = 1
+
+        aspect_smoothed_1deriv = diff(aspect_smoothed)/dh
+        aspect_smoothed_2deriv = diff(aspect_smoothed_1deriv)/dh
+        aspect_smoothed_3deriv = diff(aspect_smoothed_2deriv)/dh
+
+        # plt.plot(rows, aspect_smoothed, c='r')  # Smoothed by filter
+        plt.plot(rows[1:], aspect_smoothed_1deriv, c='b') # 1st derivative
+        plt.plot(rows[2:], aspect_smoothed_2deriv, c='g') # 2nd derivative
+        plt.plot(rows[3:], aspect_smoothed_3deriv, c='pink') # 3rd derivative
+        plt.title(aspect_name)
+        plt.show()
+
+        aspect_smoothed_2deriv_abs = []
+        aspect_smoothed_3deriv_abs = []
+
+        # The liquid level will be at the position of the greatest |d3I/dh3| 
+        # values between the two greatest |d2I/dh2| values.
+
+        # Get the absolute values.
+        for i in aspect_smoothed_2deriv:
+            a_i = abs(i)
+            aspect_smoothed_2deriv_abs.append(a_i)
+
+        for i in aspect_smoothed_3deriv:
+            a_i = abs(i)
+            aspect_smoothed_3deriv_abs.append(a_i)
+
+        # Find the two highest peaks in the plot of 
+        # aspect_smoothed_2deriv_abs vs rows.
+
+        # Find the peaks in absolute 2nd derivative of aspect
+        peaks = find_peaks(aspect_smoothed_2deriv_abs, height=0)
+        i_peaks = []
+        for p in peaks[0]:
+            i_peaks.append(p)
+        
+        self.logger.debug("aspect peak indicies: %s", i_peaks)
+
+        h_peaks = []
+        for p in i_peaks:
+            h_peaks.append(p+2)
+        self.logger.debug("rows peak indicies: %s", h_peaks)
+        
+        plt.plot(rows[2:], aspect_smoothed_2deriv_abs, c='g') # 2nd derivative
+        for i, h in zip(i_peaks, h_peaks):
+            plt.plot(rows[h], aspect_smoothed_2deriv_abs[i], 
+                marker="o", ls="", ms=3, color='r' )
+        plt.title(aspect_name)
+        plt.show()
+
+        # From these list of indices, we want to return the two indicies that 
+        # correspond to the greatest absolute 2nd derivative values.
+        peak_heights = np.array(list(peaks[1].values())).flatten()
+        self.logger.debug("peak heights: %s", peak_heights)
+
+        # Get indices of the 2 greatest absolute 2nd derivative values.
+        n = 2
+        highest_2_peaks_index = [np.where(peak_heights==i) for i in \
+            sorted(peak_heights, reverse=True)][:n]
+
+        highest_2_peaks_index = [highest_2_peaks_index[0][0][0], 
+            highest_2_peaks_index[1][0][0]]    
+
+        self.logger.debug("highest_2_peaks_index 0: %s", highest_2_peaks_index)
+
+        largest_2ndderiv_index = []
+        largest_2ndderiv_index.append(i_peaks[highest_2_peaks_index[0]])
+        largest_2ndderiv_index.append(i_peaks[highest_2_peaks_index[1]])
+
+        largest_2ndderiv_index.sort()
+
+        self.logger.debug("largest_2ndderiv_index: %s", largest_2ndderiv_index)
+
+        max_i = 0
+        max_i_idx = 0
+        for idx, i in enumerate(aspect_smoothed_3deriv_abs):
+            if (idx >= largest_2ndderiv_index[0] and 
+                idx <= largest_2ndderiv_index[1]):
+                if i > max_i:
+                    max_i = i
+                    max_i_idx = idx
+
+        self.logger.debug("max_i_idx: %s", max_i_idx)
+
+        # max_i_idx gives the index of the greatest value of 
+        # the abs of the 3rd derivative.
+        # The corresponding value from the rows array will be the row where
+        # the liquid level is located.
+
+        prominent_row = rows[max_i_idx+3]  # location of most prominent line/where liquid level is most likely
+            #  to be
+
+        self.logger.info("The most prominent row using aspect %s is %s", aspect_name, prominent_row)
+
+        return prominent_row
+
+    def find_liquid_level(self, image):
+        """
+        Finds a/multiple menisci within a frame of a b&w image. 
+        Updates self.row and self.liquid_level_array. 
+        self.row is the single row where the only/strongest horizontal 
+        line/meniscus is, and self.liquid_level_array is an array of the rows 
+        with lines/menisci ordered by rank (higher means stronger 
         horizontal line)
         :param bw_image: black and white image
         :return:
         """
-        # TODO change to 1D method using derivatives
+
+        bw_image = self.convert_bw(image)
+
+        hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
         self.logger.debug('find_liquid_level function called')
         liquid_level_data_frame = pd.DataFrame(columns=('row', 
@@ -769,142 +812,55 @@ class LiquidLevel:
         cols = range(left_row, right_row)  # columns to consider
         num_cols = len(cols)
 
-        pixels = [] # array of pixel values created from the average of the row
+        intensity_pixels = [] # array of intensity pixel values created from the average of the row
+        hue_pixels = [] # array of hue pixel values created from the average of the row
+        saturation_pixels = [] # array of saturation pixel values created from the average of the row
+        brightness_pixels = [] # array of brightness pixel values created from the average of the row
 
         for row in rows:  # iterate through each row
-            pixel_total = 0
+            intensity_pixel_total = 0
+            hue_pixel_total = 0
+            saturation_pixel_total = 0
+            brightness_pixel_total = 0
             for col in cols: # iterate through each coloumn
-                pixel_total += bw_image[row][col]
-            pixel_value = pixel_total/num_cols
-            pixels.append(pixel_value)
+                # For the intensity - use B&W image (probably will be the same as saturation)
+                intensity_pixel_total += bw_image[row][col]
+                # For the hue.
+                hue_pixel_total += hsv_image[row][col][0]
+                # For the saturation.
+                saturation_pixel_total += hsv_image[row][col][1]
+                # For the brightness.
+                brightness_pixel_total += hsv_image[row][col][2]
+            intensity_pixel_value = intensity_pixel_total/num_cols
+            intensity_pixels.append(intensity_pixel_value)
+            hue_pixel_value = hue_pixel_total/num_cols
+            hue_pixels.append(hue_pixel_value)
+            saturation_pixel_value = saturation_pixel_total/num_cols
+            saturation_pixels.append(saturation_pixel_value)
+            brightness_pixel_value = brightness_pixel_total/num_cols
+            brightness_pixels.append(brightness_pixel_value)
 
         height = np.array(rows)
-        intensity = np.array(pixels)
+        intensity = np.array(intensity_pixels)
+        hue = np.array(hue_pixels)
+        saturation = np.array(saturation_pixels)
+        brightness = np.array(brightness_pixels)
 
-        # plt.plot(x, y)
-        # plt.show()
+        # location of most prominent line for these modes
+        intensity_row = self.find_max_change_location(height, intensity, "intensity")
+        hue_row = self.find_max_change_location(height, hue, "hue")
+        saturation_row = self.find_max_change_location(height, saturation, "saturation")
+        brightness_row = self.find_max_change_location(height, brightness, "brightness")
 
-        # implement FIR/IIR forwards and backwards filter
-        # reference: https://scipy.github.io/old-wiki/pages/Cookbook/FiltFilt.html#:~:text=filtfilt%2C%20a%20linear%20filter%20that,stable%20response%20(via%20lfilter_zi).
+        self.logger.info("intensity row: %s", intensity_row)
+        self.logger.info("hue row: %s", hue_row)
+        self.logger.info("saturation row: %s", saturation_row)
+        self.logger.info("brightness row: %s", brightness_row)
 
-         # Create an order 3 lowpass butterworth filter.
-        b, a = butter(9, 0.09)
-         
-        # Apply the filter to xn.  Use lfilter_zi to choose the initial 
-        # condition of the filter.
-        zi = lfilter_zi(b, a)
-        z, _ = lfilter(b, a, intensity, zi=zi*intensity[0])
-         
-        # Apply the filter again, to have a result filtered at an order
-        # the same as filtfilt.
-        z2, _ = lfilter(b, a, z, zi=zi*z[0])
-         
-        # Use filtfilt to apply the filter.
-        intensity_smoothed = filtfilt(b, a, intensity)
+        # Liquid level location is stored as a fraction of image height.
+        # Using intensity for now.
+        liquid_level_location = intensity_row/img_height
 
-        # n = 10  # the larger n is, the smoother curve will be
-        # b = [1.0 / n] * n
-        # a = 1
-        # yy = lfilter(b, a, y)
-        print("x values:", height)
-        print("y values:", intensity)
-        print("yy values:", intensity_smoothed)
-        plt.plot(height, intensity, c='b')
-        plt.plot(height, intensity_smoothed, c='r')  # smoothed by filter
-        
-        plt.show()
-
-        # Here we start the differentiation steps.
-
-        dh = 1
-
-        intensity_smoothed_1deriv = diff(intensity_smoothed)/dh
-        intensity_smoothed_2deriv = diff(intensity_smoothed_1deriv)/dh
-        intensity_smoothed_3deriv = diff(intensity_smoothed_2deriv)/dh
-
-        # plt.plot(height, intensity_smoothed, c='r')  # Smoothed by filter
-        plt.plot(height[1:], intensity_smoothed_1deriv, c='b') # 1st derivative
-        plt.plot(height[2:], intensity_smoothed_2deriv, c='g') # 2nd derivative
-        plt.plot(height[3:], intensity_smoothed_3deriv, c='pink') # 3rd derivative
-        plt.show()
-
-        intensity_smoothed_2deriv_abs = []
-        intensity_smoothed_3deriv_abs = []
-
-        # The liquid level will be at the position of the greatest |d3I/dh3| 
-        # values between the two greatest |d2I/dh2| values.
-
-        # Get the absolute values.
-        for i in intensity_smoothed_2deriv:
-            a_i = abs(i)
-            intensity_smoothed_2deriv_abs.append(a_i)
-
-        for i in intensity_smoothed_3deriv:
-            a_i = abs(i)
-            intensity_smoothed_3deriv_abs.append(a_i)
-
-        # Find the two highest peaks in the plot of 
-        # intensity_smoothed_2deriv_abs vs height.
-
-        # Find the peaks in absolute 2nd derivative of intensity
-        peaks = find_peaks(intensity_smoothed_2deriv_abs, height = 0)
-        i_peaks = []
-        for p in peaks[0]:
-            i_peaks.append(p)
-        
-        print("intensity peak indicies: ", i_peaks)
-
-        h_peaks = []
-        for p in i_peaks:
-            h_peaks.append(p+2)
-        print("height peak indicies: ", h_peaks)
-        
-        plt.plot(height[2:], intensity_smoothed_2deriv_abs, c='g') # 2nd derivative
-        for i, h in zip(i_peaks, h_peaks):
-            plt.plot(height[h], intensity_smoothed_2deriv_abs[i], 
-                marker="o", ls="", ms=3, color='r' )
-        plt.show()
-
-        # From these list of indices, we want to return the two indicies that 
-        # correspond to the greatest absolute 2nd derivative values.
-        peak_heights = np.array(list(peaks[1].values())).flatten()
-        print("peak heights: ", peak_heights)
-
-        # Get index of the 2 highest
-        n = 2
-        highest_2_peaks_index = [np.where(peak_heights==i) for i in \
-            sorted(peak_heights, reverse=True)][:n]
-
-        highest_2_peaks_index = [highest_2_peaks_index[0][0][0], highest_2_peaks_index[1][0][0]]    
-
-        print("highest_2_peaks_index 0", highest_2_peaks_index)
-
-        largest_2ndderiv_index = []
-        largest_2ndderiv_index.append(i_peaks[highest_2_peaks_index[0]])
-        largest_2ndderiv_index.append(i_peaks[highest_2_peaks_index[1]])
-
-        print("largest_2ndderiv_index: ", largest_2ndderiv_index)
-
-        max_i = 0
-        max_i_idx = 0
-        for idx, i in enumerate(intensity_smoothed_3deriv_abs):
-            if (idx >= largest_2ndderiv_index[0] and 
-                idx <= largest_2ndderiv_index[1]):
-                if i > max_i:
-                    max_i = i
-                    max_i_idx = idx
-
-        print("max_i_idx", max_i_idx)
-
-        # max_i_idx gives the index of the greatest value of 
-        # the abs of the 3rd derivative.
-        # The corresponding value from the height array will be the row where
-        # the liquid level is located.
-
-        liquid_level_location = height[max_i_idx+3]  # location of most prominent line/where liquid level is most likely
-            #  to be
-
-        print("liquid level location row: ", liquid_level_location)
         self.row = liquid_level_location  
 
         if self.number_of_liquid_levels_to_find == 0:
@@ -912,15 +868,15 @@ class LiquidLevel:
         else:
             number_of_number_of_liquid_levels_to_find = self.number_of_liquid_levels_to_find
 
-        self.liquid_level_array = liquid_level_location  # store the values for the
+        self.liquid_level_array.append(liquid_level_location)  # store the values for the
         # rows for the number of menisci that the user wanted to check aka if user wanted to look for 2 menisci,
         # then save the row values for the top 2 'found menisci'. if the self.number_of_liquid_levels_to_find was set
         #  to 0 because user doesn't want to set a specific number to check, this will still work because 999 will
         # actually be passed to the row_array call to find 999 menisci; it will go to the maximum number it can go to
 
-        # self.logger.debug(f'liquid level found at {liquid_level_location}')
-        # self.logger.debug('find_liquid_level function done')
-        # return liquid_level_location
+        self.logger.debug(f'liquid level found at {liquid_level_location}')
+        self.logger.debug('find_liquid_level function done')
+        return liquid_level_location
 
     def number_of_levels_last_found(self):
         # return number of liquid levels last found when find_liquid_level was run
@@ -967,7 +923,7 @@ class LiquidLevel:
         if self.track_liquid_tolerance_levels is None:
             return None
 
-        if self.track_liquid_tolerance_levels.reference_row is None:
+        if self.track_liquid_tolerance_levels.reference_rows is None:
             raise AttributeError('No reference has been set yet')
 
         current_row = self.row
@@ -979,38 +935,13 @@ class LiquidLevel:
         self.logger.debug('distance_from_reference function done')
         return percent_diff
 
-    def draw_color_split_level(self, img):
-        """
-        Draw the color split lines on the image
-        :param img: image to draw line on
-        :return:
-        """
-
-        img_height, img_width = self.find_image_height_width(image=img)
-
-        absolute_color_split_level = int(img_height * self.color_split_level)
-        color_split_level_left_point = (0, absolute_color_split_level)
-        color_split_level_right_point = (img_width, absolute_color_split_level)
-
-        # draw green line for the current level
-        colour = self.color_split_colour
-        text_position = self.color_split_text_position
-        image = self.draw_line_on_image(image=img,
-                                        left_point=color_split_level_left_point,
-                                        right_point=color_split_level_right_point,
-                                        colour=colour,
-                                        text='liquid level',
-                                        text_position=text_position
-                                        )
-
-        return image
-
     def draw_menisci(self, img):
         """
         Draws all menisci lines on an image at where the menisci were calculated
         :param img: image to draw line on
         :return: line: the image with all the menisci drawn on it
         """
+
         for row in self.liquid_level_array:
             self.row = row
             img = self.draw_level_line(img)
@@ -1023,7 +954,7 @@ class LiquidLevel:
         image is passed
 
         :param img, the image you want to draw on
-        :return: image: image with lines drawn on it
+        :return image: image with lines drawn on it
         """
         if img is None:
             image = self.loaded_image
@@ -1046,7 +977,7 @@ class LiquidLevel:
         # if no reference row has been selected yet just return the original image
         if self.track_liquid_tolerance_levels is None:
             return image
-        if self.track_liquid_tolerance_levels.reference_row is None:
+        if self.track_liquid_tolerance_levels.reference_rows is None:
             return image
 
         image = self.draw_ref_line(image)
@@ -1180,11 +1111,11 @@ class LiquidLevel:
                                                                    select_tolerance=select_tolerance
                                                                    )
         self.volumes_list=volumes_list
-        print(self.volumes_list)    
+        self.logger.info("Volumes list: %s", self.volumes_list)    
 
         time = datetime.now()
         if self.track_liquid_tolerance_levels is not None:
-            if self.track_liquid_tolerance_levels.reference_row is not None:
+            if self.track_liquid_tolerance_levels.reference_rows is not None:
                 self.all_images_with_lines.append([time.strftime(self.datetime_format), self.draw_ref_on_loaded_image()])
         self.all_images_no_lines.append([time.strftime(self.datetime_format), image])
         self.all_images_bw.append([time.strftime(self.datetime_format), bw_image])
@@ -1255,8 +1186,6 @@ class LiquidLevel:
                 input_image=None
                 ):
 
-        self.list_of_frame_points = [[263, 85],[434, 495]]
-
         self.logger.debug('test run function called')
         if input_image is None:
             image = self.camera.take_picture()
@@ -1265,6 +1194,14 @@ class LiquidLevel:
             image = input_image.copy()
 
         bw_image, row = self.load_and_find_level(image)
+
+        self.logger.info("self.row: %s", self.row)
+
+        image_with_lines = self.draw_lines(img=image)
+        cv2.imshow("image with lines", image_with_lines)
+        cv2.setWindowProperty("image with lines", cv2.WND_PROP_TOPMOST, 1)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
         self.logger.debug('test run function complete')
 
@@ -1308,7 +1245,7 @@ class LiquidLevel:
         image_with_lines = self.draw_lines(img=image)
         cv2.imshow("image with lines", image_with_lines)
         cv2.setWindowProperty("image with lines", cv2.WND_PROP_TOPMOST, 1)
-        cv2.waitKey(5000)
+        cv2.waitKey(0)
         cv2.destroyAllWindows()
         self.all_images_with_lines.append([time_formatted, image_with_lines])
         self.all_images_no_lines.append([time_formatted, image])

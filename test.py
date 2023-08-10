@@ -6,19 +6,7 @@ from heinsight.liquidlevel.track_tolerance_levels import \
     TrackLiquidToleranceLevels, TrackOneLiquidToleranceLevel, \
     TrackTwoLiquidToleranceLevels
 
-# get image
-# select ROI as normal
-# reduce ROI to a vertical line of pixels, with the values as the 
-# average for that row in the ROI
-# make a scatter plot of I vs h
-# find second derivative at each point on the graph
-# select the two points with the greatest absolute second derivative
-# ensure that these two points are close enough together - within a threshold
-# e.g. could do select the greatest one and then select the next greatest 
-# within the threshold area
-# set liquid level line as being halfway between these two points
-
-# try this for greyscale at first and then try other channels like RBG ?
+# TODO do the gradient method on color channels as well ?
 
 def resize(input_image):
     h, w = input_image.shape[:2]
@@ -42,14 +30,14 @@ liquid_level = LiquidLevel(
         'logs')
     )  
 
-#start_image = cv2.imread("/Users/Emma/Documents/Documents - MacBook Pro/Liverpool PhD/Code/heinsight/images/Fume Hood 7-24-2023, 5-15-13 PM.jpg")
-#distill_volumes = 4
-#threshold = 0.01
+start_image = cv2.imread("/Users/Emma/Documents/Documents - MacBook Pro/Liverpool PhD/Code/heinsight/images/Fume Hood 7-27-2023, 3-53-55 PM.jpg")
+distill_volumes = 4
+threshold = 0.01
 
-# liquid_level.start(image=start_image, select_region_of_interest=True, 
-#     set_reference=True, volumes_list = ['4'], select_tolerance=False)
+liquid_level.start(image=start_image, select_region_of_interest=True, 
+    set_reference=True, volumes_list = ['4'], select_tolerance=False)
 
-run_image = cv2.imread("/Users/Emma/Documents/Documents - MacBook Pro/Liverpool PhD/Code/heinsight/images/Fume Hood 7-24-2023, 5-15-13 PM.jpg")
+run_image = cv2.imread("/Users/Emma/Documents/Documents - MacBook Pro/Liverpool PhD/Code/heinsight/images/Fume Hood 7-27-2023, 3-53-55 PM.jpg")
 
 liquid_level.test_run(input_image=run_image) 
 
