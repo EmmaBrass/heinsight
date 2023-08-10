@@ -812,27 +812,21 @@ class LiquidLevel:
         cols = range(left_row, right_row)  # columns to consider
         num_cols = len(cols)
 
-        intensity_pixels = [] # array of intensity pixel values created from the average of the row
         hue_pixels = [] # array of hue pixel values created from the average of the row
         saturation_pixels = [] # array of saturation pixel values created from the average of the row
         brightness_pixels = [] # array of brightness pixel values created from the average of the row
 
         for row in rows:  # iterate through each row
-            intensity_pixel_total = 0
             hue_pixel_total = 0
             saturation_pixel_total = 0
             brightness_pixel_total = 0
             for col in cols: # iterate through each coloumn
-                # For the intensity - use B&W image (probably will be the same as saturation)
-                intensity_pixel_total += bw_image[row][col]
                 # For the hue.
                 hue_pixel_total += hsv_image[row][col][0]
                 # For the saturation.
                 saturation_pixel_total += hsv_image[row][col][1]
                 # For the brightness.
                 brightness_pixel_total += hsv_image[row][col][2]
-            intensity_pixel_value = intensity_pixel_total/num_cols
-            intensity_pixels.append(intensity_pixel_value)
             hue_pixel_value = hue_pixel_total/num_cols
             hue_pixels.append(hue_pixel_value)
             saturation_pixel_value = saturation_pixel_total/num_cols
@@ -841,25 +835,57 @@ class LiquidLevel:
             brightness_pixels.append(brightness_pixel_value)
 
         height = np.array(rows)
-        intensity = np.array(intensity_pixels)
         hue = np.array(hue_pixels)
         saturation = np.array(saturation_pixels)
         brightness = np.array(brightness_pixels)
 
         # location of most prominent line for these modes
-        intensity_row = self.find_max_change_location(height, intensity, "intensity")
         hue_row = self.find_max_change_location(height, hue, "hue")
         saturation_row = self.find_max_change_location(height, saturation, "saturation")
         brightness_row = self.find_max_change_location(height, brightness, "brightness")
 
-        self.logger.info("intensity row: %s", intensity_row)
         self.logger.info("hue row: %s", hue_row)
         self.logger.info("saturation row: %s", saturation_row)
         self.logger.info("brightness row: %s", brightness_row)
 
+        # Find average saturation value above and below the saturation_row
+        rows_above = range(rows[0], saturation_row)
+        num_rows_above = len(rows_above)
+        rows_below = range(saturation_row, rows[-1])
+        num_rows_below = len(rows_below)
+
+        saturation_above_total = 0
+        for row in rows_above:  # iterate through each row
+            for col in cols: # iterate through each coloumn
+                # For the saturation.
+                saturation_above_total += hsv_image[row][col][1]
+        saturation_above_av = saturation_above_total/(num_cols*num_rows_above)
+
+        # Here we also find the average brightness value below the saturation_row
+        saturation_below_total = 0
+        brightness_below_total = 0
+        for row in rows_below:  # iterate through each row
+            for col in cols: # iterate through each coloumn
+                # For the saturation.
+                saturation_below_total += hsv_image[row][col][1]
+                brightness_below_total += hsv_image[row][col][2]
+        saturation_below_av = saturation_below_total/(num_cols*num_rows_below)
+        brightness_below_av = brightness_below_total/(num_cols*num_rows_below)
+
+        self.logger.info("saturation_above_av, %s", saturation_above_av)
+        self.logger.info("saturation_below_av, %s", saturation_below_av)
+        self.logger.info("brightness_below_av, %s", brightness_below_av)
+
         # Liquid level location is stored as a fraction of image height.
-        # Using intensity for now.
-        liquid_level_location = intensity_row/img_height
+        # If liquid is brightly colored, saturation_row is used.
+        # Otherwise, brightness_row is used.
+        if (brightness_below_av > 50) and \
+            (saturation_below_av >= (saturation_above_av + 50)):
+            self.logger.info("Most prominent line is saturation row.")
+            liquid_level_location = saturation_row/img_height
+        else:
+            self.logger.info("Most prominent line is brightness row.")
+            liquid_level_location = brightness_row/img_height
 
         self.row = liquid_level_location  
 

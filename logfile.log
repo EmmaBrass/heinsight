@@ -2161,3 +2161,776 @@
 2023-08-10 14:40:47,535 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function done
 2023-08-10 14:40:47,536 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function done
 2023-08-10 14:40:47,536 : INFO :             liquid_level.LiquidLevel : self.row: 0.6413690476190477
+2023-08-10 15:19:16,369 : INFO :             liquid_level.LiquidLevel : start function called
+2023-08-10 15:19:16,370 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-08-10 15:19:16,370 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 15:19:16,371 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 15:19:16,371 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:19:18,936 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:19:18,936 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function called
+2023-08-10 15:19:20,932 : INFO :             liquid_level.LiquidLevel : list of points: [(488, 544)]
+2023-08-10 15:19:21,624 : INFO :             liquid_level.LiquidLevel : list of points: [(488, 544), (328, 141)]
+2023-08-10 15:19:23,139 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function done
+2023-08-10 15:19:24,720 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-08-10 15:19:24,720 : INFO :             liquid_level.LiquidLevel : Volumes list: ['4']
+2023-08-10 15:19:24,723 : INFO :             liquid_level.LiquidLevel : start function done
+2023-08-10 15:19:24,739 : DEBUG :             liquid_level.LiquidLevel : test run function called
+2023-08-10 15:19:24,739 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function called
+2023-08-10 15:19:24,740 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 15:19:24,740 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 15:19:25,173 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:19:25,799 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:19:25,800 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:19:29,381 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:19:29,388 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function called
+2023-08-10 15:19:35,513 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [6, 20, 32, 44, 59, 78, 93, 104, 121, 134, 147, 161, 174, 190, 205, 215, 229, 244, 256, 266, 280, 294, 307, 320, 332, 344, 359, 373, 389]
+2023-08-10 15:19:35,513 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [8, 22, 34, 46, 61, 80, 95, 106, 123, 136, 149, 163, 176, 192, 207, 217, 231, 246, 258, 268, 282, 296, 309, 322, 334, 346, 361, 375, 391]
+2023-08-10 15:19:37,887 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.44134643 0.18314305 0.07716892 0.09059873 0.0800335  0.04785246
+ 0.01394616 0.02515377 0.01805813 0.08050621 0.10332939 0.10554189
+ 0.10473724 0.12999999 0.03610983 0.01388123 0.10273959 0.10635343
+ 0.03371372 0.0779231  0.27240267 0.26084334 0.20747802 0.16920277
+ 0.0958949  0.24194478 0.26391681 0.0747274  0.01070406]
+2023-08-10 15:19:37,894 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [0, 20]
+2023-08-10 15:19:37,894 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [6, 280]
+2023-08-10 15:19:37,894 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 12
+2023-08-10 15:19:37,895 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect intensity is 156
+2023-08-10 15:19:43,637 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [5, 19, 33, 48, 63, 83, 98, 112, 141, 162, 177, 190, 205, 218, 230, 243, 256, 268, 278, 290, 302, 311, 324, 336, 347, 357, 367, 379, 392]
+2023-08-10 15:19:43,642 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [7, 21, 35, 50, 65, 85, 100, 114, 143, 164, 179, 192, 207, 220, 232, 245, 258, 270, 280, 292, 304, 313, 326, 338, 349, 359, 369, 381, 394]
+2023-08-10 15:19:44,538 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.12311311 0.12836154 0.04980816 0.21447808 0.19624063 0.16425755
+ 0.20591745 0.09876267 0.11271104 0.18393455 0.22155637 0.31651031
+ 0.41374932 0.34745361 0.28722985 0.3550256  0.34489696 0.06421452
+ 0.14205912 0.1875098  0.00904345 0.08910885 0.04038463 0.02366563
+ 0.01107135 0.00399905 0.00676107 0.00640742 0.00377805]
+2023-08-10 15:19:44,539 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [12, 15]
+2023-08-10 15:19:44,540 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [205, 243]
+2023-08-10 15:19:44,540 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 211
+2023-08-10 15:19:44,540 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect hue is 355
+2023-08-10 15:19:49,584 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [19, 32, 47, 64, 82, 107, 122, 136, 147, 159, 174, 192, 207, 221, 233, 246, 258, 270, 281, 292, 306, 320, 332, 345, 359, 374, 390]
+2023-08-10 15:19:49,590 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [21, 34, 49, 66, 84, 109, 124, 138, 149, 161, 176, 194, 209, 223, 235, 248, 260, 272, 283, 294, 308, 322, 334, 347, 361, 376, 392]
+2023-08-10 15:19:51,345 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.01340999 0.0158806  0.0268717  0.03918655 0.03922922 0.02854055
+ 0.04132116 0.03644015 0.01226864 0.05994335 0.10811814 0.15689196
+ 0.16517187 0.07444745 0.04566992 0.05052125 0.00623021 0.06013038
+ 0.0115698  0.11936565 0.29236517 0.38508049 0.39654468 1.0215444
+ 1.11556165 0.29262373 0.20213318]
+2023-08-10 15:19:51,346 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [24, 23]
+2023-08-10 15:19:51,346 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [345, 359]
+2023-08-10 15:19:51,346 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 352
+2023-08-10 15:19:51,346 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect saturation is 496
+2023-08-10 15:19:54,518 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [6, 20, 32, 43, 58, 77, 92, 105, 120, 134, 148, 161, 174, 188, 210, 227, 244, 256, 266, 280, 294, 308, 321, 332, 344, 358, 374]
+2023-08-10 15:19:54,518 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [8, 22, 34, 45, 60, 79, 94, 107, 122, 136, 150, 163, 176, 190, 212, 229, 246, 258, 268, 282, 296, 310, 323, 334, 346, 360, 376]
+2023-08-10 15:19:56,965 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.48566438 0.20117935 0.08580229 0.09072064 0.07713869 0.04255792
+ 0.02123236 0.0369456  0.00540234 0.07292368 0.10045905 0.09107008
+ 0.07617393 0.08871264 0.03628218 0.10134086 0.0888301  0.02684928
+ 0.07234418 0.26969315 0.25053169 0.18875645 0.1342151  0.05254841
+ 0.14814931 0.16025824 0.05349631]
+2023-08-10 15:19:56,966 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [0, 19]
+2023-08-10 15:19:56,966 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [6, 280]
+2023-08-10 15:19:56,966 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 12
+2023-08-10 15:19:56,967 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect brightness is 156
+2023-08-10 15:19:56,967 : INFO :             liquid_level.LiquidLevel : intensity row: 156
+2023-08-10 15:19:56,967 : INFO :             liquid_level.LiquidLevel : hue row: 355
+2023-08-10 15:19:56,967 : INFO :             liquid_level.LiquidLevel : saturation row: 496
+2023-08-10 15:19:56,967 : INFO :             liquid_level.LiquidLevel : brightness row: 156
+2023-08-10 15:19:56,967 : DEBUG :             liquid_level.LiquidLevel : liquid level found at 0.23214285714285715
+2023-08-10 15:19:56,967 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function done
+2023-08-10 15:19:56,967 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function done
+2023-08-10 15:19:56,968 : INFO :             liquid_level.LiquidLevel : self.row: 0.23214285714285715
+2023-08-10 15:20:40,551 : INFO :             liquid_level.LiquidLevel : start function called
+2023-08-10 15:20:40,551 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-08-10 15:20:40,551 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 15:20:40,551 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 15:20:40,552 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:20:42,363 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:20:42,363 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function called
+2023-08-10 15:20:45,461 : INFO :             liquid_level.LiquidLevel : list of points: [(486, 537)]
+2023-08-10 15:20:46,945 : INFO :             liquid_level.LiquidLevel : list of points: [(486, 537), (330, 240)]
+2023-08-10 15:20:48,513 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function done
+2023-08-10 15:20:49,963 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-08-10 15:20:49,963 : INFO :             liquid_level.LiquidLevel : Volumes list: ['4']
+2023-08-10 15:20:49,963 : INFO :             liquid_level.LiquidLevel : start function done
+2023-08-10 15:20:49,977 : DEBUG :             liquid_level.LiquidLevel : test run function called
+2023-08-10 15:20:49,978 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function called
+2023-08-10 15:20:49,978 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 15:20:49,978 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 15:20:50,382 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:20:50,874 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:20:50,874 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:20:51,379 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:20:51,379 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function called
+2023-08-10 15:20:55,258 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [3, 13, 23, 35, 49, 62, 75, 91, 108, 130, 145, 157, 167, 181, 195, 208, 222, 233, 245, 260, 274, 293]
+2023-08-10 15:20:55,258 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [5, 15, 25, 37, 51, 64, 77, 93, 110, 132, 147, 159, 169, 183, 197, 210, 224, 235, 247, 262, 276, 295]
+2023-08-10 15:20:56,728 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.01708487 0.00890367 0.02018261 0.07440328 0.09711629 0.10110395
+ 0.09982568 0.12405712 0.03606948 0.09170749 0.10130173 0.03245594
+ 0.08271298 0.2750936  0.2676144  0.21678846 0.17239772 0.09860489
+ 0.24905037 0.27379757 0.07904345 0.01200196]
+2023-08-10 15:20:56,729 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [13, 19]
+2023-08-10 15:20:56,730 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [181, 260]
+2023-08-10 15:20:56,730 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 188
+2023-08-10 15:20:56,730 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect intensity is 431
+2023-08-10 15:20:59,755 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [7, 20, 28, 43, 62, 77, 91, 106, 119, 132, 144, 157, 169, 179, 191, 203, 212, 225, 237, 248, 258, 268, 281]
+2023-08-10 15:20:59,756 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [9, 22, 30, 45, 64, 79, 93, 108, 121, 134, 146, 159, 171, 181, 193, 205, 214, 227, 239, 250, 260, 270, 283]
+2023-08-10 15:21:01,224 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.13018178 0.00881591 0.02496405 0.12666075 0.16718208 0.19337569
+ 0.29727419 0.40004054 0.34332888 0.28882331 0.35805928 0.33859245
+ 0.04689257 0.14299225 0.1917208  0.00805747 0.08998203 0.04007168
+ 0.02394538 0.01073247 0.00343032 0.00684431 0.00658304]
+2023-08-10 15:21:01,225 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [7, 10]
+2023-08-10 15:21:01,225 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [106, 144]
+2023-08-10 15:21:01,225 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 112
+2023-08-10 15:21:01,225 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect hue is 355
+2023-08-10 15:21:04,702 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [11, 24, 37, 47, 59, 75, 93, 108, 122, 134, 146, 158, 171, 182, 193, 207, 221, 233, 246, 260, 274, 286]
+2023-08-10 15:21:04,703 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [13, 26, 39, 49, 61, 77, 95, 110, 124, 136, 148, 160, 173, 184, 195, 209, 223, 235, 248, 262, 276, 288]
+2023-08-10 15:21:05,806 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.01953739 0.03706689 0.03097113 0.0068037  0.05446179 0.09942992
+ 0.15183202 0.15826942 0.07018718 0.04777412 0.0513217  0.01189659
+ 0.06385069 0.00446145 0.12212615 0.30314449 0.39887844 0.41439055
+ 1.05170203 1.16170505 0.30523355 0.133029  ]
+2023-08-10 15:21:05,807 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [19, 18]
+2023-08-10 15:21:05,807 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [246, 260]
+2023-08-10 15:21:05,807 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 253
+2023-08-10 15:21:05,807 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect saturation is 496
+2023-08-10 15:21:07,766 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [3, 15, 23, 35, 49, 62, 75, 90, 129, 145, 157, 167, 181, 195, 209, 222, 233, 245, 259, 274]
+2023-08-10 15:21:07,767 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [5, 17, 25, 37, 51, 64, 77, 92, 131, 147, 159, 169, 183, 197, 211, 224, 235, 247, 261, 276]
+2023-08-10 15:21:08,880 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.02041638 0.00653075 0.01001471 0.06823023 0.09647881 0.08875959
+ 0.07285395 0.0812274  0.0873876  0.08442046 0.02565852 0.07731654
+ 0.27313021 0.25775667 0.19872467 0.13693538 0.05359639 0.15299746
+ 0.16762733 0.05225578]
+2023-08-10 15:21:08,881 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [12, 13]
+2023-08-10 15:21:08,882 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [181, 195]
+2023-08-10 15:21:08,882 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 188
+2023-08-10 15:21:08,882 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect brightness is 431
+2023-08-10 15:21:08,882 : INFO :             liquid_level.LiquidLevel : intensity row: 431
+2023-08-10 15:21:08,882 : INFO :             liquid_level.LiquidLevel : hue row: 355
+2023-08-10 15:21:08,882 : INFO :             liquid_level.LiquidLevel : saturation row: 496
+2023-08-10 15:21:08,882 : INFO :             liquid_level.LiquidLevel : brightness row: 431
+2023-08-10 15:21:08,882 : DEBUG :             liquid_level.LiquidLevel : liquid level found at 0.6413690476190477
+2023-08-10 15:21:08,882 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function done
+2023-08-10 15:21:08,883 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function done
+2023-08-10 15:21:08,883 : INFO :             liquid_level.LiquidLevel : self.row: 0.6413690476190477
+2023-08-10 15:23:24,097 : INFO :             liquid_level.LiquidLevel : start function called
+2023-08-10 15:23:24,098 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-08-10 15:23:24,098 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 15:23:24,099 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 15:23:24,099 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:23:25,529 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:23:25,530 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function called
+2023-08-10 15:23:26,954 : INFO :             liquid_level.LiquidLevel : list of points: [(486, 544)]
+2023-08-10 15:23:27,781 : INFO :             liquid_level.LiquidLevel : list of points: [(486, 544), (339, 266)]
+2023-08-10 15:23:29,575 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function done
+2023-08-10 15:23:33,998 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-08-10 15:23:33,999 : INFO :             liquid_level.LiquidLevel : Volumes list: ['4']
+2023-08-10 15:23:33,999 : INFO :             liquid_level.LiquidLevel : start function done
+2023-08-10 15:23:34,013 : DEBUG :             liquid_level.LiquidLevel : test run function called
+2023-08-10 15:23:34,013 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function called
+2023-08-10 15:23:34,013 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 15:23:34,013 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 15:23:34,586 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:23:35,278 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:23:35,278 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:23:35,828 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:23:35,829 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function called
+2023-08-10 15:23:39,877 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [8, 22, 35, 49, 67, 86, 106, 119, 129, 140, 154, 168, 182, 195, 207, 220, 234, 248, 261]
+2023-08-10 15:23:39,878 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [10, 24, 37, 51, 69, 88, 108, 121, 131, 142, 156, 170, 184, 197, 209, 222, 236, 250, 263]
+2023-08-10 15:23:40,991 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.08747202 0.10066679 0.10009695 0.09425064 0.09584658 0.02686488
+ 0.07225124 0.05366628 0.02126292 0.11229605 0.28799891 0.28769891
+ 0.24485693 0.18882772 0.10905824 0.25890019 0.28455028 0.0854794
+ 0.01117229]
+2023-08-10 15:23:40,992 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [10, 11]
+2023-08-10 15:23:40,992 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [154, 168]
+2023-08-10 15:23:40,992 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 161
+2023-08-10 15:23:40,992 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect intensity is 430
+2023-08-10 15:23:44,717 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [17, 36, 51, 65, 80, 95, 108, 120, 134, 151, 165, 176, 186, 199, 211, 222, 232, 242, 254, 266]
+2023-08-10 15:23:44,718 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [19, 38, 53, 67, 82, 97, 110, 122, 136, 153, 167, 178, 188, 201, 213, 224, 234, 244, 256, 268]
+2023-08-10 15:23:50,560 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.12529368 0.18148931 0.18477001 0.23090878 0.25542464 0.19154326
+ 0.13603128 0.1765511  0.17589651 0.13792565 0.18413466 0.00593556
+ 0.09543117 0.0367265  0.01969562 0.00970281 0.00372613 0.00662855
+ 0.00665211 0.003557  ]
+2023-08-10 15:23:50,561 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [4, 3]
+2023-08-10 15:23:50,561 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [65, 80]
+2023-08-10 15:23:50,562 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 72
+2023-08-10 15:23:50,562 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect hue is 341
+2023-08-10 15:24:02,158 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [8, 20, 32, 47, 68, 84, 97, 107, 120, 132, 145, 166, 181, 195, 207, 220, 235, 249, 264]
+2023-08-10 15:24:02,164 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [10, 22, 34, 49, 70, 86, 99, 109, 122, 134, 147, 168, 183, 197, 209, 222, 237, 251, 266]
+2023-08-10 15:24:03,141 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.03238078 0.01124151 0.06377246 0.09964254 0.09939491 0.09360498
+ 0.02649807 0.03989489 0.05171369 0.0322292  0.08193932 0.13332613
+ 0.33360788 0.42016495 0.42818326 1.06459208 1.17569773 0.33566759
+ 0.20883218]
+2023-08-10 15:24:03,142 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [16, 15]
+2023-08-10 15:24:03,142 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [220, 235]
+2023-08-10 15:24:03,142 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 227
+2023-08-10 15:24:03,142 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect saturation is 496
+2023-08-10 15:24:05,564 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [8, 22, 36, 49, 66, 106, 119, 129, 140, 154, 168, 182, 196, 207, 219, 234, 248, 266]
+2023-08-10 15:24:05,564 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [10, 24, 38, 51, 68, 108, 121, 131, 142, 156, 170, 184, 198, 209, 221, 236, 250, 268]
+2023-08-10 15:24:06,662 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.08245277 0.09917    0.08684143 0.06755802 0.06652862 0.0667385
+ 0.03940266 0.01661037 0.10863716 0.28669078 0.27498792 0.22391401
+ 0.15087664 0.06360151 0.16037704 0.17613125 0.05911027 0.01244249]
+2023-08-10 15:24:06,663 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [9, 10]
+2023-08-10 15:24:06,663 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [154, 168]
+2023-08-10 15:24:06,663 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 161
+2023-08-10 15:24:06,663 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect brightness is 430
+2023-08-10 15:24:06,663 : INFO :             liquid_level.LiquidLevel : intensity row: 430
+2023-08-10 15:24:06,664 : INFO :             liquid_level.LiquidLevel : hue row: 341
+2023-08-10 15:24:06,664 : INFO :             liquid_level.LiquidLevel : saturation row: 496
+2023-08-10 15:24:06,664 : INFO :             liquid_level.LiquidLevel : brightness row: 430
+2023-08-10 15:24:06,664 : DEBUG :             liquid_level.LiquidLevel : liquid level found at 0.7380952380952381
+2023-08-10 15:24:06,664 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function done
+2023-08-10 15:24:06,664 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function done
+2023-08-10 15:24:06,664 : INFO :             liquid_level.LiquidLevel : self.row: 0.7380952380952381
+2023-08-10 15:25:35,198 : INFO :             liquid_level.LiquidLevel : start function called
+2023-08-10 15:25:35,198 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-08-10 15:25:35,199 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 15:25:35,199 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 15:25:35,199 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:25:36,877 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:25:36,877 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function called
+2023-08-10 15:25:38,770 : INFO :             liquid_level.LiquidLevel : list of points: [(488, 545)]
+2023-08-10 15:25:39,649 : INFO :             liquid_level.LiquidLevel : list of points: [(488, 545), (333, 269)]
+2023-08-10 15:25:41,140 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function done
+2023-08-10 15:25:42,604 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-08-10 15:25:42,604 : INFO :             liquid_level.LiquidLevel : Volumes list: ['4']
+2023-08-10 15:25:42,604 : INFO :             liquid_level.LiquidLevel : start function done
+2023-08-10 15:25:42,618 : DEBUG :             liquid_level.LiquidLevel : test run function called
+2023-08-10 15:25:42,618 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function called
+2023-08-10 15:25:42,619 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 15:25:42,619 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 15:25:43,077 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:25:43,630 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:25:43,630 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:25:44,152 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:25:44,159 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function called
+2023-08-10 15:25:46,758 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [6, 19, 32, 46, 62, 78, 88, 101, 116, 127, 138, 151, 166, 179, 192, 204, 217, 231, 245, 260]
+2023-08-10 15:25:46,759 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [8, 21, 34, 48, 64, 80, 90, 103, 118, 129, 140, 153, 168, 181, 194, 206, 219, 233, 247, 262]
+2023-08-10 15:25:47,456 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.0780108  0.10791498 0.1058418  0.10157091 0.11428543 0.02163088
+ 0.01253476 0.09483147 0.08615205 0.02578134 0.09203612 0.28288372
+ 0.28077033 0.2289496  0.17759338 0.10152038 0.24947505 0.27576893
+ 0.08205851 0.00976295]
+2023-08-10 15:25:47,457 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [11, 12]
+2023-08-10 15:25:47,457 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [151, 166]
+2023-08-10 15:25:47,458 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 158
+2023-08-10 15:25:47,458 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect intensity is 430
+2023-08-10 15:25:49,382 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [8, 34, 49, 62, 77, 91, 103, 116, 129, 149, 162, 174, 183, 196, 208, 219, 229, 239, 251, 262, 270]
+2023-08-10 15:25:49,382 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [10, 36, 51, 64, 79, 93, 105, 118, 131, 151, 164, 176, 185, 198, 210, 221, 231, 241, 253, 264, 272]
+2023-08-10 15:25:50,180 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.12402208 0.18611323 0.21672981 0.28687187 0.36001023 0.30005496
+ 0.244284   0.28992788 0.27710619 0.12581665 0.18176653 0.00481449
+ 0.08841967 0.03762443 0.02114531 0.00955017 0.00264532 0.00559986
+ 0.00524402 0.0013426  0.00092058]
+2023-08-10 15:25:50,181 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [4, 5]
+2023-08-10 15:25:50,181 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [77, 91]
+2023-08-10 15:25:50,182 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 83
+2023-08-10 15:25:50,182 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect hue is 355
+2023-08-10 15:25:53,186 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [6, 18, 30, 45, 64, 80, 93, 104, 117, 129, 142, 153, 164, 178, 192, 204, 217, 231, 246, 262]
+2023-08-10 15:25:53,186 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [8, 20, 32, 47, 66, 82, 95, 106, 119, 131, 144, 155, 166, 180, 194, 206, 219, 233, 248, 264]
+2023-08-10 15:25:54,020 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.0332405  0.01272324 0.06346053 0.10482669 0.12826804 0.12703001
+ 0.05132903 0.04210492 0.05071126 0.01769884 0.07404778 0.00869601
+ 0.12550241 0.30843736 0.40113206 0.41543315 1.05246559 1.16212839
+ 0.31792867 0.20044714]
+2023-08-10 15:25:54,021 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [17, 16]
+2023-08-10 15:25:54,021 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [217, 231]
+2023-08-10 15:25:54,021 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 224
+2023-08-10 15:25:54,022 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect saturation is 496
+2023-08-10 15:25:55,970 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [6, 19, 33, 46, 60, 82, 100, 116, 127, 138, 151, 166, 179, 193, 204, 216, 230, 246]
+2023-08-10 15:25:55,970 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [8, 21, 35, 48, 62, 84, 102, 118, 129, 140, 153, 168, 181, 195, 206, 218, 232, 248]
+2023-08-10 15:25:56,740 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.07459171 0.10648346 0.09051469 0.07366405 0.0802959  0.03253817
+ 0.09135932 0.0706604  0.02061242 0.08699855 0.28109103 0.27026542
+ 0.20920934 0.14137778 0.05610275 0.15282775 0.16827809 0.05674573]
+2023-08-10 15:25:56,743 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [10, 11]
+2023-08-10 15:25:56,744 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [151, 166]
+2023-08-10 15:25:56,744 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 158
+2023-08-10 15:25:56,744 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect brightness is 430
+2023-08-10 15:25:56,744 : INFO :             liquid_level.LiquidLevel : intensity row: 430
+2023-08-10 15:25:56,744 : INFO :             liquid_level.LiquidLevel : hue row: 355
+2023-08-10 15:25:56,744 : INFO :             liquid_level.LiquidLevel : saturation row: 496
+2023-08-10 15:25:56,745 : INFO :             liquid_level.LiquidLevel : brightness row: 430
+2023-08-10 15:25:56,745 : DEBUG :             liquid_level.LiquidLevel : liquid level found at 0.6889880952380952
+2023-08-10 15:25:56,745 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function done
+2023-08-10 15:25:56,745 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function done
+2023-08-10 15:25:56,745 : INFO :             liquid_level.LiquidLevel : self.row: 0.6889880952380952
+2023-08-10 15:51:22,862 : DEBUG :             liquid_level.LiquidLevel : test run function complete
+2023-08-10 15:51:40,116 : INFO :             liquid_level.LiquidLevel : start function called
+2023-08-10 15:51:40,117 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-08-10 15:51:40,117 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 15:51:40,117 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 15:51:40,118 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:51:43,042 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:51:43,042 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function called
+2023-08-10 15:51:45,180 : INFO :             liquid_level.LiquidLevel : list of points: [(484, 549)]
+2023-08-10 15:51:45,826 : INFO :             liquid_level.LiquidLevel : list of points: [(484, 549), (343, 258)]
+2023-08-10 15:51:46,872 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function done
+2023-08-10 15:51:48,207 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-08-10 15:51:48,207 : INFO :             liquid_level.LiquidLevel : Volumes list: ['4']
+2023-08-10 15:51:48,207 : INFO :             liquid_level.LiquidLevel : start function done
+2023-08-10 15:51:48,222 : DEBUG :             liquid_level.LiquidLevel : test run function called
+2023-08-10 15:51:48,223 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function called
+2023-08-10 15:51:48,223 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 15:51:48,223 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 15:51:48,702 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:51:49,131 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:51:49,132 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:51:51,589 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:51:51,592 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function called
+2023-08-10 15:51:56,374 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [7, 24, 42, 58, 72, 88, 104, 117, 129, 157, 172, 184, 194, 207, 218, 229, 239, 250, 262, 275, 287]
+2023-08-10 15:51:56,374 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [9, 26, 44, 60, 74, 90, 106, 119, 131, 159, 174, 186, 196, 209, 220, 231, 241, 252, 264, 277, 289]
+2023-08-10 15:51:57,648 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.08468374 0.14843419 0.1674845  0.15946152 0.18799947 0.17670476
+ 0.11719333 0.05996613 0.07969832 0.18988599 0.19954534 0.01199758
+ 0.10605816 0.03852647 0.01984133 0.01027142 0.00486712 0.00764557
+ 0.0077564  0.00464455 0.00075473]
+2023-08-10 15:51:57,649 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [10, 9]
+2023-08-10 15:51:57,649 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [157, 172]
+2023-08-10 15:51:57,650 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 164
+2023-08-10 15:51:57,650 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect hue is 425
+2023-08-10 15:52:01,445 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [6, 19, 28, 40, 54, 79, 94, 106, 116, 128, 140, 154, 174, 188, 203, 215, 228, 243, 257, 272, 278]
+2023-08-10 15:52:01,445 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [8, 21, 30, 42, 56, 81, 96, 108, 118, 130, 142, 156, 176, 190, 205, 217, 230, 245, 259, 274, 280]
+2023-08-10 15:52:02,410 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.03279528 0.02845055 0.00618822 0.0599711  0.09315234 0.08482262
+ 0.07915497 0.0086853  0.03479237 0.05038321 0.0402469  0.0819747
+ 0.13939301 0.35029172 0.43095641 0.4355278  1.07713116 1.1887149
+ 0.32455932 0.14182581 0.14237887]
+2023-08-10 15:52:02,411 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [17, 16]
+2023-08-10 15:52:02,411 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [228, 243]
+2023-08-10 15:52:02,412 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 235
+2023-08-10 15:52:02,412 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect saturation is 496
+2023-08-10 15:52:05,120 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [5, 18, 31, 44, 57, 82, 98, 116, 128, 136, 148, 162, 176, 190, 204, 216, 228, 242, 256, 277]
+2023-08-10 15:52:05,120 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [7, 20, 33, 46, 59, 84, 100, 118, 130, 138, 150, 164, 178, 192, 206, 218, 230, 244, 258, 279]
+2023-08-10 15:52:06,402 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.04473172 0.08276142 0.10492958 0.09114389 0.06582885 0.07733967
+ 0.02878067 0.0466951  0.01389012 0.01982406 0.12116987 0.284474
+ 0.27252301 0.22980225 0.15622983 0.06788751 0.16616938 0.18275802
+ 0.06205115 0.01709036]
+2023-08-10 15:52:06,403 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [11, 12]
+2023-08-10 15:52:06,403 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [162, 176]
+2023-08-10 15:52:06,403 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 169
+2023-08-10 15:52:06,403 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect brightness is 430
+2023-08-10 15:52:06,403 : INFO :             liquid_level.LiquidLevel : hue row: 425
+2023-08-10 15:52:06,403 : INFO :             liquid_level.LiquidLevel : saturation row: 496
+2023-08-10 15:52:06,403 : INFO :             liquid_level.LiquidLevel : brightness row: 430
+2023-08-10 15:52:06,438 : DEBUG :             liquid_level.LiquidLevel : liquid level found at 0.6398809523809523
+2023-08-10 15:52:06,439 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function done
+2023-08-10 15:52:06,439 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function done
+2023-08-10 15:52:06,439 : INFO :             liquid_level.LiquidLevel : self.row: 0.6398809523809523
+2023-08-10 15:53:07,576 : INFO :             liquid_level.LiquidLevel : start function called
+2023-08-10 15:53:07,577 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-08-10 15:53:07,577 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 15:53:07,577 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 15:53:07,577 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:53:12,432 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:53:12,432 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function called
+2023-08-10 15:53:14,015 : INFO :             liquid_level.LiquidLevel : list of points: [(483, 543)]
+2023-08-10 15:53:14,651 : INFO :             liquid_level.LiquidLevel : list of points: [(483, 543), (352, 249)]
+2023-08-10 15:53:16,240 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function done
+2023-08-10 15:53:17,174 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-08-10 15:53:17,174 : INFO :             liquid_level.LiquidLevel : Volumes list: ['4']
+2023-08-10 15:53:17,175 : INFO :             liquid_level.LiquidLevel : start function done
+2023-08-10 15:53:17,187 : DEBUG :             liquid_level.LiquidLevel : test run function called
+2023-08-10 15:53:17,188 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function called
+2023-08-10 15:53:17,188 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 15:53:17,188 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 15:53:17,606 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:53:18,130 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:53:18,130 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:53:19,801 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:53:19,802 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function called
+2023-08-10 15:53:23,374 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [6, 19, 33, 50, 66, 80, 94, 106, 119, 134, 146, 153, 167, 182, 194, 204, 217, 229, 239, 248, 258, 271, 283]
+2023-08-10 15:53:23,374 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [8, 21, 35, 52, 68, 82, 96, 108, 121, 136, 148, 155, 169, 184, 196, 206, 219, 231, 241, 250, 260, 273, 285]
+2023-08-10 15:53:24,289 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.14926863 0.10007108 0.18415528 0.185461   0.16271738 0.1695008
+ 0.11538611 0.05411161 0.05951885 0.06677594 0.01730618 0.00788254
+ 0.29471977 0.24692958 0.00925135 0.08908487 0.03057319 0.01126583
+ 0.0045019  0.00337491 0.00661144 0.00584887 0.00115876]
+2023-08-10 15:53:24,291 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [12, 13]
+2023-08-10 15:53:24,291 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [167, 182]
+2023-08-10 15:53:24,292 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 174
+2023-08-10 15:53:24,292 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect hue is 426
+2023-08-10 15:53:28,658 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [5, 17, 29, 38, 49, 63, 76, 96, 115, 135, 149, 164, 181, 197, 212, 224, 237, 252, 266, 281]
+2023-08-10 15:53:28,659 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [7, 19, 31, 40, 51, 65, 78, 98, 117, 137, 151, 166, 183, 199, 214, 226, 239, 254, 268, 283]
+2023-08-10 15:53:29,278 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.05235967 0.0510083  0.03790079 0.00610707 0.06415567 0.10664868
+ 0.04482733 0.06722554 0.05644186 0.04008197 0.04808854 0.08074546
+ 0.16395755 0.39078615 0.44894025 0.42993781 1.06501928 1.1987109
+ 0.36618817 0.22731258]
+2023-08-10 15:53:29,279 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [17, 16]
+2023-08-10 15:53:29,279 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [237, 252]
+2023-08-10 15:53:29,279 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 244
+2023-08-10 15:53:29,279 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect saturation is 496
+2023-08-10 15:53:39,729 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [5, 16, 27, 40, 53, 66, 94, 110, 130, 144, 157, 171, 184, 198, 213, 225, 237, 251, 265, 284]
+2023-08-10 15:53:39,735 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [7, 18, 29, 42, 55, 68, 96, 112, 132, 146, 159, 173, 186, 200, 215, 227, 239, 253, 267, 286]
+2023-08-10 15:53:40,460 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.06680694 0.03338987 0.08273194 0.1116618  0.09942117 0.07176523
+ 0.08527339 0.04619792 0.00388457 0.04926534 0.11533063 0.25968257
+ 0.26803583 0.24103463 0.16671812 0.07909182 0.1765225  0.18971269
+ 0.05969043 0.01924429]
+2023-08-10 15:53:40,461 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [12, 11]
+2023-08-10 15:53:40,461 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [171, 184]
+2023-08-10 15:53:40,461 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 177
+2023-08-10 15:53:40,461 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect brightness is 429
+2023-08-10 15:53:40,461 : INFO :             liquid_level.LiquidLevel : hue row: 426
+2023-08-10 15:53:40,462 : INFO :             liquid_level.LiquidLevel : saturation row: 496
+2023-08-10 15:53:40,462 : INFO :             liquid_level.LiquidLevel : brightness row: 429
+2023-08-10 15:53:40,491 : INFO :             liquid_level.LiquidLevel : saturation_above_av, 0.7624625274283772
+2023-08-10 15:54:52,900 : INFO :             liquid_level.LiquidLevel : start function called
+2023-08-10 15:54:52,901 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-08-10 15:54:52,901 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 15:54:52,901 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 15:54:52,902 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:54:54,870 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:54:54,870 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function called
+2023-08-10 15:54:56,569 : INFO :             liquid_level.LiquidLevel : list of points: [(492, 536)]
+2023-08-10 15:54:57,265 : INFO :             liquid_level.LiquidLevel : list of points: [(492, 536), (335, 269)]
+2023-08-10 15:54:58,160 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function done
+2023-08-10 15:54:59,178 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-08-10 15:54:59,178 : INFO :             liquid_level.LiquidLevel : Volumes list: ['4']
+2023-08-10 15:54:59,179 : INFO :             liquid_level.LiquidLevel : start function done
+2023-08-10 15:54:59,199 : DEBUG :             liquid_level.LiquidLevel : test run function called
+2023-08-10 15:54:59,200 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function called
+2023-08-10 15:54:59,200 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 15:54:59,200 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 15:54:59,604 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:55:00,115 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:55:00,115 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:55:02,638 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:55:02,645 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function called
+2023-08-10 15:55:06,714 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [10, 34, 49, 63, 77, 91, 104, 116, 129, 141, 150, 162, 174, 184, 196, 208, 219, 229, 239, 251]
+2023-08-10 15:55:06,715 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [12, 36, 51, 65, 79, 93, 106, 118, 131, 143, 152, 164, 176, 186, 198, 210, 221, 231, 241, 253]
+2023-08-10 15:55:07,783 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.09757622 0.21120208 0.24310524 0.28054529 0.32810845 0.26979918
+ 0.22770439 0.27070017 0.26685436 0.00799093 0.11977194 0.17734338
+ 0.00576988 0.08652941 0.03646895 0.02142287 0.00936598 0.00241305
+ 0.00528805 0.00445752]
+2023-08-10 15:55:07,784 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [4, 3]
+2023-08-10 15:55:07,784 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [63, 77]
+2023-08-10 15:55:07,784 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 70
+2023-08-10 15:55:07,785 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect hue is 342
+2023-08-10 15:55:10,408 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [6, 18, 31, 46, 64, 80, 94, 105, 117, 129, 142, 153, 164, 178, 192, 204, 217, 231, 245, 257]
+2023-08-10 15:55:10,409 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [8, 20, 33, 48, 66, 82, 96, 107, 119, 131, 144, 155, 166, 180, 194, 206, 219, 233, 247, 259]
+2023-08-10 15:55:11,439 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.04932993 0.02185713 0.07500828 0.11062643 0.10204104 0.09660903
+ 0.03578582 0.03524759 0.04728152 0.015975   0.07833951 0.00957952
+ 0.12228089 0.30647406 0.38955667 0.40553098 1.05879614 1.17026358
+ 0.306361   0.10742542]
+2023-08-10 15:55:11,440 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [17, 16]
+2023-08-10 15:55:11,440 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [217, 231]
+2023-08-10 15:55:11,440 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 224
+2023-08-10 15:55:11,440 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect saturation is 496
+2023-08-10 15:55:16,934 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [6, 19, 32, 45, 58, 80, 101, 116, 126, 137, 151, 165, 179, 193, 204, 216, 230, 246]
+2023-08-10 15:55:16,934 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [8, 21, 34, 47, 60, 82, 103, 118, 128, 139, 153, 167, 181, 195, 206, 218, 232, 248]
+2023-08-10 15:55:18,031 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.12071809 0.13494333 0.10178168 0.07348839 0.06640571 0.05193605
+ 0.07245425 0.04476349 0.01629332 0.09592683 0.29465863 0.28620841
+ 0.21846717 0.14282219 0.05699305 0.15100598 0.16360535 0.048879  ]
+2023-08-10 15:55:18,032 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [10, 11]
+2023-08-10 15:55:18,032 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [151, 165]
+2023-08-10 15:55:18,032 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 158
+2023-08-10 15:55:18,032 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect brightness is 430
+2023-08-10 15:55:18,032 : INFO :             liquid_level.LiquidLevel : hue row: 342
+2023-08-10 15:55:18,033 : INFO :             liquid_level.LiquidLevel : saturation row: 496
+2023-08-10 15:55:18,033 : INFO :             liquid_level.LiquidLevel : brightness row: 430
+2023-08-10 15:55:18,064 : INFO :             liquid_level.LiquidLevel : saturation_above_av, 0.8322343500098207
+2023-08-10 15:55:18,065 : INFO :             liquid_level.LiquidLevel : saturation_below_av, 4.833741629919974
+2023-08-10 15:55:18,065 : INFO :             liquid_level.LiquidLevel : brightness_below_av, 2.889596602972399
+2023-08-10 15:55:18,065 : DEBUG :             liquid_level.LiquidLevel : liquid level found at 0.6398809523809523
+2023-08-10 15:55:18,065 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function done
+2023-08-10 15:55:18,065 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function done
+2023-08-10 15:55:18,065 : INFO :             liquid_level.LiquidLevel : self.row: 0.6398809523809523
+2023-08-10 15:57:14,773 : INFO :             liquid_level.LiquidLevel : start function called
+2023-08-10 15:57:14,774 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-08-10 15:57:14,774 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 15:57:14,775 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 15:57:14,775 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:57:22,914 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:57:22,915 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function called
+2023-08-10 15:57:25,076 : INFO :             liquid_level.LiquidLevel : list of points: [(480, 542)]
+2023-08-10 15:57:25,980 : INFO :             liquid_level.LiquidLevel : list of points: [(480, 542), (354, 272)]
+2023-08-10 15:57:27,123 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function done
+2023-08-10 15:57:28,346 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-08-10 15:57:28,346 : INFO :             liquid_level.LiquidLevel : Volumes list: ['4']
+2023-08-10 15:57:28,346 : INFO :             liquid_level.LiquidLevel : start function done
+2023-08-10 15:57:28,360 : DEBUG :             liquid_level.LiquidLevel : test run function called
+2023-08-10 15:57:28,361 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function called
+2023-08-10 15:57:28,361 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 15:57:28,361 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 15:57:28,844 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:57:29,378 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:57:29,378 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 15:57:29,993 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 15:57:30,003 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function called
+2023-08-10 15:57:34,908 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [11, 28, 43, 57, 70, 83, 96, 111, 125, 145, 160, 182, 195, 207, 216, 224, 235, 247, 261]
+2023-08-10 15:57:34,909 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [13, 30, 45, 59, 72, 85, 98, 113, 127, 147, 162, 184, 197, 209, 218, 226, 237, 249, 263]
+2023-08-10 15:57:35,939 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.12288546 0.18374971 0.18694059 0.1895964  0.12863694 0.10157537
+ 0.10975373 0.0963487  0.03805564 0.27028386 0.23566336 0.07230263
+ 0.02442615 0.00649296 0.00068038 0.0027324  0.00689287 0.00691474
+ 0.00457866]
+2023-08-10 15:57:35,940 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [9, 10]
+2023-08-10 15:57:35,940 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [145, 160]
+2023-08-10 15:57:35,940 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 152
+2023-08-10 15:57:35,940 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect hue is 427
+2023-08-10 15:57:39,937 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [4, 14, 25, 39, 53, 74, 95, 112, 125, 140, 158, 174, 189, 201, 215, 229, 243, 257]
+2023-08-10 15:57:39,937 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [6, 16, 27, 41, 55, 76, 97, 114, 127, 142, 160, 176, 191, 203, 217, 231, 245, 259]
+2023-08-10 15:57:40,800 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.02796466 0.00190853 0.06270489 0.10496712 0.04702961 0.06860129
+ 0.06759541 0.04528536 0.05245679 0.07645315 0.17617768 0.40334523
+ 0.45851999 0.43026607 1.06183168 1.20493478 0.38235254 0.24332403]
+2023-08-10 15:57:40,801 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [15, 14]
+2023-08-10 15:57:40,801 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [215, 229]
+2023-08-10 15:57:40,801 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 221
+2023-08-10 15:57:40,801 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect saturation is 496
+2023-08-10 15:57:43,162 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [5, 17, 30, 43, 57, 72, 88, 106, 121, 134, 148, 161, 175, 190, 202, 214, 228, 242, 261]
+2023-08-10 15:57:43,168 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [7, 19, 32, 45, 59, 74, 90, 108, 123, 136, 150, 163, 177, 192, 204, 216, 230, 244, 263]
+2023-08-10 15:57:44,084 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.1389972  0.13715917 0.11588808 0.08332931 0.03626105 0.08009631
+ 0.04447313 0.01110254 0.05299701 0.11848085 0.26706302 0.27308508
+ 0.23962861 0.16463466 0.08073736 0.18261375 0.19406367 0.06053865
+ 0.02140502]
+2023-08-10 15:57:44,085 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [11, 10]
+2023-08-10 15:57:44,085 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [148, 161]
+2023-08-10 15:57:44,085 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 154
+2023-08-10 15:57:44,085 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect brightness is 429
+2023-08-10 15:57:44,085 : INFO :             liquid_level.LiquidLevel : hue row: 427
+2023-08-10 15:57:44,085 : INFO :             liquid_level.LiquidLevel : saturation row: 496
+2023-08-10 15:57:44,085 : INFO :             liquid_level.LiquidLevel : brightness row: 429
+2023-08-10 15:57:44,297 : INFO :             liquid_level.LiquidLevel : saturation_above_av, 0.8379393424036281
+2023-08-10 15:57:44,297 : INFO :             liquid_level.LiquidLevel : saturation_below_av, 4.012345679012346
+2023-08-10 15:57:44,297 : INFO :             liquid_level.LiquidLevel : brightness_below_av, 2.515873015873016
+2023-08-10 15:57:44,297 : DEBUG :             liquid_level.LiquidLevel : liquid level found at 0.6383928571428571
+2023-08-10 15:57:44,298 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function done
+2023-08-10 15:57:44,298 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function done
+2023-08-10 15:57:44,298 : INFO :             liquid_level.LiquidLevel : self.row: 0.6383928571428571
+2023-08-10 16:03:29,348 : INFO :             liquid_level.LiquidLevel : start function called
+2023-08-10 16:03:29,349 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-08-10 16:03:29,349 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 16:03:29,350 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 16:03:29,350 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 16:03:30,903 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 16:03:30,903 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function called
+2023-08-10 16:03:33,410 : INFO :             liquid_level.LiquidLevel : list of points: [(486, 535)]
+2023-08-10 16:03:34,317 : INFO :             liquid_level.LiquidLevel : list of points: [(486, 535), (341, 247)]
+2023-08-10 16:03:35,372 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function done
+2023-08-10 16:03:36,042 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-08-10 16:03:36,042 : INFO :             liquid_level.LiquidLevel : Volumes list: ['4']
+2023-08-10 16:03:36,043 : INFO :             liquid_level.LiquidLevel : start function done
+2023-08-10 16:03:36,060 : DEBUG :             liquid_level.LiquidLevel : test run function called
+2023-08-10 16:03:36,060 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function called
+2023-08-10 16:03:36,060 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 16:03:36,061 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 16:03:36,424 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 16:03:36,871 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 16:03:36,871 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 16:03:40,728 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 16:03:40,729 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function called
+2023-08-10 16:03:52,575 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [6, 37, 55, 70, 84, 99, 114, 127, 139, 154, 169, 183, 195, 205, 218, 230, 241, 251, 261, 274]
+2023-08-10 16:03:52,575 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [8, 39, 57, 72, 86, 101, 116, 129, 141, 156, 171, 185, 197, 207, 220, 232, 243, 253, 263, 276]
+2023-08-10 16:03:53,431 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.09840856 0.12662148 0.18635245 0.18437385 0.21790979 0.2213438
+ 0.15739264 0.10443112 0.1305438  0.13223101 0.15723451 0.18824256
+ 0.00805395 0.09955077 0.03701563 0.01938646 0.00981765 0.00411522
+ 0.0068382  0.00723559]
+2023-08-10 16:03:53,432 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [5, 4]
+2023-08-10 16:03:53,432 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [84, 99]
+2023-08-10 16:03:53,432 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 91
+2023-08-10 16:03:53,432 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect hue is 341
+2023-08-10 16:03:55,622 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [5, 18, 30, 40, 52, 66, 87, 104, 116, 126, 139, 151, 165, 185, 200, 214, 226, 239, 254, 268, 279]
+2023-08-10 16:03:55,622 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [7, 20, 32, 42, 54, 68, 89, 106, 118, 128, 141, 153, 167, 187, 202, 216, 228, 241, 256, 270, 281]
+2023-08-10 16:03:56,620 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.0599965  0.05611341 0.04353467 0.01688105 0.06960043 0.10469994
+ 0.08479227 0.07890351 0.0158631  0.03718203 0.05052138 0.03512823
+ 0.08303521 0.13567917 0.34048771 0.42557833 0.43264618 1.07385957
+ 1.18486571 0.31956542 0.09810894]
+2023-08-10 16:03:56,621 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [18, 17]
+2023-08-10 16:03:56,622 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [239, 254]
+2023-08-10 16:03:56,622 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 246
+2023-08-10 16:03:56,622 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect saturation is 496
+2023-08-10 16:03:58,278 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [13, 28, 42, 55, 68, 86, 110, 126, 138, 147, 159, 173, 187, 201, 215, 226, 238, 253, 268]
+2023-08-10 16:03:58,278 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [15, 30, 44, 57, 70, 88, 112, 128, 140, 149, 161, 175, 189, 203, 217, 228, 240, 255, 270]
+2023-08-10 16:03:59,150 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.01299405 0.07242619 0.10117564 0.08960446 0.06872132 0.06263755
+ 0.00941605 0.05779703 0.02534044 0.01697132 0.11432749 0.28624821
+ 0.27585752 0.22651055 0.15230311 0.06378854 0.16025266 0.17575516
+ 0.05748692]
+2023-08-10 16:03:59,150 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [11, 12]
+2023-08-10 16:03:59,151 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [173, 187]
+2023-08-10 16:03:59,151 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 180
+2023-08-10 16:03:59,151 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect brightness is 430
+2023-08-10 16:03:59,151 : INFO :             liquid_level.LiquidLevel : hue row: 341
+2023-08-10 16:03:59,151 : INFO :             liquid_level.LiquidLevel : saturation row: 496
+2023-08-10 16:03:59,151 : INFO :             liquid_level.LiquidLevel : brightness row: 430
+2023-08-10 16:03:59,410 : INFO :             liquid_level.LiquidLevel : saturation_above_av, 0.7622766929788118
+2023-08-10 16:03:59,411 : INFO :             liquid_level.LiquidLevel : saturation_below_av, 5.043920145190563
+2023-08-10 16:03:59,411 : INFO :             liquid_level.LiquidLevel : brightness_below_av, 2.976225045372051
+2023-08-10 16:03:59,411 : DEBUG :             liquid_level.LiquidLevel : liquid level found at 0.6398809523809523
+2023-08-10 16:03:59,411 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function done
+2023-08-10 16:03:59,412 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function done
+2023-08-10 16:03:59,412 : INFO :             liquid_level.LiquidLevel : self.row: 0.6398809523809523
+2023-08-10 16:07:46,189 : INFO :             liquid_level.LiquidLevel : start function called
+2023-08-10 16:07:46,190 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-08-10 16:07:46,190 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 16:07:46,190 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 16:07:46,190 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 16:07:48,513 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 16:07:48,513 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function called
+2023-08-10 16:07:51,202 : INFO :             liquid_level.LiquidLevel : list of points: [(339, 271)]
+2023-08-10 16:07:52,264 : INFO :             liquid_level.LiquidLevel : list of points: [(339, 271), (488, 543)]
+2023-08-10 16:07:53,315 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function done
+2023-08-10 16:07:54,135 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-08-10 16:07:54,135 : INFO :             liquid_level.LiquidLevel : Volumes list: ['4']
+2023-08-10 16:07:54,135 : INFO :             liquid_level.LiquidLevel : start function done
+2023-08-10 16:07:54,155 : DEBUG :             liquid_level.LiquidLevel : test run function called
+2023-08-10 16:07:54,156 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function called
+2023-08-10 16:07:54,156 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 16:07:54,156 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 16:07:54,541 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 16:07:54,962 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 16:07:54,962 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 16:07:55,271 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 16:07:55,272 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function called
+2023-08-10 16:07:58,424 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [15, 31, 46, 60, 75, 90, 103, 115, 129, 145, 160, 171, 181, 194, 206, 217, 227, 237, 249, 265]
+2023-08-10 16:07:58,425 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [17, 33, 48, 62, 77, 92, 105, 117, 131, 147, 162, 173, 183, 196, 208, 219, 229, 239, 251, 267]
+2023-08-10 16:07:59,109 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.08768916 0.2049674  0.21687881 0.24460254 0.25729847 0.19370898
+ 0.14273168 0.16731957 0.16505996 0.13205001 0.17792448 0.00431018
+ 0.09331709 0.03547472 0.01913588 0.00945    0.00334781 0.00570185
+ 0.00499621 0.00044966]
+2023-08-10 16:07:59,111 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [4, 3]
+2023-08-10 16:07:59,111 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [60, 75]
+2023-08-10 16:07:59,111 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 67
+2023-08-10 16:07:59,111 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect hue is 341
+2023-08-10 16:08:00,870 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [5, 16, 28, 43, 62, 79, 92, 102, 115, 127, 140, 162, 176, 190, 202, 215, 230, 244, 259]
+2023-08-10 16:08:00,871 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [7, 18, 30, 45, 64, 81, 94, 104, 117, 129, 142, 164, 178, 192, 204, 217, 232, 246, 261]
+2023-08-10 16:08:01,537 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.0389335  0.01534228 0.07070556 0.1085075  0.09240833 0.08184539
+ 0.02045896 0.03584975 0.04985567 0.02980385 0.08283888 0.13149697
+ 0.32926667 0.41516946 0.42261838 1.0598792  1.17587744 0.34480135
+ 0.22119214]
+2023-08-10 16:08:01,538 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [16, 15]
+2023-08-10 16:08:01,538 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [215, 230]
+2023-08-10 16:08:01,539 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 222
+2023-08-10 16:08:01,539 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect saturation is 496
+2023-08-10 16:08:03,197 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [5, 18, 31, 44, 58, 100, 114, 124, 135, 149, 163, 177, 191, 202, 214, 229, 243, 260]
+2023-08-10 16:08:03,197 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [7, 20, 33, 46, 60, 102, 116, 126, 137, 151, 165, 179, 193, 204, 216, 231, 245, 262]
+2023-08-10 16:08:03,899 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.09885489 0.12253837 0.101276   0.07675025 0.06951427 0.07466711
+ 0.03883523 0.01923361 0.11062339 0.29036695 0.28016617 0.22391773
+ 0.14959787 0.06243175 0.15798832 0.17398905 0.05760865 0.0156628 ]
+2023-08-10 16:08:03,900 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [9, 10]
+2023-08-10 16:08:03,900 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [149, 163]
+2023-08-10 16:08:03,900 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 156
+2023-08-10 16:08:03,901 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect brightness is 430
+2023-08-10 16:08:03,901 : INFO :             liquid_level.LiquidLevel : hue row: 341
+2023-08-10 16:08:03,901 : INFO :             liquid_level.LiquidLevel : saturation row: 496
+2023-08-10 16:08:03,901 : INFO :             liquid_level.LiquidLevel : brightness row: 430
+2023-08-10 16:08:03,935 : INFO :             liquid_level.LiquidLevel : saturation_above_av, 47.9089932885906
+2023-08-10 16:08:03,936 : INFO :             liquid_level.LiquidLevel : saturation_below_av, 200.22293551210973
+2023-08-10 16:08:03,936 : INFO :             liquid_level.LiquidLevel : brightness_below_av, 111.85555879778232
+2023-08-10 16:08:03,936 : DEBUG :             liquid_level.LiquidLevel : liquid level found at 0.7380952380952381
+2023-08-10 16:08:03,936 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function done
+2023-08-10 16:08:03,937 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function done
+2023-08-10 16:08:03,937 : INFO :             liquid_level.LiquidLevel : self.row: 0.7380952380952381
+2023-08-10 16:09:13,764 : INFO :             liquid_level.LiquidLevel : start function called
+2023-08-10 16:09:13,765 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-08-10 16:09:13,765 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 16:09:13,765 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 16:09:13,765 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 16:09:16,532 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 16:09:16,532 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function called
+2023-08-10 16:09:18,616 : INFO :             liquid_level.LiquidLevel : list of points: [(439, 494)]
+2023-08-10 16:09:19,413 : INFO :             liquid_level.LiquidLevel : list of points: [(439, 494), (257, 159)]
+2023-08-10 16:09:20,954 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function done
+2023-08-10 16:09:23,023 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-08-10 16:09:23,024 : INFO :             liquid_level.LiquidLevel : Volumes list: ['4']
+2023-08-10 16:09:23,024 : INFO :             liquid_level.LiquidLevel : start function done
+2023-08-10 16:09:23,038 : DEBUG :             liquid_level.LiquidLevel : test run function called
+2023-08-10 16:09:23,038 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function called
+2023-08-10 16:09:23,038 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 16:09:23,038 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 16:09:23,533 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 16:09:24,014 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 16:09:24,015 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 16:09:27,769 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 16:09:27,770 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function called
+2023-08-10 16:09:31,626 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [7, 21, 34, 48, 72, 85, 97, 109, 121, 133, 143, 156, 170, 184, 196, 205, 219, 233, 246, 259, 273, 285, 296, 307, 318, 330]
+2023-08-10 16:09:31,626 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [9, 23, 36, 50, 74, 87, 99, 111, 123, 135, 145, 158, 172, 186, 198, 207, 221, 235, 248, 261, 275, 287, 298, 309, 320, 332]
+2023-08-10 16:09:32,760 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.5606126  0.30027501 0.2581606  0.15404689 0.05317292 0.07300137
+ 0.06796123 0.03807147 0.02668593 0.01456747 0.03088224 0.15681886
+ 0.28421472 0.21017615 0.03278824 0.11016898 0.24514572 0.19588064
+ 0.1154506  0.10382091 0.06068024 0.01317262 0.0106268  0.00651904
+ 0.00273162 0.00325925]
+2023-08-10 16:09:32,761 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [0, 1]
+2023-08-10 16:09:32,761 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [7, 21]
+2023-08-10 16:09:32,761 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 13
+2023-08-10 16:09:32,761 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect hue is 175
+2023-08-10 16:09:40,443 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [8, 22, 30, 41, 54, 68, 80, 89, 101, 115, 127, 144, 164, 177, 200, 213, 225, 237, 250, 263, 276, 287, 299, 318]
+2023-08-10 16:09:40,443 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [10, 24, 32, 43, 56, 70, 82, 91, 103, 117, 129, 146, 166, 179, 202, 215, 227, 239, 252, 265, 278, 289, 301, 320]
+2023-08-10 16:09:42,290 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.03679386 0.00835231 0.00185845 0.03295199 0.07661962 0.0846414
+ 0.03137154 0.03014972 0.09283988 0.07153969 0.05996387 0.08992453
+ 0.08039986 0.04165598 0.24706088 0.23106642 0.57103218 0.78276002
+ 1.11595307 1.1854222  0.38849855 0.2652651  0.20232598 0.15104027]
+2023-08-10 16:09:42,291 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [19, 18]
+2023-08-10 16:09:42,291 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [250, 263]
+2023-08-10 16:09:42,292 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 256
+2023-08-10 16:09:42,292 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect saturation is 418
+2023-08-10 16:09:48,380 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [5, 17, 29, 43, 54, 64, 74, 86, 97, 106, 119, 132, 141, 153, 166, 179, 190, 204, 219, 231, 242, 254, 268, 281, 294, 305, 322]
+2023-08-10 16:09:48,380 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [7, 19, 31, 45, 56, 66, 76, 88, 99, 108, 121, 134, 143, 155, 168, 181, 192, 206, 221, 233, 244, 256, 270, 283, 296, 307, 324]
+2023-08-10 16:09:51,211 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.06149504 0.05002357 0.08698191 0.04225124 0.01285478 0.01129349
+ 0.00926053 0.02374879 0.00197779 0.01988481 0.04344061 0.01614287
+ 0.00569055 0.03221718 0.03406527 0.02454426 0.04799032 0.15500166
+ 0.19548308 0.07208082 0.08552255 0.25308884 0.3089608  0.18489971
+ 0.05009274 0.03718727 0.07083258]
+2023-08-10 16:09:51,212 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [22, 21]
+2023-08-10 16:09:51,212 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [254, 268]
+2023-08-10 16:09:51,212 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 260
+2023-08-10 16:09:51,212 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect brightness is 422
+2023-08-10 16:09:51,212 : INFO :             liquid_level.LiquidLevel : hue row: 175
+2023-08-10 16:09:51,213 : INFO :             liquid_level.LiquidLevel : saturation row: 418
+2023-08-10 16:09:51,213 : INFO :             liquid_level.LiquidLevel : brightness row: 422
+2023-08-10 16:09:51,266 : INFO :             liquid_level.LiquidLevel : saturation_above_av, 37.64758793330222
+2023-08-10 16:09:51,267 : INFO :             liquid_level.LiquidLevel : saturation_below_av, 245.1323076923077
+2023-08-10 16:09:51,267 : INFO :             liquid_level.LiquidLevel : brightness_below_av, 103.36996336996337
+2023-08-10 16:09:51,267 : DEBUG :             liquid_level.LiquidLevel : liquid level found at 0.6220238095238095
+2023-08-10 16:09:51,267 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function done
+2023-08-10 16:09:51,267 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function done
+2023-08-10 16:09:51,267 : INFO :             liquid_level.LiquidLevel : self.row: 0.6220238095238095
+2023-08-10 16:11:14,414 : INFO :             liquid_level.LiquidLevel : start function called
+2023-08-10 16:11:14,415 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function called
+2023-08-10 16:11:14,415 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 16:11:14,415 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 16:11:14,415 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 16:11:17,191 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 16:11:17,192 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function called
+2023-08-10 16:11:18,834 : INFO :             liquid_level.LiquidLevel : list of points: [(428, 481)]
+2023-08-10 16:11:19,460 : INFO :             liquid_level.LiquidLevel : list of points: [(428, 481), (247, 147)]
+2023-08-10 16:11:20,780 : INFO :             liquid_level.LiquidLevel : select_region_of_interest function done
+2023-08-10 16:11:21,968 : INFO :             liquid_level.LiquidLevel : load_image_and_select_and_set_parameters function done
+2023-08-10 16:11:21,968 : INFO :             liquid_level.LiquidLevel : Volumes list: ['4']
+2023-08-10 16:11:21,968 : INFO :             liquid_level.LiquidLevel : start function done
+2023-08-10 16:11:21,986 : DEBUG :             liquid_level.LiquidLevel : test run function called
+2023-08-10 16:11:21,986 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function called
+2023-08-10 16:11:21,986 : DEBUG :             liquid_level.LiquidLevel : load_img function called
+2023-08-10 16:11:21,986 : DEBUG :             liquid_level.LiquidLevel : load_img function done
+2023-08-10 16:11:22,364 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 16:11:23,176 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 16:11:23,176 : DEBUG :             liquid_level.LiquidLevel : convert_bw function called
+2023-08-10 16:11:23,788 : DEBUG :             liquid_level.LiquidLevel : convert_bw function done
+2023-08-10 16:11:23,789 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function called
+2023-08-10 16:11:26,663 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [8, 21, 35, 48, 62, 75, 95, 110, 124, 137, 152, 166, 182, 197, 215, 230, 245, 259, 271, 284, 295, 306, 318, 330]
+2023-08-10 16:11:26,663 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [10, 23, 37, 50, 64, 77, 97, 112, 126, 139, 154, 168, 184, 199, 217, 232, 247, 261, 273, 286, 297, 308, 320, 332]
+2023-08-10 16:11:27,679 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.02831851 0.14782104 0.19843557 0.27661137 0.21920834 0.09068247
+ 0.06287909 0.09506891 0.06028338 0.02436222 0.00536865 0.10234925
+ 0.19316602 0.09961583 0.11978987 0.24243011 0.18914525 0.10154918
+ 0.0901638  0.0490207  0.00804719 0.01671921 0.00899943 0.00248616]
+2023-08-10 16:11:27,680 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [3, 15]
+2023-08-10 16:11:27,681 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [48, 230]
+2023-08-10 16:11:27,681 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 54
+2023-08-10 16:11:27,681 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect hue is 204
+2023-08-10 16:11:30,230 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [6, 20, 33, 41, 53, 66, 80, 92, 101, 113, 127, 140, 160, 177, 190, 212, 225, 237, 249, 262, 275, 288, 300, 312, 324]
+2023-08-10 16:11:30,230 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [8, 22, 35, 43, 55, 68, 82, 94, 103, 115, 129, 142, 162, 179, 192, 214, 227, 239, 251, 264, 277, 290, 302, 314, 326]
+2023-08-10 16:11:31,247 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.01159942 0.0275896  0.00252471 0.01115964 0.04671448 0.09816951
+ 0.10925604 0.03928485 0.03099308 0.10527765 0.0845901  0.05123369
+ 0.08380713 0.08588244 0.03773843 0.25550322 0.2578821  0.56371892
+ 0.7477496  1.11953399 1.21272983 0.43478361 0.2743356  0.1907501
+ 0.14319244]
+2023-08-10 16:11:31,249 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [20, 19]
+2023-08-10 16:11:31,249 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [262, 275]
+2023-08-10 16:11:31,249 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 268
+2023-08-10 16:11:31,249 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect saturation is 418
+2023-08-10 16:11:33,525 : DEBUG :             liquid_level.LiquidLevel : aspect peak indicies: [6, 18, 28, 42, 56, 80, 95, 107, 118, 131, 143, 153, 164, 177, 189, 200, 215, 230, 244, 254, 266, 280, 293, 305, 316, 328]
+2023-08-10 16:11:33,525 : DEBUG :             liquid_level.LiquidLevel : rows peak indicies: [8, 20, 30, 44, 58, 82, 97, 109, 120, 133, 145, 155, 166, 179, 191, 202, 217, 232, 246, 256, 268, 282, 295, 307, 318, 330]
+2023-08-10 16:11:34,806 : DEBUG :             liquid_level.LiquidLevel : peak heights: [0.08212102 0.00898193 0.03961493 0.07551539 0.03987224 0.01558587
+ 0.02718161 0.00594923 0.02326644 0.04401645 0.0201043  0.00829548
+ 0.03172246 0.03737259 0.02756873 0.05430131 0.15687505 0.20337296
+ 0.07098238 0.06725993 0.2579956  0.31041147 0.1780053  0.05574647
+ 0.03971377 0.02662739]
+2023-08-10 16:11:34,807 : DEBUG :             liquid_level.LiquidLevel : highest_2_peaks_index 0: [21, 20]
+2023-08-10 16:11:34,808 : DEBUG :             liquid_level.LiquidLevel : largest_2ndderiv_index: [266, 280]
+2023-08-10 16:11:34,808 : DEBUG :             liquid_level.LiquidLevel : max_i_idx: 272
+2023-08-10 16:11:34,808 : INFO :             liquid_level.LiquidLevel : The most prominent row using aspect brightness is 422
+2023-08-10 16:11:34,808 : INFO :             liquid_level.LiquidLevel : hue row: 204
+2023-08-10 16:11:34,808 : INFO :             liquid_level.LiquidLevel : saturation row: 418
+2023-08-10 16:11:34,808 : INFO :             liquid_level.LiquidLevel : brightness row: 422
+2023-08-10 16:11:34,858 : INFO :             liquid_level.LiquidLevel : saturation_above_av, 36.260137408003914
+2023-08-10 16:11:34,859 : INFO :             liquid_level.LiquidLevel : saturation_below_av, 245.7921939048298
+2023-08-10 16:11:34,859 : INFO :             liquid_level.LiquidLevel : brightness_below_av, 103.4909107111032
+2023-08-10 16:11:34,859 : INFO :             liquid_level.LiquidLevel : Most prominent line is saturation row.
+2023-08-10 16:11:34,859 : DEBUG :             liquid_level.LiquidLevel : liquid level found at 0.6220238095238095
+2023-08-10 16:11:34,859 : DEBUG :             liquid_level.LiquidLevel : find_liquid_level function done
+2023-08-10 16:11:34,859 : DEBUG :             liquid_level.LiquidLevel : load_and_find_level function done
+2023-08-10 16:11:34,859 : INFO :             liquid_level.LiquidLevel : self.row: 0.6220238095238095
+2023-08-10 16:12:19,952 : DEBUG :             liquid_level.LiquidLevel : test run function complete

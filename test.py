@@ -30,14 +30,14 @@ liquid_level = LiquidLevel(
         'logs')
     )  
 
-start_image = cv2.imread("/Users/Emma/Documents/Documents - MacBook Pro/Liverpool PhD/Code/heinsight/images/Fume Hood 7-27-2023, 3-53-55 PM.jpg")
+start_image = cv2.imread("/Users/Emma/Documents/Documents - MacBook Pro/Liverpool PhD/Code/heinsight/images/Fume Hood 7-24-2023, 5-15-13 PM.jpg")
 distill_volumes = 4
 threshold = 0.01
 
 liquid_level.start(image=start_image, select_region_of_interest=True, 
     set_reference=True, volumes_list = ['4'], select_tolerance=False)
 
-run_image = cv2.imread("/Users/Emma/Documents/Documents - MacBook Pro/Liverpool PhD/Code/heinsight/images/Fume Hood 7-27-2023, 3-53-55 PM.jpg")
+run_image = cv2.imread("/Users/Emma/Documents/Documents - MacBook Pro/Liverpool PhD/Code/heinsight/images/Fume Hood 7-24-2023, 5-15-13 PM.jpg")
 
 liquid_level.test_run(input_image=run_image) 
 
