@@ -52,7 +52,6 @@ import matplotlib.pyplot as plt
 from scipy.signal import lfilter, lfilter_zi, filtfilt, butter, find_peaks
 from numpy import diff
 import pandas as pd
-import heapq
 from datetime import datetime
 from skimage.color import rgb2lab, lab2rgb
 from heinsight.liquidlevel.track_tolerance_levels import \
