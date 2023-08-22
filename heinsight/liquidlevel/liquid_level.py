@@ -685,6 +685,8 @@ class LiquidLevel:
         plt.plot(rows, aspect, c='b')
         plt.plot(rows, aspect_smoothed, c='r')  # smoothed by filter
         plt.title(aspect_name)
+        plt.xlabel("row")
+        plt.ylabel("value")
         plt.show()
 
         # Here we start the differentiation steps.
@@ -696,10 +698,11 @@ class LiquidLevel:
         aspect_smoothed_3deriv = diff(aspect_smoothed_2deriv)/dh
 
         # plt.plot(rows, aspect_smoothed, c='r')  # Smoothed by filter
-        plt.plot(rows[1:], aspect_smoothed_1deriv, c='b') # 1st derivative
         plt.plot(rows[2:], aspect_smoothed_2deriv, c='g') # 2nd derivative
-        plt.plot(rows[3:], aspect_smoothed_3deriv, c='pink') # 3rd derivative
-        plt.title(aspect_name)
+        plt.plot(rows[3:], aspect_smoothed_3deriv, c='b') # 3rd derivative
+        plt.title('2nd and 3rd derivative values, {}'.format(aspect_name))
+        plt.xlabel("row")
+        plt.ylabel("value")
         plt.show()
 
         aspect_smoothed_2deriv_abs = []
@@ -737,7 +740,10 @@ class LiquidLevel:
         for i, h in zip(i_peaks, h_peaks):
             plt.plot(rows[h], aspect_smoothed_2deriv_abs[i], 
                 marker="o", ls="", ms=3, color='r' )
-        plt.title(aspect_name)
+        plt.plot(rows[3:], aspect_smoothed_3deriv_abs, c='b') # 3rd derivative
+        plt.title('Absolute 2nd and 3rd derivative values, {}'.format(aspect_name))
+        plt.xlabel("row")
+        plt.ylabel("value")
         plt.show()
 
         # From these list of indices, we want to return the two indicies that 
