@@ -490,16 +490,31 @@ class LiquidLevel:
 
         return_image = cv2.cvtColor(return_image, cv2.COLOR_BGR2GRAY)
         # apply histogram equalization
-        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8)) # contrast limited adaptive histogram equalisation (improves contrast)
+        clahe = cv2.createCLAHE(clipLimit=10.0, tileGridSize=(7, 7)) # contrast limited adaptive histogram equalisation (improves contrast)
         return_image = clahe.apply(return_image)
+        cv2.imshow("return_image", return_image)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
         canny_threshold_1, canny_threshold_2 = self.find_parameters_for_canny_edge(return_image) # find parameters for edge detection
         return_image = cv2.Canny(return_image, canny_threshold_1, canny_threshold_2) # apply edge detection algorithm
+        cv2.imshow("return_image", return_image)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
         return_image = cv2.morphologyEx(return_image, cv2.MORPH_DILATE, morph_dilate_kernel_size) # erosion then dilation to remove noise
+        cv2.imshow("return_image", return_image)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
         # create a horizontal structural element;
         horizontal_structure = cv2.getStructuringElement(cv2.MORPH_RECT, morph_rect_kernel_size)
+        cv2.imshow("horizontal_structure", horizontal_structure)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
         # to the edges, apply morphological opening operation to remove vertical lines from the contour image
         return_image = cv2.morphologyEx(return_image, cv2.MORPH_OPEN, horizontal_structure)
+        cv2.imshow("return_image", return_image)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
         self.logger.debug('find_contour function done')
         return return_image
@@ -1087,6 +1102,7 @@ class LiquidLevel:
         image_with_lines = self.draw_lines(img=image)
         cv2.imshow("image with lines", image_with_lines)
         cv2.setWindowProperty("image with lines", cv2.WND_PROP_TOPMOST, 1)
+        cv2.imwrite("image_with_lines.jpg", image_with_lines)
         cv2.waitKey(5000)
         cv2.destroyAllWindows()
         self.all_images_with_lines.append([time_formatted, image_with_lines])
