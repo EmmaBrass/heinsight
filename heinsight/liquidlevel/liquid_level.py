@@ -1231,6 +1231,7 @@ class LiquidLevel:
         image_with_lines = self.draw_lines(img=image)
         cv2.imshow("image with lines", image_with_lines)
         cv2.setWindowProperty("image with lines", cv2.WND_PROP_TOPMOST, 1)
+        cv2.imwrite("image_with_lines_gradient.jpg", image_with_lines)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 

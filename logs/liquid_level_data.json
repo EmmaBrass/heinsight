@@ -1,1 +1,1 @@
-{"number_of_liquid_levels_to_find": 1, "rows_to_count": 10, "find_meniscus_minimum": 0.1, "reference_level_relative": [0.6071428571428571], "tolerance_level_relative": null, "liquid_level_data": {}}
+{"number_of_liquid_levels_to_find": 1, "rows_to_count": 10, "find_meniscus_minimum": 0.1, "reference_level_relative": null, "tolerance_level_relative": null, "liquid_level_data": {}}

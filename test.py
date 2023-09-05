@@ -6,7 +6,7 @@ from heinsight.liquidlevel.track_tolerance_levels import \
     TrackLiquidToleranceLevels, TrackOneLiquidToleranceLevel, \
     TrackTwoLiquidToleranceLevels
 
-# TODO do the gradient method on color channels as well ?
+# NEW CODE - LEEDS/ASTRAZENECA GRADIENT METHOD
 
 def resize(input_image):
     h, w = input_image.shape[:2]
@@ -21,7 +21,7 @@ liquid_level = LiquidLevel(
     camera=None,
     track_liquid_tolerance_levels=tracker,
     use_tolerance=False,
-    use_reference=True,
+    use_reference=False,
     rows_to_count=10,
     number_of_liquid_levels_to_find=1,
     find_meniscus_minimum=0.1,
@@ -30,14 +30,14 @@ liquid_level = LiquidLevel(
         'logs')
     )  
 
-start_image = cv2.imread("C:\\Users\\eb559981\\Documents\\heinsight\\images\\Fume Hood 7-24-2023, 5-13-39 PM.jpg")
+start_image = cv2.imread("C:\\Users\\eb559981\\Documents\\Images\\Fume Hood 8-10-2023, 4-28-26 PM.jpg")
 distill_volumes = 4
 threshold = 0.01
 
 liquid_level.start(image=start_image, select_region_of_interest=True, 
-    set_reference=True, volumes_list = ['4'], select_tolerance=False)
+    set_reference=False, volumes_list = ['4'], select_tolerance=False)
 
-run_image = cv2.imread("C:\\Users\\eb559981\\Documents\\heinsight\\images\\Fume Hood 7-24-2023, 5-13-39 PM.jpg")
+run_image = cv2.imread("C:\\Users\\eb559981\\Documents\\Images\\Fume Hood 8-10-2023, 4-28-26 PM.jpg")
 
 liquid_level.test_run(input_image=run_image) 
 
